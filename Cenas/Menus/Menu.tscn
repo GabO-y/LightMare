@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://b4nrn1evrp1qq" path="res://Cenas/Menus/menu.gd" id="1_4jae1"]
 
-[node name="Menu" type="Node2D"]
+[node name="Menu" type="CanvasLayer"]
 script = ExtResource("1_4jae1")

@@ -16,7 +16,7 @@ fill_from = Vector2(0.495726, 0.492877)
 
 [node name="Lighter" type="Node2D" node_paths=PackedStringArray("area") groups=["Armor"]]
 script = ExtResource("1_dlcgh")
-damage = 1
+damage = 5
 area = NodePath("Area2D")
 
 [node name="Area2D" type="Area2D" parent="."]

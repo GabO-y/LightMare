@@ -39,4 +39,6 @@ layout_mode = 2
 text = "Sair do Jogo"
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="MarginContainer/VBoxContainer/FinishRound" to="." method="_on_finish_round_button_down"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/FinishRound" to="." method="_on_finish_round_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/Exit" to="." method="_on_exit_button_down"]

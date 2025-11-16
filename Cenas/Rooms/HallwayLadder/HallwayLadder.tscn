@@ -63,6 +63,9 @@ is_locked = false
 [node name="DeskRoom" parent="Doors" instance=ExtResource("12_0er1k")]
 position = Vector2(23, 311)
 
+[node name="GhostBossRoom" parent="Doors" instance=ExtResource("12_0er1k")]
+position = Vector2(139, 74)
+
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="EnemieSpawaner" parent="Spawners" instance=ExtResource("13_2uq8x")]

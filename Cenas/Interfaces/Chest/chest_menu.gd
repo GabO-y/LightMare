@@ -2,6 +2,8 @@ extends Menu
 
 class_name ChestMenu
 
+@export var wearpon_menu: WearponMenu
+
 @export var popup: Label
 @export var menu: Container
 @export var area: Area2D
@@ -29,10 +31,6 @@ var label_coin_pos: Vector2
 
 func _ready() -> void:
 	
-	for child in wearpowns_node.get_children():
-		child = child as ChestItem
-		child.item_buyed.connect(_buy_item)
-		child.insufficient_coins.connect(_insuffient_coisn)
 	
 	add_power_up(
 		"vida",
@@ -43,10 +41,15 @@ func _ready() -> void:
 	menu.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	await get_tree().process_frame
+	
 	set_active(false)
 	hide_pop_up()
 	
+	wearpon_menu.wearpon_infos = Globals.player.wearpons_infos
+	wearpon_menu._update("lantern")
+	
 func add_power_up(item_name: String, price: float, icon: Texture2D):
+	
 	var item: ChestItem = ChestItem.create(item_name, price, icon) 
 	
 	item.item_buyed.connect(_buy_item)
@@ -81,6 +84,7 @@ func _process(delta: float) -> void:
 		timer_issu_coin += delta
 			
 	if Globals.player == null: return
+	
 	var dist = area.global_position.distance_to(Globals.player_pos())
 			
 	if dist < 30 and not is_visible_pop_up:

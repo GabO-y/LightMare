@@ -1,6 +1,12 @@
-[gd_resource type="TileSet" load_steps=5 format=3 uid="uid://beitqqbn2empt"]
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://beitqqbn2empt"]
 
 [ext_resource type="Texture2D" uid="uid://dro6cmns1usf5" path="res://Cenas/Rooms/HallWayRooms/tileset.png" id="1"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ae588"]
+vertices = PackedVector2Array(8, 8, -8, 8, -8, -8, 8, -8)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)])
+agent_radius = 0.0
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_sugi5"]
 polygon = PackedVector2Array(-6.99164, 1.03155, 8, 1.08886, 8, 6.99164, -7.10626, 6.99164)
@@ -72,6 +78,7 @@ texture = ExtResource("1")
 6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 5.43162, -8, 4.62015, -39.9882, 8.12508, -39.9882, 8, -6.59916, -8, -6.56484)
 7:4/0 = 0
 0:5/0 = 0
+0:5/0/navigation_layer_0/polygon = SubResource("NavigationPolygon_ae588")
 1:5/0 = 0
 1:5/0/z_index = 1
 1:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -2.78781, 8, -2.96767, 8, 8, -8, 8)
@@ -98,4 +105,5 @@ texture = ExtResource("1")
 occlusion_layer_0/light_mask = 1
 physics_layer_0/collision_layer = 7
 physics_layer_0/collision_mask = 0
+navigation_layer_0/layers = 1
 sources/0 = SubResource("TileSetAtlasSource_cmp_Q4ep4R_")

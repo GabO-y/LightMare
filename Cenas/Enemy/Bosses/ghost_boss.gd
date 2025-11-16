@@ -13,9 +13,10 @@ var is_laugh_animation: bool = false
 
 # Variaveis que devem vir do quarto que ele está
 #######################
-@export var area_to_ghost_run: Area2D
+#@export var area_to_ghost_run: Area2D
 # vai conter os seguimentos para o spawn num ponto aleatorio
 @export var segs_to_ghost_run: Node2D
+@export var screen_notifier: VisibleOnScreenNotifier2D
 #######################
 
 @export var slash_node: Node2D
@@ -43,7 +44,7 @@ var ghost_count:int = 0
 var min_dist_ghost_run: int = 90
 
 var timer_special = 0
-@export var special_coldown = 5
+@export var special_coldown: float = 1.0
 
 var stop_timer: float = 0.0
 var stop_duration: float = 2.0
@@ -64,7 +65,11 @@ func _ready() -> void:
 	set_process(false)
 	set_physics_process(false)
 	
-	area_to_ghost_run.body_entered.connect(_ghost_out)
+	#area_to_ghost_run.body_entered.connect(_ghost_out)
+	
+	screen_notifier.screen_exited.connect(test_exited)
+	screen_notifier.screen_exited.connect(_ghost_out)
+	
 	super._ready()
 
 func _process(delta: float) -> void:
@@ -73,8 +78,9 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	
 	if not is_active: return
+	if is_dying:
+		current_state = State.DYING
 		
-
 	match current_state:
 		State.CHASING:
 			chase_move()
@@ -85,8 +91,9 @@ func _physics_process(delta: float) -> void:
 			if dist_to_player() > 40 and not is_laugh_animation:
 				current_state = State.CHASING
 		State.SPECIAL:
+			
 			special_move()
-				
+			
 		State.STOPED:
 			pass
 		State.DYING:
@@ -108,12 +115,12 @@ func _physics_process(delta: float) -> void:
 			return
 			
 	timer_special += delta
-	
+		
 	if timer_special >= special_coldown and not is_on_special:
 		start_special()
 		
 
-func special_move():
+func special_move():	
 	match current_special:
 		Specials.GHOSTS_RUN:
 			ghost_run_move()
@@ -129,7 +136,7 @@ func setup_ghost_run():
 	area_attack_ghosts_run.collision_layer = Globals.layers["boss"]
 	area_attack_ghosts_run.collision_mask = Globals.layers["player"]
 	
-	area_to_ghost_run.collision_mask = Globals.layers["boss"]
+	#area_to_ghost_run.collision_mask = Globals.layers["boss"]
 	
 	speed = 150
 
@@ -172,7 +179,19 @@ func create_ghosts(pos: Vector2):
 	call_deferred("add_child", ghost)
 
 	ghost.global_position = pos
+	ghost.speed = 300
 
+	ghost.tree_entered.connect(
+		func():
+			ghost.screen_notifier.screen_exited.connect(
+				func():
+					_ghost_out(ghost)
+					print("ajshdkjh")
+			)
+
+	)
+	
+	
 	return ghost
 	
 func get_random_point_in_line(line: Line2D) -> Vector2:
@@ -197,8 +216,8 @@ func get_random_point_in_line(line: Line2D) -> Vector2:
 	# por isso subitraio a posição global, já que ele começa, pois preciso da
 	# posição original no mundo, pois os fantamas que nascem dele, precisam do
 	# no mundo e não relativo a seu pai
+	
 	return Vector2(x, y) - global_position
-
 
 func create_ghosts_and_run():
 		
@@ -214,6 +233,7 @@ func create_ghosts_and_run():
 
 		var line = get_random_line()
 		var gho = create_ghosts(get_random_point_in_line(line)) as Ghost
+		
 		gho.speed = 150
 		
 		gho.dir = {
@@ -249,7 +269,7 @@ func set_ghost_generic(set_gho: Callable, gho):
 func finish_ghosts_run():
 	# com a chance dele nascer em baixo, ele fica perto o suficiente para
 	# colidir com a area que faz o ghosts nascerem, o setup torna true denovo
-	area_to_ghost_run.monitoring = false
+	#area_to_ghost_run.monitoring = false
 	body.global_position = get_random_point_in_line(get_random_line())
 	is_finish_ghosts_run = true
 		
@@ -286,15 +306,6 @@ func _animation_logic():
 	anim.flip_h = dir.x < 0
 	anim.play(play)
 
-func set_active(mode: bool):
-	
-	if mode: setup()
-	
-	set_process(mode)
-	set_physics_process(mode)
-	is_active = mode
-	visible = mode
-	
 func setup():
 	
 	print("asas")
@@ -313,7 +324,7 @@ func setup():
 	ghost_count = 0
 	quant_ghost_create = 10
 	is_finish_ghosts_run = false
-	area_to_ghost_run.monitoring = true
+	#area_to_ghost_run.monitoring = true
 	speed = 80
 	is_toward_ghost_run = false
 	damage_bar.visible = true
@@ -372,6 +383,7 @@ func start_special():
 	if is_on_special: return
 	
 	anim.play("laugh")
+	
 	current_state = State.STOPED
 	is_laugh_animation = true
 	is_on_special = true
@@ -421,18 +433,19 @@ func _on_area_attack_to_ghosts_run_player_body_entered(body: Node2D) -> void:
 	var player = body.get_parent() as Player
 	if !player: return
 	
-	if is_dying: return
+	if is_dying or not is_active: return
 	
 	player.take_knockback(dir, 20)
 	player.take_damage(damage)
 	
-func _ghost_out(body: Node2D):
-						
-	if body.get_parent() is GhostBoss:
+func _ghost_out(me):
+							
+	if me is GhostBoss:
 		create_ghosts_and_run()	
 		
-	if body.get_parent() is Ghost:
-		body.get_parent().die()
+	if me is Ghost:
+		me.die()
+		
 
 func die():
 	is_dead = true
@@ -485,4 +498,9 @@ func color_to_normal():
 	
 	if is_flicking:
 		tween.finished.connect(color_to_white)
+		
+func test_exited():
+	print("saiu")
 	
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	_ghost_out(self)

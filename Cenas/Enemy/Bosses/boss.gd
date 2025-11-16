@@ -13,16 +13,25 @@ func _ready() -> void:
 	life_bar.value = life
 
 func set_active(mode):
-	is_active = mode
-	is_stop = !mode
+	
 	if mode: setup()
+	
+	set_process(mode)
+	set_physics_process(mode)
+	
+	is_stop = !mode
+	is_active = mode
+	visible = mode
+	
 	super.set_active(mode)
+
 	
 func enable():
 	set_active(true)
 	
 func desable():
 	set_active(false)
+
 	
 func setup():
 	pass

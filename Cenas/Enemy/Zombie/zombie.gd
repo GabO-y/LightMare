@@ -27,7 +27,7 @@ func _ready() -> void:
 
 	super._ready()
 
-func _process(delta: float) -> void:
+func _process(delta: float) -> void:	
 	animation_logic()
 	super._process(delta)
 
@@ -51,7 +51,10 @@ func handle_chasing_state(distance_to_player: float):
 	
 	var next_point = agent.get_next_path_position() 
 	dir = body.global_position.direction_to(next_point).normalized()
+	dir = dir.normalized()
+
 	body.velocity = dir * speed
+	
 	body.move_and_slide()
 	
 	if distance_to_player < 40:
@@ -131,5 +134,4 @@ func _exit_player_area_attack(player_body: Node2D) -> void:
 		is_player_in_attack_range = false
 
 func _update_agent() -> void:
-	agent.target_position = Globals.player.body.global_position
-	pass
+	agent.target_position = Globals.player_pos()

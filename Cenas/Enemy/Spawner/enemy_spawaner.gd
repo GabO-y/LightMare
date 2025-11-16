@@ -114,7 +114,7 @@ func _on_timer_to_spawn_a_enemy() -> void:
 func spawn(ene_name: String, round: Round) -> Enemy:
 	var ene = load("res://Cenas/Enemy/" + ene_name + "/" + ene_name + ".tscn").instantiate() as Enemy
 		
-	call_deferred("add_child", ene)
+	Globals.room_manager.current_room.call_deferred("add_child", ene)
 	
 	Globals.house.reseted.connect(
 		func():
@@ -123,7 +123,7 @@ func spawn(ene_name: String, round: Round) -> Enemy:
 				ene.queue_free()
 	)
 			
-	ene.global_position = get_random_circle_point()
+	ene.global_position = get_random_circle_point() 
 	
 	ene.enemy_die.connect(_free_enemy)
 	ene.enemy_die.connect(round._check_finish_round)
@@ -151,4 +151,5 @@ func get_random_circle_point() -> Vector2:
 	var r_ = circle.radius * sqrt(randf())
 	var t_ = randi_range(0, 360)
 	
-	return Vector2(r_ * cos(t_), r_ * sin(t_))
+	
+	return Vector2(r_ * cos(t_), r_ * sin(t_)) + global_position

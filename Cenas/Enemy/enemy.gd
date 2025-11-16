@@ -48,19 +48,21 @@ func update_bar():
 		return
 	bar.value = life
 
-func set_active(mode: bool):
+func set_active(mode):
 		
 	set_process(mode)
 	set_physics_process(mode)
+	
 	visible = mode
 	is_active = mode
 		
 	var layer = Globals.layers["enemy"] if mode else 0
-	var mask = Globals.layers["player"] | Globals.layers["enemy"] | Globals.layers["current_wall"] if mode else 0
+	var mask = Globals.layers["player"] | Globals.layers["enemy"] | Globals.layers["current_wall"] | Globals.layers["utils_wall"] if mode else 0
 	
 	body.collision_layer = layer
 	body.collision_mask = mask
 
+	
 func take_damage(damage: int):
 	
 	if is_dead: return

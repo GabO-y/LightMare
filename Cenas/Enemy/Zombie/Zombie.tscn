@@ -541,16 +541,17 @@ wall_min_slide_angle = 0.00174533
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
 path_desired_distance = 3.0
 target_desired_distance = 3.0
-navigation_layers = 8
 path_postprocessing = 1
 radius = 30.0
+debug_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1
 position = Vector2(1.19209e-07, 2.38419e-07)
 scale = Vector2(1.05982, 1.06882)
 sprite_frames = SubResource("SpriteFrames_ck86d")
-animation = &"die"
+animation = &"walk_4"
+frame_progress = 0.805388
 
 [node name="CollisionBody" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CapsuleShape2D_xejvs")

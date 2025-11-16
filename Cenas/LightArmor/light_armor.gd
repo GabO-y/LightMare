@@ -3,15 +3,16 @@ extends Node2D
 class_name LightArmor
 
 @export var damage: int = 0
-@export var energie = 0
+@export var time_to_damage: float = 0.0
+@export var distance: Vector2 = Vector2.ONE
 
 @export var is_active = true
 @export var area: Area2D
 
 var enemies_on_light: Dictionary[Enemy, float] = {}
 var mouse_move = false
-var time_to_damage: float = 0.0
 
+@export var can_active: bool = true
 
 var armor_dir: Vector2 = Vector2.ZERO
 
@@ -24,7 +25,7 @@ func _ready() -> void:
 	
 	area.body_entered.connect(_ene_on_light_area)
 	area.body_exited.connect(_ene_exit_light_area)
-
+	
 func _process(delta: float) -> void:
 	
 	if Globals.player.is_in_menu: return
@@ -35,16 +36,23 @@ func _process(delta: float) -> void:
 		toggle_activate()
 
 func toggle_activate():
+		
+	if not can_active:
+		if is_active:
+			is_active = false
+			visible = false
+		return
 	
 	is_active = !is_active
-	area.visible = is_active
-		
-	if is_active:
-		area.collision_mask = Globals.layers["ghost"] | Globals.layers["enemy"] | Globals.layers["boss"]
-		area.collision_layer = Globals.layers["player"] | Globals.layers["armor"] | Globals.layers["current_wall"]
-	else:
-		area.collision_layer = 0
-		area.collision_mask = 0
+	visible = is_active
+
+	if not area: return
+	
+	var layer = Globals.layers["player"] | Globals.layers["armor"] | Globals.layers["current_wall"] if is_active else 0
+	var mask = Globals.layers["ghost"] | Globals.layers["enemy"] | Globals.layers["boss"] if is_active else 0
+
+	area.collision_layer = layer
+	area.collision_mask = mask
 
 
 func _input(event: InputEvent) -> void:

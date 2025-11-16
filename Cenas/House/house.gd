@@ -9,7 +9,6 @@ class_name House
 @export var initial_position: Marker2D
 @export var die_menu: DieMenu
 
-
 var can_reset: bool = false
 
 var follow: Node2D
@@ -21,9 +20,14 @@ func _ready() -> void:
 	
 	Globals.house = self
 	Globals.player = player
+	
 	Globals.room_manager = room_manager
 	Globals.item_manager = room_manager.item_manager
 	Globals.key_manager = room_manager.key_manager
+	
+	die_menu.house = self
+	
+	player._die.connect(die_menu.start_anim_1)
 	
 	room_manager.changed_room.connect(active_menu)
 	
@@ -33,11 +37,9 @@ func _ready() -> void:
 			
 		process_mode = Node.PROCESS_MODE_ALWAYS
 		
-	die_menu.finished.connect(
-		func():
-			can_reset = true
-	)
-			
+func _input(event: InputEvent) -> void:
+	if Input.is_key_label_pressed(KEY_1):
+		restart()
 
 func _process(delta: float) -> void:
 		
@@ -65,21 +67,9 @@ func set_camare_in(thing: Node2D, zoom: Vector2):
 func desable_camera():
 	camera.enabled = false
 	room_manager.current_room.camera.enabled = true
-	
-func _input(event: InputEvent) -> void:
-	if die_menu.is_in_die_menu and die_menu.can_skip:		
-		if Input.is_anything_pressed():
-			die_menu.skip_logic()			
-	if can_reset:
-		if Input.is_anything_pressed():
-			restart()			
 		
 		
 func restart():
-	
-	if Globals.is_reseting: return
-	
-	Globals.is_reseting = true
 	
 	player.reset()
 	
@@ -92,7 +82,6 @@ func restart():
 	room_manager.item_manager.reset()
 
 	player.global_position = initial_position.global_position
-	player.can_dash = false   
 	
 	for door in room_manager.current_room.doors:
 		door.open()
@@ -100,16 +89,12 @@ func restart():
 	get_tree().paused = false
 	
 	Globals.conquited_coins = 0
-	die_menu.part = 0
-	die_menu.can_skip = false
-	can_reset = false
+	Globals.enemies_defalted = 0
+	
+	die_menu.reset()
+	
+	active_menu(room_manager.current_room)
 	
 	reseted.emit()
-	
-
-	
-	await get_tree().process_frame
-	
-	Globals.is_reseting = false
 	
 signal reseted

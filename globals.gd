@@ -38,7 +38,9 @@ var layers = {
 	"out_room_boss": 1 << 5,
 	"ghost": 1 << 6,
 	"no_collision_wall": 1 << 7,
-	"armor": 1 << 8
+	"armor": 1 << 8,
+	# Para uns obstaculos nos quartos (toy_library)
+	"utils_wall": 1 << 9
 }
 
 var ene_in_crash_attack: Array[Enemy]

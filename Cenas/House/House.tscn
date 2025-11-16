@@ -48,13 +48,17 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Menus" type="Node2D" parent="MenuManager"]
 
-[node name="MenuPause" parent="MenuManager/Menus" instance=ExtResource("7_6pdaa")]
+[node name="DieMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("house", "manager") instance=ExtResource("7_k5gof")]
+house = NodePath("../../..")
+manager = NodePath("../..")
 
-[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area") instance=ExtResource("5_iqu7b")]
+[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "manager") instance=ExtResource("5_iqu7b")]
 popup = NodePath("../../ChestMenuInteratives/MenuPopUp")
 area = NodePath("../../ChestMenuInteratives/BearArea")
+manager = NodePath("../..")
 
-[node name="DieMenu" parent="MenuManager/Menus" instance=ExtResource("7_k5gof")]
+[node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
+manager = NodePath("../..")
 
 [node name="InitialPosition" type="Marker2D" parent="."]
 position = Vector2(64, 104)

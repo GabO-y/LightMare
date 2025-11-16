@@ -39,11 +39,9 @@ func _physics_process(delta: float) -> void:
 	shot_logic(delta, dir)
 	
 func toggle_activate():
-	
-	is_active = !is_active
+	super.toggle_activate()	
 	aim_sprite.visible = is_active
 	
-	print(is_active)
 	
 func shot(angle):
 	

@@ -1,15 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://bb4ttu771sbb6"]
+[gd_scene load_steps=5 format=3 uid="uid://bb4ttu771sbb6"]
 
 [ext_resource type="Script" uid="uid://cxhx4lbgt2i12" path="res://Cenas/Interfaces/Chest/chest_menu.gd" id="1_qanw0"]
 [ext_resource type="Texture2D" uid="uid://ds33n7jap68rc" path="res://Assets/Interfaces/ChestUI/LanternIcon.png" id="2_e48bf"]
 [ext_resource type="Texture2D" uid="uid://i61i268vkyxl" path="res://Assets/Interfaces/ChestUI/PowerUpsIcon.png" id="3_rcjur"]
+[ext_resource type="PackedScene" uid="uid://k46xf6sum86h" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponChestMenu.tscn" id="4_nnnol"]
 
-[node name="ChestMenu" type="CanvasLayer" node_paths=PackedStringArray("menu", "tabCont", "wearpowns_node", "power_ups_node", "inssu_coins_point", "coins_label")]
+[node name="ChestMenu" type="CanvasLayer" node_paths=PackedStringArray("wearpon_menu", "menu", "tabCont", "power_ups_node", "inssu_coins_point", "coins_label")]
 process_mode = 3
 script = ExtResource("1_qanw0")
+wearpon_menu = NodePath("MarginContainer/VBoxMain/TabContainer/Wearpons/WearponChestMenu")
 menu = NodePath("MarginContainer")
 tabCont = NodePath("MarginContainer/VBoxMain/TabContainer")
-wearpowns_node = NodePath("MarginContainer/VBoxMain/TabContainer/Wearpons/HFlowContainer")
 power_ups_node = NodePath("MarginContainer/VBoxMain/TabContainer/Ups/HFlowContainer")
 inssu_coins_point = NodePath("InsufficientCoinsPoint")
 coins_label = NodePath("MarginContainer/VBoxMain/Options/Control/Points")
@@ -82,12 +83,10 @@ layout_mode = 2
 size_flags_vertical = 3
 metadata/_tab_index = 0
 
-[node name="HFlowContainer" type="HFlowContainer" parent="MarginContainer/VBoxMain/TabContainer/Wearpons"]
+[node name="WearponChestMenu" parent="MarginContainer/VBoxMain/TabContainer/Wearpons" instance=ExtResource("4_nnnol")]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_stretch_ratio = 4.4
-theme_override_constants/h_separation = 40
-alignment = 1
+size_flags_vertical = 3
 
 [node name="Ups" type="ScrollContainer" parent="MarginContainer/VBoxMain/TabContainer"]
 visible = false

@@ -1,0 +1,148 @@
+[gd_scene load_steps=8 format=3 uid="uid://k46xf6sum86h"]
+
+[ext_resource type="Script" uid="uid://u2ejs4d5e3b5" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/wearpon_chest_menu.gd" id="1_5voj3"]
+[ext_resource type="Texture2D" uid="uid://b8w10j8p6lcri" path="res://Assets/LightArmor/Lantern/lantern_icon.png" id="1_ifxik"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="1_nfax0"]
+[ext_resource type="Texture2D" uid="uid://dyhth5uuxxxbr" path="res://Assets/LightArmor/Lighter/lighter_icon.png" id="3_ew5op"]
+[ext_resource type="Texture2D" uid="uid://b8i4lkx8qmfrx" path="res://Assets/LightArmor/FairyLight/fairy_light_icon.png" id="3_uyevu"]
+[ext_resource type="PackedScene" uid="uid://nlmjik0ymw8o" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/ItemPowerUp.tscn" id="5_pvuqm"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ifxik"]
+font = ExtResource("1_nfax0")
+font_size = 60
+
+[node name="WearponChestMenu" type="Control" node_paths=PackedStringArray("damage", "time_to_attack", "distamce", "lantern", "lighter", "fairy_light")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5voj3")
+damage = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Damage")
+time_to_attack = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/TimeAttack")
+distamce = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Distance")
+lantern = NodePath("PanelContainer/HBoxContainer/Wearpons/MarginContainer/Lantern")
+lighter = NodePath("PanelContainer/HBoxContainer/Wearpons/MarginContainer2/Lighter")
+fairy_light = NodePath("PanelContainer/HBoxContainer/Wearpons/MarginContainer3/FairyLight")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Wearpons" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer/Wearpons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Lantern" type="Button" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("1_ifxik")
+expand_icon = true
+
+[node name="Label" type="Label" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer/Lantern"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Lanterna"
+label_settings = SubResource("LabelSettings_ifxik")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/HBoxContainer/Wearpons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Lighter" type="Button" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("3_ew5op")
+expand_icon = true
+
+[node name="Label2" type="Label" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer2/Lighter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Isqueiro"
+label_settings = SubResource("LabelSettings_ifxik")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/HBoxContainer/Wearpons"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="FairyLight" type="Button" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 3
+icon = ExtResource("3_uyevu")
+expand_icon = true
+
+[node name="Label3" type="Label" parent="PanelContainer/HBoxContainer/Wearpons/MarginContainer3/FairyLight"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Pisca-Pisca"
+label_settings = SubResource("LabelSettings_ifxik")
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Damage" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("5_pvuqm")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Distance" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("5_pvuqm")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TimeAttack" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("5_pvuqm")]
+layout_mode = 2
+size_flags_vertical = 3

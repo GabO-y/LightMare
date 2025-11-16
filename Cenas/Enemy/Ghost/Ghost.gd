@@ -35,6 +35,7 @@ var type_special: int
 var current_state: State
 
 @export var area_hit: Area2D
+@export var screen_notifier: VisibleOnScreenNotifier2D
 
 func _ready() -> void:
 		

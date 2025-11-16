@@ -15,7 +15,7 @@ var last_ene_pos: Vector2
 
 var current_room: Room
 
-func _ready() -> void:		
+func _ready() -> void:
 		
 	for room in roomsNode.get_children():
 				
@@ -28,17 +28,18 @@ func _ready() -> void:
 			room.manager = self
 			
 			for door in room.doors:
-		
-				match_doors(room.name, door.name)
-				
 				door = door as Door
 				door.enter_door.connect(_change_room)
 
+	for room in rooms:
+		for door in room.doors:
+			match_doors(room.name, door.name)
+
 	round_manager.round_finished.connect(
 		func():
+			
 			if not current_room.can_return and not Globals.is_reseting:
 				current_room.finish = true
-				print("entrouAAAAAAAAAAAAAAAAAAAAAAAAA")
 				
 			_clear_effects()
 	)

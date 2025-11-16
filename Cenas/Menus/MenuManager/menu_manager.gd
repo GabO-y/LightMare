@@ -16,6 +16,13 @@ func _ready() -> void:
 				menu.manager = self
 				menu.process_mode = Node.PROCESS_MODE_ALWAYS
 				
+				
+func show_menus():
+	print("current menu: ", current_menu)
+	print("sinapse: ")
+	for menu in menus:
+		print("\t", menu.name, ": ", menu.is_active)
+				
 func reset():
 	
 	for menu in menus:

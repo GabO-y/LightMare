@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://cxUskprQdQ2"]
+[gd_scene load_steps=3 format=4 uid="uid://cx6f6r17dycqy"]
 
-[ext_resource type="TileSet" id="tileset_id" path="tileset.tres"]
+[ext_resource type="Script" uid="uid://6c7fbqmiplcg" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_alto_1.gd" id="2_el1ls"]
+[ext_resource type="TileSet" uid="uid://btw3m3mlgpdcr" path="res://Cenas/Rooms/ToyLibrary/Map/tileset.tres" id="tileset_id"]
 
 [node name="moveis_alto_1" type="TileMapLayer"]
-collision_enabled = false
+tile_map_data = PackedByteArray("AAAEAAYAAAAAAAEAAAAFAAYAAAABAAEAAAAGAAYAAAACAAEAAAAEAAcAAAADAAEAAAAFAAcAAAAEAAEAAAAGAAcAAAAFAAEAAAAMAAYAAAAAAAEAAAANAAYAAAABAAEAAAAOAAYAAAACAAEAAAAMAAcAAAADAAEAAAANAAcAAAAEAAEAAAAOAAcAAAAFAAEAAAA=")
 tile_set = ExtResource("tileset_id")
-tile_map_data = PackedByteArray(0, 0, 4, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 5, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 6, 0, 6, 0, 0, 0, 2, 0, 1, 0, 0, 0, 4, 0, 7, 0, 0, 0, 3, 0, 1, 0, 0, 0, 5, 0, 7, 0, 0, 0, 4, 0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 5, 0, 1, 0, 0, 0, 12, 0, 6, 0, 0, 0, 0, 0, 1, 0, 0, 0, 13, 0, 6, 0, 0, 0, 1, 0, 1, 0, 0, 0, 14, 0, 6, 0, 0, 0, 2, 0, 1, 0, 0, 0, 12, 0, 7, 0, 0, 0, 3, 0, 1, 0, 0, 0, 13, 0, 7, 0, 0, 0, 4, 0, 1, 0, 0, 0, 14, 0, 7, 0, 0, 0, 5, 0, 1, 0, 0, 0)
+collision_enabled = false
+script = ExtResource("2_el1ls")

@@ -1,9 +1,11 @@
-[gd_scene load_steps=36 format=3 uid="uid://clp3coh5mf60x"]
+[gd_scene load_steps=38 format=3 uid="uid://clp3coh5mf60x"]
 
 [ext_resource type="Script" uid="uid://cyt1w5e4h0e4" path="res://Cenas/Player/player.gd" id="1_yjlpd"]
 [ext_resource type="Texture2D" uid="uid://cd4to1qh32730" path="res://Assets/Player/Animations/knockback_animaiton.png" id="3_5akqg"]
 [ext_resource type="Texture2D" uid="uid://8qj0ov3p7avy" path="res://Assets/Player/Animations/spr_player_assets.png" id="4_4o7c8"]
-[ext_resource type="PackedScene" uid="uid://cuin301acfa3g" path="res://Cenas/LightArmor/Lighter/Lighter.tscn" id="4_5akqg"]
+[ext_resource type="PackedScene" uid="uid://b0ycmxpkip27y" path="res://Cenas/LightArmor/Lantern/Lantern.tscn" id="4_5akqg"]
+[ext_resource type="Script" uid="uid://chamii6y3xgja" path="res://Cenas/Player/ghost_dash_effect.gd" id="4_6ihxy"]
+[ext_resource type="PackedScene" uid="uid://mcuhgoenbx6w" path="res://Cenas/Player/WearponsInfos/WearponsInfos.tscn" id="6_4o7c8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8ryd"]
 atlas = ExtResource("4_4o7c8")
@@ -240,24 +242,25 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pmvhq"]
-size = Vector2(11.5, 11.2222)
+size = Vector2(11.5, 12.2222)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yjlpd"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("armor", "body", "anim", "hit_area", "hud", "label_coins", "heart_conteiner") groups=["player"]]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("armor", "body", "anim", "hit_area", "hud", "label_coins", "wearpons_infos", "heart_conteiner") groups=["player"]]
 modulate = Color(1, 0.992157, 1, 1)
 script = ExtResource("1_yjlpd")
-armor = NodePath("Armors/Lighter")
+armor = NodePath("Armors/Lantern")
+can_die = false
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/AnimatedSprite2D")
 hit_area = NodePath("CharacterBody2D/HitArea")
 hud = NodePath("Hud")
 label_coins = NodePath("Hud/Coins")
+wearpons_infos = NodePath("WearponsInfos")
 heart_conteiner = NodePath("Hud/HBoxContainer")
 life = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
-z_index = 1000
 position = Vector2(4, -2)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
@@ -268,7 +271,7 @@ sprite_frames = SubResource("SpriteFrames_htvwm")
 animation = &"die"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
-position = Vector2(1, 0.05)
+position = Vector2(1, 0.500005)
 scale = Vector2(0.9, 0.9)
 shape = SubResource("RectangleShape2D_pmvhq")
 
@@ -282,16 +285,13 @@ position = Vector2(-3, 2)
 shape = SubResource("CircleShape2D_yjlpd")
 debug_color = Color(0.992689, 0, 0.248493, 0.42)
 
-[node name="Label" type="Label" parent="CharacterBody2D"]
-visible = false
-offset_left = -17.0
-offset_top = -29.0
-offset_right = 23.0
-offset_bottom = -6.0
+[node name="GhostDashEffect" type="Node2D" parent="CharacterBody2D" node_paths=PackedStringArray("player")]
+script = ExtResource("4_6ihxy")
+player = NodePath("../..")
 
 [node name="Armors" type="Node2D" parent="."]
 
-[node name="Lighter" parent="Armors" instance=ExtResource("4_5akqg")]
+[node name="Lantern" parent="Armors" instance=ExtResource("4_5akqg")]
 damage = 100
 
 [node name="Hud" type="CanvasLayer" parent="."]
@@ -317,6 +317,8 @@ grow_vertical = 2
 
 [node name="TextureRect" type="TextureRect" parent="Hud/HBoxContainer"]
 layout_mode = 2
+
+[node name="WearponsInfos" parent="." instance=ExtResource("6_4o7c8")]
 
 [connection signal="area_entered" from="CharacterBody2D/HitArea" to="." method="_kill_entered"]
 [connection signal="body_entered" from="CharacterBody2D/HitArea" to="." method="_on_hit_area_body_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dfbt2q3vq6op5"]
+[gd_scene load_steps=14 format=4 uid="uid://dfbt2q3vq6op5"]
 
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/Hall/teto_0.tscn" id="0_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/Hall/moveis_cima_1.tscn" id="1_id"]
@@ -16,11 +16,6 @@
 [sub_resource type="GDScript" id="GDScript_16r42"]
 script/source = "extends Room
 "
-
-[sub_resource type="NavigationPolygon" id="NavigationPolygon_kegp6"]
-vertices = PackedVector2Array(259.906, 293.906, 43.0781, 292.078, 44.9062, 72.9531, 258.078, 72.0391)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(35, 63, 268, 62, 270, 304, 33, 302)])
 
 [node name="Hall" type="Node2D" node_paths=PackedStringArray("camera", "door_node")]
 script = SubResource("GDScript_16r42")
@@ -98,7 +93,3 @@ type_enemie = ExtResource("12_2wqts")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(157, 164)
 zoom = Vector2(2.5, 2.5)
-
-[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
-navigation_polygon = SubResource("NavigationPolygon_kegp6")
-navigation_layers = 8

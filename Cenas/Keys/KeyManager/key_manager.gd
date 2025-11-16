@@ -12,6 +12,7 @@ var current_door_can_open: Array[Door]
 # Quando uma chave é criada, ela não é automaticamente lançada,
 # quem lida com isso, é o item_manager, ent, essa variavel 
 # vai guardar se tem uma chave pro item manager criar
+
 var has_key: bool = false
 var key: Key
 
@@ -78,6 +79,7 @@ func try_open_door():
 	
 	var available_doors: Array[Door] = []
 	var retured_doors: Array[Door]
+	var boss_doors: Array[Door]
 		
 	for door in room_manager.current_room.doors:
 		
@@ -90,17 +92,26 @@ func try_open_door():
 			retured_doors.append(door)
 			continue
 			
+		if goTo is BossRoom:
+			boss_doors.append(door)
+			continue
+			
 		available_doors.append(door)
 							
-	if available_doors.is_empty():
-		open_random_door(retured_doors)
-	else:
+	if not available_doors.is_empty():
 		open_random_door(available_doors)
+	elif not boss_doors.is_empty():
+		open_random_door(boss_doors)
+	else:
+		open_random_door(retured_doors)
 		
 func open_random_door(doors: Array[Door]):
 	
-	var door = doors.pick_random() as Door
 	
+	if doors.is_empty(): return
+	
+	var door = doors.pick_random() as Door
+		
 	if door.is_locked:
 		setup_key(create_key_by_door(door))
 		return

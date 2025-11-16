@@ -11,6 +11,7 @@ class_name Player
 @export var coins: int = 0
 @export var hud: CanvasLayer
 @export var label_coins: Label
+@export var wearpons_infos: WearponInfo
 
 var original_modulate = self.modulate
 var modulate_timer: float = 0.0
@@ -61,6 +62,7 @@ var hearts_control: Array[TextureRect] = []
 
 func _ready() -> void:
 	
+	
 	hearts = max_heart
 	
 	hit_area.body_exited.connect(_exit_enemie)
@@ -72,22 +74,22 @@ func _ready() -> void:
 	update_label_coins()
 	update_hearts()
 	
+	_die.connect(
+		func():
+			if armor.is_active:
+				armor.toggle_activate()
+			armor.can_active = false
+	)
 	
 	
 func _process(delta: float) -> void:
-	
-	$CharacterBody2D/Label.text = str(hearts)
-	
+			
 	if is_in_menu: return
 		
 	animation_logic()
 	
 	armor.global_position = body.global_position
 	
-		
-func _input(event: InputEvent) -> void:
-	if Input.is_key_label_pressed(KEY_0) and not is_dead:
-		take_damage(1000)
 	
 func _exit_enemie(body):
 	#pra pegar o corpo e verificar se é enemie
@@ -167,7 +169,7 @@ func move_logic():
 
 func animation_logic():
 	
-	if is_on_knockback or is_getting_key: return
+	if is_on_knockback or is_getting_key or is_dead: return
 	
 	var play = ""
 	
@@ -227,6 +229,8 @@ func _unlocked_doors():
 	
 func take_damage(damage: int):
 	
+	if not can_die: return
+	
 	if is_invencible: return
 	is_invencible = true
 	
@@ -234,7 +238,20 @@ func take_damage(damage: int):
 	update_hearts()
 	
 	if hearts <= 0:
-		die.emit()
+		die()
+	
+func die():
+	
+	if is_dead: return
+	
+	get_tree().paused = true
+	
+	is_dead = true
+	
+	set_process(false)
+	set_physics_process(false)
+	
+	_die.emit()
 	
 func flick_invensible():
 		
@@ -335,8 +352,6 @@ func update_hearts():
 func upgrade_heart(amount: int):
 	max_heart += amount
 	
-	
-
 func reset():
 	
 	Globals.player.set_process(true)
@@ -347,9 +362,15 @@ func reset():
 	
 	Globals.player.process_mode = Node.PROCESS_MODE_INHERIT
 	
+	can_dash = false   
+	armor.can_active = true
+	
 	scale = Vector2(1, 1)
+	
+	hearts = max_heart
+	update_hearts()
 	
 	z_index = 0
 	is_dead = false
 	
-signal die
+signal _die

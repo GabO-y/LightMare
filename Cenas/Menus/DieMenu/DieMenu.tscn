@@ -3,168 +3,33 @@
 [ext_resource type="Script" uid="uid://bmfp80wo0gt6p" path="res://Cenas/Menus/DieMenu/die_menu.gd" id="1_fivf0"]
 [ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_ijqvd"]
 
-[sub_resource type="Animation" id="Animation_ijqvd"]
-length = 7.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimPlayer/TextureRect1:texture:gradient:offsets")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [PackedFloat32Array(1, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimPlayer/Label1:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(4, 4)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimPlayer/Label1:modulate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AnimPlayer/Label2:modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimPlayer/LabelEnemiesCount2:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AnimPlayer/CoinsLabel2:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AnimPlayer/CoinsAlreadyHave2:visible")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("AnimPlayer/ConquistedCoins2:modulate")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 1)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("AnimPlayer/CoinsAlreadyHave2:modulate")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(1, 1, 1, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_fivf0"]
-resource_name = "Part1"
-length = 7.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("AnimPlayer/Label1:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.166667, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(5, 5)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AnimPlayer/Label1:modulate")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.166667, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("AnimPlayer/TextureRect1:texture:gradient:offsets")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 7),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [PackedFloat32Array(1, 1), PackedFloat32Array(0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_6w1pf"]
-resource_name = "Part2"
+resource_name = "1"
 length = 5.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("AnimPlayer/Label2:modulate")
+tracks/0/path = NodePath("AnimationPlayer/Part1/TextureRect:texture:gradient:offsets")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedFloat32Array(1, 1, 1), PackedFloat32Array(0, 0.00793651, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_6w1pf"]
+resource_name = "2"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Part2/CoinText:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -172,11 +37,11 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("AnimPlayer/LabelEnemiesCount2:modulate")
+tracks/1/path = NodePath("AnimationPlayer/Part2/EneText:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -184,11 +49,11 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("AnimPlayer/CoinsLabel2:modulate")
+tracks/2/path = NodePath("AnimationPlayer/Part2/AlreadyCoin:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -196,156 +61,240 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimPlayer/CoinsAlreadyHave2:visible")
+tracks/3/path = NodePath("AnimationPlayer/Part2/ConqCoin:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(5),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimPlayer/ConquistedCoins2:modulate")
+tracks/4/path = NodePath("AnimationPlayer/Part2/EneCount:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 5),
+"times": PackedFloat32Array(0, 3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_aj38n"]
+resource_name = "3"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Part2/ConqCoin:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ijqvd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Part1/TextureRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedFloat32Array(0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Part2/CoinText:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Part2/EneText:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Part2/AlreadyCoin:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Part2/ConqCoin:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimPlayer/CoinsAlreadyHave2:modulate")
+tracks/5/path = NodePath("AnimationPlayer/Part2/EneCount:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+"values": [Color(1, 1, 1, 0)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_6w1pf"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ijqvd"]
 _data = {
-&"Part1": SubResource("Animation_fivf0"),
-&"Part2": SubResource("Animation_6w1pf"),
+&"1": SubResource("Animation_fivf0"),
+&"2": SubResource("Animation_6w1pf"),
+&"3": SubResource("Animation_aj38n"),
 &"RESET": SubResource("Animation_ijqvd")
 }
 
 [sub_resource type="Gradient" id="Gradient_fivf0"]
-offsets = PackedFloat32Array(1, 1)
-colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 0.603033)
+colors = PackedColorArray(1, 1, 1, 0, 0, 0, 0, 0.345098)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ijqvd"]
 gradient = SubResource("Gradient_fivf0")
 fill = 1
-fill_from = Vector2(0.501424, 0.527066)
-fill_to = Vector2(0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6w1pf"]
-font = ExtResource("2_ijqvd")
+fill_from = Vector2(0.5, 0.5)
 
 [sub_resource type="LabelSettings" id="LabelSettings_ijqvd"]
 font = ExtResource("2_ijqvd")
-font_size = 30
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_6w1pf"]
+font = ExtResource("2_ijqvd")
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_aj38n"]
 font = ExtResource("2_ijqvd")
-font_size = 50
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_y25e6"]
 font = ExtResource("2_ijqvd")
-font_size = 30
+font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_hsttx"]
 font = ExtResource("2_ijqvd")
-font_size = 50
+font_size = 40
 
-[sub_resource type="LabelSettings" id="LabelSettings_ty21j"]
-font = ExtResource("2_ijqvd")
-font_size = 50
-
-[node name="DieMenu" type="CanvasLayer" node_paths=PackedStringArray("anim", "label_ene_defalted", "label_coin_already", "label_coin_conquisted")]
+[node name="DieMenu" type="CanvasLayer" node_paths=PackedStringArray("anim", "a_coins", "c_coins", "ene_count")]
 script = ExtResource("1_fivf0")
-anim = NodePath("AnimPlayer")
-label_ene_defalted = NodePath("AnimPlayer/LabelEnemiesCount2")
-label_coin_already = NodePath("AnimPlayer/CoinsAlreadyHave2")
-label_coin_conquisted = NodePath("AnimPlayer/ConquistedCoins2")
+anim = NodePath("AnimationPlayer")
+a_coins = NodePath("AnimationPlayer/Part2/AlreadyCoin")
+c_coins = NodePath("AnimationPlayer/Part2/ConqCoin")
+ene_count = NodePath("AnimationPlayer/Part2/EneCount")
 
-[node name="AnimPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-&"": SubResource("AnimationLibrary_6w1pf")
+&"": SubResource("AnimationLibrary_ijqvd")
 }
 
-[node name="TextureRect1" type="TextureRect" parent="AnimPlayer"]
-z_index = -1
-texture_filter = 1
+[node name="Part1" type="Control" parent="AnimationPlayer"]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 64.0
-offset_bottom = 64.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="AnimationPlayer/Part1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 texture = SubResource("GradientTexture2D_ijqvd")
 
-[node name="Label1" type="Label" parent="AnimPlayer"]
-texture_filter = 1
-offset_left = 426.0
-offset_top = 64.0
-offset_right = 493.0
-offset_bottom = 101.0
-scale = Vector2(4, 4)
-text = "Fim de Jogo
-"
-label_settings = SubResource("LabelSettings_6w1pf")
+[node name="Part2" type="Control" parent="AnimationPlayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Label2" type="Label" parent="AnimPlayer"]
+[node name="CoinText" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 804.0
-offset_top = 134.0
-offset_right = 933.0
-offset_bottom = 199.0
-text = "Inimigos
-Derrotados"
+layout_mode = 0
+offset_left = 803.0
+offset_top = 195.0
+offset_right = 910.0
+offset_bottom = 236.0
+text = "Moedas"
 label_settings = SubResource("LabelSettings_ijqvd")
+
+[node name="EneText" type="Label" parent="AnimationPlayer/Part2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 762.0
+offset_top = 39.0
+offset_right = 941.0
+offset_bottom = 124.0
+text = "Inimigos
+ derrotados"
+label_settings = SubResource("LabelSettings_6w1pf")
 horizontal_alignment = 1
 
-[node name="LabelEnemiesCount2" type="Label" parent="AnimPlayer"]
-offset_left = 999.0
-offset_top = 140.0
-offset_right = 1039.0
-offset_bottom = 192.0
-text = "0"
+[node name="AlreadyCoin" type="Label" parent="AnimationPlayer/Part2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = 953.0
+offset_top = 193.0
+offset_right = 1056.0
+offset_bottom = 234.0
+text = "0 +"
 label_settings = SubResource("LabelSettings_aj38n")
 
-[node name="CoinsLabel2" type="Label" parent="AnimPlayer"]
+[node name="ConqCoin" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 832.0
-offset_top = 265.0
-offset_right = 912.0
-offset_bottom = 296.0
-text = "Moedas"
+layout_mode = 0
+offset_left = 1057.0
+offset_top = 193.0
+offset_right = 1102.0
+offset_bottom = 234.0
+text = "100"
 label_settings = SubResource("LabelSettings_y25e6")
 
-[node name="CoinsAlreadyHave2" type="Label" parent="AnimPlayer"]
+[node name="EneCount" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-offset_left = 965.0
-offset_top = 255.0
-offset_right = 1005.0
-offset_bottom = 307.0
-text = "0 +"
+layout_mode = 0
+offset_left = 1025.0
+offset_top = 62.0
+offset_right = 1070.0
+offset_bottom = 103.0
+text = "100"
 label_settings = SubResource("LabelSettings_hsttx")
-
-[node name="ConquistedCoins2" type="Label" parent="AnimPlayer"]
-offset_left = 1072.0
-offset_top = 255.0
-offset_right = 1112.0
-offset_bottom = 307.0
-text = "0"
-label_settings = SubResource("LabelSettings_ty21j")

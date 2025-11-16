@@ -10,10 +10,23 @@ var door2: Door
 var is_going_to_door: bool = false
 
 var is_key_moment: bool = false
-var is_particles_moment: bool = false
+var is_await_moment: bool = false
+
+var finish_key_moment: bool = false
+var finish_await_moment: bool = false
 
 func _ready() -> void:
 	super._ready()
+	
+func _process(delta: float) -> void:
+	
+	if Input.is_anything_pressed():
+		if is_key_moment:
+			finish_get_key()		
+		elif is_await_moment:
+			finish_await()
+			
+	super._process(delta)
 
 func start_chase_player():
 	super.start_chase_player()
@@ -26,6 +39,10 @@ func use():
 	queue_free()
 	
 func finish_get_key():
+	
+	if finish_key_moment: return
+	finish_key_moment = true
+	
 	set_go_to(door1.position)
 	use_when_arrieve.connect(_open_door_and_wait)
 
@@ -40,11 +57,18 @@ func start_particles():
 	is_key_moment = false
 		
 	await tween.finished
-	is_particles_moment = true
+	is_await_moment = true
 	
-func finish_particles():
+	
+func finish_await():
+	
+	if finish_await_moment: return
+	finish_await_moment = true
+	
+	is_await_moment = false
 	
 	Globals.player.is_getting_key = false
+	set_process(false)
 	
 	Globals.player.set_process(true)
 	Globals.player.set_physics_process(true)
@@ -52,23 +76,17 @@ func finish_particles():
 	Globals.house.desable_camera()
 	use()		
 	
+	finish_key_moment = false
+	finish_await_moment = false
+	
 func _open_door_and_wait():
 	
 	visible = false
 	
 	door1.open()
 	
-	is_particles_moment = true
+	is_await_moment = true
 	is_key_moment =  false
-	
-func _input(event: InputEvent) -> void:
-	
-	if is_going_to_door or event is InputEventMouse	: return
-	
-	if is_key_moment:
-		finish_get_key()		
-	elif is_particles_moment:
-		finish_particles()
-	
+
 signal use_when_arrieve
 	

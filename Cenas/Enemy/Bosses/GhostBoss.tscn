@@ -307,7 +307,6 @@ script = ExtResource("1_21eog")
 slash_node = NodePath("BossBody/SlashNode")
 slash_node_timer = NodePath("BossBody/SlashNode/SlashView/TimerToHideView")
 area_attack_ghosts_run = NodePath("BossBody/SpecialUtils/AreaAttackToGhostsRun")
-special_coldown = 10
 life_bar = NodePath("DinamicLifeBar/DamageBar/LifeBar")
 damage_bar = NodePath("DinamicLifeBar/DamageBar")
 speed = 80
@@ -349,12 +348,15 @@ texture = SubResource("GradientTexture2D_t6okw")
 wait_time = 0.1
 
 [node name="SpecialUtils" type="Node2D" parent="BossBody"]
-visible = false
 
 [node name="AreaAttackToGhostsRun" type="Area2D" parent="BossBody/SpecialUtils"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossBody/SpecialUtils/AreaAttackToGhostsRun"]
 shape = SubResource("CircleShape2D_t6okw")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="BossBody/SpecialUtils"]
+position = Vector2(-3.57628e-07, 0.769231)
+scale = Vector2(1.30769, 1.23077)
 
 [node name="DinamicLifeBar" type="CanvasLayer" parent="." node_paths=PackedStringArray("boss", "timer")]
 script = ExtResource("3_t6okw")
@@ -398,4 +400,5 @@ autostart = true
 [connection signal="timeout" from="BossBody/SlashNode/SlashView/TimerToHideView" to="." method="_on_timer_to_hide_view_timeout"]
 [connection signal="body_entered" from="BossBody/SpecialUtils/AreaAttackToGhostsRun" to="." method="_on_area_attack_to_ghosts_run_player_body_entered"]
 [connection signal="body_exited" from="BossBody/SpecialUtils/AreaAttackToGhostsRun" to="." method="_on_area_attack_to_ghosts_run_player_body_exited"]
+[connection signal="screen_exited" from="BossBody/SpecialUtils/VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
 [connection signal="timeout" from="DinamicLifeBar/UpdateLifeTimer" to="DinamicLifeBar" method="_on_timer_to_update_life"]

@@ -5,7 +5,9 @@ class_name BossRoom
 @export var boss: Boss
 
 func _ready() -> void:
+	
 	boss.room = self
+	
 	super._ready()
 
 func desable():
@@ -16,7 +18,7 @@ func desable():
 	
 	if is_instance_valid(boss):
 		boss.desable()
-		
+
 	super.desable()
 	
 func enable():

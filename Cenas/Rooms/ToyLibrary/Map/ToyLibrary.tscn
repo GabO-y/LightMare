@@ -1,22 +1,32 @@
-[gd_scene load_steps=0 format=3 uid="uid://csxry8oj5mmaf"]
+[gd_scene load_steps=10 format=4 uid="uid://csxry8oj5mmaf"]
 
-[ext_resource type="PackedScene" uid="uid://c3TRrwysoQH" id="0_id" path="teto_0.tscn"]
-[ext_resource type="PackedScene" uid="uid://cyz04SzEfRR" id="1_id" path="moveis_alto_1.tscn"]
-[ext_resource type="PackedScene" uid="uid://cYLtw8B5sSF" id="2_id" path="moveis_baixos_2.tscn"]
-[ext_resource type="PackedScene" uid="uid://cwF2EfomgRf" id="3_id" path="tapete_3.tscn"]
-[ext_resource type="PackedScene" uid="uid://cHA1lxpgkSe" id="4_id" path="porta_4.tscn"]
-[ext_resource type="PackedScene" uid="uid://ceuxZd_Z1T7" id="5_id" path="parede_2_5.tscn"]
-[ext_resource type="PackedScene" uid="uid://cI4KP1IzDSE" id="6_id" path="parede_6.tscn"]
-[ext_resource type="PackedScene" uid="uid://cZcnDiJ6RQH" id="7_id" path="chão_7.tscn"]
-[ext_resource type="PackedScene" uid="uid://cr3XgSLnOSb" id="8_id" path="bg_8.tscn"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/teto_0.tscn" id="0_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_alto_1.tscn" id="1_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_baixos_2.tscn" id="2_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/tapete_3.tscn" id="3_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/porta_4.tscn" id="4_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/parede_2_5.tscn" id="5_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/parede_6.tscn" id="6_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/chão_7.tscn" id="7_id"]
+[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/bg_8.tscn" id="8_id"]
 
 [node name="map" type="Node2D"]
+
 [node name="bg_8" parent="." instance=ExtResource("8_id")]
+tile_map_data = PackedByteArray("AAAAAAAAAAADAAgAAAABAAAAAAADAAgAAAACAAAAAAADAAgAAAADAAAAAAADAAgAAAAEAAAAAAADAAgAAAAFAAAAAAADAAgAAAAGAAAAAAADAAgAAAAHAAAAAAADAAgAAAAIAAAAAAADAAgAAAAJAAAAAAADAAgAAAAKAAAAAAADAAgAAAALAAAAAAADAAgAAAAMAAAAAAADAAgAAAANAAAAAAADAAgAAAAOAAAAAAADAAgAAAAPAAAAAAADAAgAAAAQAAAAAAADAAgAAAARAAAAAAADAAgAAAASAAAAAAADAAgAAAAAAAEAAAADAAgAAAASAAEAAAADAAgAAAAAAAIAAAADAAgAAAASAAIAAAADAAgAAAAAAAMAAAADAAgAAAASAAMAAAADAAgAAAAAAAQAAAADAAgAAAASAAQAAAADAAgAAAAAAAUAAAADAAgAAAASAAUAAAADAAgAAAAAAAYAAAADAAgAAAASAAYAAAADAAgAAAAAAAcAAAADAAgAAAASAAcAAAADAAgAAAAAAAgAAAADAAgAAAASAAgAAAADAAgAAAAAAAkAAAADAAgAAAASAAkAAAADAAgAAAAAAAoAAAADAAgAAAASAAoAAAADAAgAAAAAAAsAAAADAAgAAAABAAsAAAADAAgAAAACAAsAAAADAAgAAAADAAsAAAADAAgAAAAEAAsAAAADAAgAAAAFAAsAAAADAAgAAAAGAAsAAAADAAgAAAAHAAsAAAADAAgAAAAIAAsAAAADAAgAAAAJAAsAAAADAAgAAAAKAAsAAAADAAgAAAALAAsAAAADAAgAAAAMAAsAAAADAAgAAAANAAsAAAADAAgAAAAOAAsAAAADAAgAAAAPAAsAAAADAAgAAAAQAAsAAAADAAgAAAARAAsAAAADAAgAAAASAAsAAAADAAgAAAA=")
+
 [node name="chão_7" parent="." instance=ExtResource("7_id")]
+
 [node name="parede_6" parent="." instance=ExtResource("6_id")]
+
 [node name="parede_2_5" parent="." instance=ExtResource("5_id")]
+
 [node name="porta_4" parent="." instance=ExtResource("4_id")]
+
 [node name="tapete_3" parent="." instance=ExtResource("3_id")]
+
 [node name="moveis_baixos_2" parent="." instance=ExtResource("2_id")]
+
 [node name="moveis_alto_1" parent="." instance=ExtResource("1_id")]
+
 [node name="teto_0" parent="." instance=ExtResource("0_id")]

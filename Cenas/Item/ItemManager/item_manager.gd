@@ -159,6 +159,10 @@ func make_items_chase_player():
 		
 func _collect_item(item: Item):
 			
+	if Globals.player.is_dead:
+		item.queue_free()
+		return
+			
 	match item.type:
 		
 		item_type.COIN:

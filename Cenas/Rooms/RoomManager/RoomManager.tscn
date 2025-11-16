@@ -27,29 +27,22 @@ color = Color(0.258125, 0.1475, 0.59, 1)
 
 [node name="Rooms" type="Node2D" parent="."]
 
-[node name="SafeRoom" parent="Rooms" instance=ExtResource("2_rqem0")]
-
 [node name="Hall" parent="Rooms" instance=ExtResource("5_ow6w0")]
-visible = false
 texture_filter = 1
 
-[node name="GhostBossRoom" parent="Rooms" instance=ExtResource("6_ow6w0")]
-visible = false
-
-[node name="HallwayRooms" parent="Rooms" instance=ExtResource("6_o0csn")]
-visible = false
-
 [node name="HallwayLadder" parent="Rooms" instance=ExtResource("6_sq71m")]
-visible = false
 
 [node name="ToyLibrary" parent="Rooms" instance=ExtResource("7_sq71m")]
-visible = false
 
 [node name="BathRoom" parent="Rooms" instance=ExtResource("8_2fcsa")]
-visible = false
 
 [node name="DeskRoom" parent="Rooms" instance=ExtResource("9_oxtvy")]
-visible = false
+
+[node name="SafeRoom" parent="Rooms" instance=ExtResource("2_rqem0")]
+
+[node name="HallwayRooms" parent="Rooms" instance=ExtResource("6_o0csn")]
+
+[node name="GhostBossRoom" parent="Rooms" instance=ExtResource("6_ow6w0")]
 
 [node name="Managers" type="Node2D" parent="."]
 

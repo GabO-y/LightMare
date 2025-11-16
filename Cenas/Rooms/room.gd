@@ -29,6 +29,7 @@ var rounds: Array[Round]
 var current_round: Round
 
 func _ready() -> void:
+	
 	for child in get_children():
 		
 		if child is Camera2D:
@@ -49,6 +50,8 @@ func _ready() -> void:
 			for layer in child.get_children():
 				if layer is TileMapLayer:
 					layers.append(layer)
+
+	
 
 func _process(delta: float) -> void:
 	if is_camera_chase_mode:
@@ -96,7 +99,10 @@ func switch_process(mode: bool):
 			spawn.set_active(mode)
 
 	for layer in layers:
-
+		
+		if name.contains("Boss"):
+			print("hKJASDHKSA")
+	
 		layer.collision_enabled = mode
 		layer.navigation_enabled = mode
 		
@@ -105,8 +111,8 @@ func switch_process(mode: bool):
 		
 		var lar = Globals.layers["current_wall"] if mode else 0
 				
-		#layer.tile_set.set_physics_layer_collision_layer(1, lar)
-		#layer.tile_set.set_physics_layer_collision_mask(1, lar)
+		layer.tile_set.set_physics_layer_collision_layer(0, lar)
+		layer.tile_set.set_physics_layer_collision_mask(0, lar)
 		
 	if mode:
 		_update_doors()

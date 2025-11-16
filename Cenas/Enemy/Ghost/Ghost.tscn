@@ -250,9 +250,10 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v7o7"]
 radius = 8.0
 
-[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "body", "anim")]
+[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "screen_notifier", "body", "anim")]
 script = ExtResource("1_8icm7")
 area_hit = NodePath("CharacterBody2D/Areas/HitArea")
+screen_notifier = NodePath("CharacterBody2D/ToBoss/VisibleOnScreenNotifier2D")
 speed = 80
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/Animation")
@@ -294,5 +295,10 @@ show_percentage = false
 visible = false
 shape = SubResource("CircleShape2D_5v7o7")
 debug_color = Color(0.999259, 0, 0.118767, 0.42)
+
+[node name="ToBoss" type="Node2D" parent="CharacterBody2D"]
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="CharacterBody2D/ToBoss"]
+scale = Vector2(0.6, 0.65)
 
 [connection signal="body_entered" from="CharacterBody2D/Areas/HitArea" to="." method="_player_enter_hit"]
