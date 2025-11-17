@@ -2,7 +2,7 @@ extends Menu
 
 class_name ChestMenu
 
-@export var wearpon_menu: WearponMenu
+@export var armor_menu: ArmorChestMenu
 
 @export var popup: Label
 @export var menu: Container
@@ -14,6 +14,8 @@ class_name ChestMenu
 
 @export var inssu_coins_point: Marker2D
 @export var coins_label: Label
+
+@export var player: Player
 
 var test: Array[Dictionary]
 var is_test = false
@@ -31,6 +33,7 @@ var label_coin_pos: Vector2
 
 func _ready() -> void:
 	
+	player.armor_manager.chess_menu = self
 	
 	add_power_up(
 		"vida",
@@ -45,8 +48,14 @@ func _ready() -> void:
 	set_active(false)
 	hide_pop_up()
 	
-	wearpon_menu.wearpon_infos = Globals.player.wearpons_infos
-	wearpon_menu._update("lantern")
+	armor_menu.armor_manager = player.armor_manager
+	armor_menu.setup_sizes()
+	armor_menu._update("lantern")
+		
+	player.spend_coins.connect(_update_label_coins)
+	
+func _update_label_coins(amount: int):
+	coins_label.text = str(player.coins)
 	
 func add_power_up(item_name: String, price: float, icon: Texture2D):
 	
@@ -110,8 +119,10 @@ func hide_pop_up():
 	set_visible_pop_up(false)
 	
 func show_menu():
+	
 	if !menu: return
 	set_active(true)
+	
 	#Globals.player.hud.visible = false
 	#update_label_coins()
 	#

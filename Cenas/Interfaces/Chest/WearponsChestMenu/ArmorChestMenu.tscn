@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://k46xf6sum86h"]
+
+[ext_resource type="Script" uid="uid://u2ejs4d5e3b5" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/armor_chest_menu.gd" id="1_jwrmq"]
+[ext_resource type="PackedScene" uid="uid://caveueqjt1kyd" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponSize/WearponSize.tscn" id="2_8quyv"]
+[ext_resource type="PackedScene" uid="uid://nlmjik0ymw8o" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/UpgradeSizeItem.tscn" id="3_s6aqg"]
+
+[node name="ArmorChestMenu" type="Control" node_paths=PackedStringArray("damage", "time_to_attack", "distamce", "lantern", "lighter", "fairy_light")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_jwrmq")
+damage = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Damage")
+time_to_attack = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/TimeAttack")
+distamce = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Distance")
+lantern = NodePath("PanelContainer/HBoxContainer/Wearpons/Lantern")
+lighter = NodePath("PanelContainer/HBoxContainer/Wearpons/Lighter")
+fairy_light = NodePath("PanelContainer/HBoxContainer/Wearpons/FairyLight")
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+
+[node name="Wearpons" type="VBoxContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Lantern" parent="PanelContainer/HBoxContainer/Wearpons" instance=ExtResource("2_8quyv")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Lighter" parent="PanelContainer/HBoxContainer/Wearpons" instance=ExtResource("2_8quyv")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="FairyLight" parent="PanelContainer/HBoxContainer/Wearpons" instance=ExtResource("2_8quyv")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="PanelContainer/HBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Damage" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("3_s6aqg")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Distance" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("3_s6aqg")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TimeAttack" parent="PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2" instance=ExtResource("3_s6aqg")]
+layout_mode = 2
+size_flags_vertical = 3

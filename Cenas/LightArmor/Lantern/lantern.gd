@@ -8,6 +8,8 @@ var ene_on_light = {}
 
 func _ready() -> void:
 	super._ready()
+	set_max(5, "damage")
+	set_max(70, "damage", true)
 
 func _process(delta):
 		
@@ -26,3 +28,4 @@ func _process(delta):
 	armor_dir = dir
 		
 	super._process(delta)
+	

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://df6rl28qpnweo"]
+
+[ext_resource type="Script" uid="uid://dv2h8dpx42l3j" path="res://Cenas/LightArmor/ArmorManager/armor_manager.gd" id="1_f5o6k"]
+
+[node name="ArmorManager" type="Node2D" node_paths=PackedStringArray("armor_node")]
+script = ExtResource("1_f5o6k")
+armor_node = NodePath("Armors")
+
+[node name="Armors" type="Node2D" parent="."]

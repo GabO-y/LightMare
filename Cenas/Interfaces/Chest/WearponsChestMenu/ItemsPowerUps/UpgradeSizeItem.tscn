@@ -1,25 +1,25 @@
 [gd_scene load_steps=6 format=3 uid="uid://nlmjik0ymw8o"]
 
-[ext_resource type="Script" uid="uid://j0b1r2n44rty" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/item_power_up.gd" id="1_jmjxs"]
-[ext_resource type="Texture2D" uid="uid://br8rd7e65byo6" path="res://Assets/LightArmor/AssestsUpgrades/power_icon.png" id="2_vucfv"]
-[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_2fyea"]
+[ext_resource type="Script" uid="uid://j0b1r2n44rty" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/upgrade_size_item.gd" id="1_wu3um"]
+[ext_resource type="Texture2D" uid="uid://br8rd7e65byo6" path="res://Assets/LightArmor/AssestsUpgrades/power_icon.png" id="2_lplic"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_ver8n"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_yie43"]
-font = ExtResource("3_2fyea")
+font = ExtResource("3_ver8n")
 font_size = 40
 
 [sub_resource type="LabelSettings" id="LabelSettings_r556p"]
-font = ExtResource("3_2fyea")
+font = ExtResource("3_ver8n")
 font_size = 40
 
-[node name="ItemPowerUp" type="Control" node_paths=PackedStringArray("button", "item_icon", "item_name", "item_price", "progress_bar")]
+[node name="UpgradeSize" type="Control" node_paths=PackedStringArray("button", "item_icon", "item_name", "item_price", "progress_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_jmjxs")
+script = ExtResource("1_wu3um")
 button = NodePath("Button")
 item_icon = NodePath("Button/HBoxContainer/VBoxContainer/TextureRect")
 item_name = NodePath("Button/HBoxContainer/VBoxContainer/Label")
@@ -52,7 +52,7 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-texture = ExtResource("2_vucfv")
+texture = ExtResource("2_lplic")
 expand_mode = 2
 
 [node name="Label" type="Label" parent="Button/HBoxContainer/VBoxContainer"]

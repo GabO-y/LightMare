@@ -171,7 +171,6 @@ func make_ramdom_round(size: int):
 			"horder": 
 				
 				var ene_name = ["Zombie", "Ghost"].pick_random()
-				ene_name = "Zombie"
 				var quantity = randi_range(int(expected_quantity * 0.5), expected_quantity)
 				var time_spawn = randf_range(0.5, 2.0)
 				round.add_horder(ene_name, quantity, time_spawn)

@@ -13,6 +13,7 @@ var bullets = 50
 
 func _ready() -> void:
 	super._ready()
+	set_price(50)
 
 func _process(delta: float) -> void:
 	

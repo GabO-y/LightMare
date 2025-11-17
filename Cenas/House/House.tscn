@@ -52,9 +52,10 @@ metadata/_edit_use_anchors_ = true
 house = NodePath("../../..")
 manager = NodePath("../..")
 
-[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "manager") instance=ExtResource("5_iqu7b")]
+[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "player", "manager") instance=ExtResource("5_iqu7b")]
 popup = NodePath("../../ChestMenuInteratives/MenuPopUp")
 area = NodePath("../../ChestMenuInteratives/BearArea")
+player = NodePath("../../../Player")
 manager = NodePath("../..")
 
 [node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]

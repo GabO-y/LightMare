@@ -11,14 +11,15 @@ class_name Player
 @export var coins: int = 0
 @export var hud: CanvasLayer
 @export var label_coins: Label
-@export var wearpons_infos: WearponInfo
+@export var armor_node: Node2D
+@export var armor_manager: ArmorManager
 
 var original_modulate = self.modulate
 var modulate_timer: float = 0.0
 var white_time: bool = true
 var is_flicking: bool = false
 
-var max_heart: int = 1
+var max_heart: int = 2
 var hearts: int = 2
 var is_invencible: bool = false
 var invencible_duration: float = 1.2
@@ -62,7 +63,6 @@ var hearts_control: Array[TextureRect] = []
 
 func _ready() -> void:
 	
-	
 	hearts = max_heart
 	
 	hit_area.body_exited.connect(_exit_enemie)
@@ -80,8 +80,27 @@ func _ready() -> void:
 				armor.toggle_activate()
 			armor.can_active = false
 	)
+		
+	spend_coins.connect(_spend_coins)
 	
+func set_armor(armor: LightArmor):
+	for child in armor_node.get_children():
+		armor_node.remove_child(child)
+		
+	armor_node.add_child(armor)
+	self.armor = armor
+		
+
+func _spend_coins(amount: int):
 	
+	if amount > coins:
+		print("quantidade a ser gasta, execede a quantidade de moedas: Player/spend_coins()")
+		return
+		
+	coins -= amount
+	update_label_coins()
+	
+
 func _process(delta: float) -> void:
 			
 	if is_in_menu: return
@@ -374,3 +393,5 @@ func reset():
 	is_dead = false
 	
 signal _die
+
+signal spend_coins(amount: int)

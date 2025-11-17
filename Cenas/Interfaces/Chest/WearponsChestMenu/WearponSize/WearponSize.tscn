@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://caveueqjt1kyd"]
+
+[ext_resource type="Texture2D" uid="uid://b8w10j8p6lcri" path="res://Assets/LightArmor/Lantern/lantern_icon.png" id="1_hcmeu"]
+[ext_resource type="Script" uid="uid://b113485jhbhy8" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponSize/wearpon_size.gd" id="1_tfpph"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_tfpph"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_1nmvd"]
+font = ExtResource("2_tfpph")
+font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_s7n5u"]
+font = ExtResource("2_tfpph")
+font_size = 40
+
+[node name="WearponSizeItem" type="Control" node_paths=PackedStringArray("button", "name_label", "price_label")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tfpph")
+button = NodePath("MarginContainer/HBoxContainer/Button")
+name_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Name")
+price_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Price")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+icon = ExtResource("1_hcmeu")
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+modulate = Color(0.0596081, 0.80015, 0.0500734, 1)
+layout_mode = 2
+size_flags_vertical = 6
+text = "Lantern"
+label_settings = SubResource("LabelSettings_1nmvd")
+horizontal_alignment = 1
+
+[node name="Price" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+text = "100.0"
+label_settings = SubResource("LabelSettings_s7n5u")
+horizontal_alignment = 1

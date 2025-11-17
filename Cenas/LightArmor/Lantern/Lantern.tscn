@@ -21,6 +21,7 @@ light_mask = 3
 visibility_layer = 3
 script = ExtResource("1_ix4eb")
 damage = 2
+time_to_damage = 1.5
 area = NodePath("Light")
 
 [node name="Icon" type="Sprite2D" parent="."]
