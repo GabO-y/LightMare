@@ -12,7 +12,8 @@ var armors: Array[LightArmor]
 
 func _ready() -> void:
 	
-	for name in ["Lantern", "Lighter", "FairyLight"]:
+	#for name in ["Lantern", "Lighter", "FairyLight"]:
+	for name in ["Lantern", "Lighter"]:
 		var path: String = str("res://Cenas/LightArmor/", name, "/", name, ".tscn")
 		var armor = load(path).instantiate() 
 
@@ -27,7 +28,7 @@ func _ready() -> void:
 	change_to_select()
 		
 func get_selected_armor():
-	selected_armor.update()
+	selected_armor._update()
 	return selected_armor
 	
 func get_armor(armor_name: String) -> LightArmor:
@@ -70,17 +71,16 @@ func try_buy(armor_name: String) -> bool:
 	if not armor_target:
 		return false
 		
-	if not armor_target.infos["is_locked"]:
+	if not armor_target.general_infos.is_locked:
 		selected_armor = armor_target
 		change_to_select()
 		return true
 		
-	if player.coins >= armor_target.infos["price"]:
+	print("aqui: ", player.coins >= armor_target.get_price())
 		
-		player._spend_coins(armor_target.infos["price"])
-		
-		armor_target.infos["is_locked"] = false
-		
+	if player.coins >= armor_target.get_price():
+		player._spend_coins(armor_target.get_price())
+		armor_target.general_infos.is_locked = false
 		return true
 	else:
 		chess_menu._insuffient_coisn()

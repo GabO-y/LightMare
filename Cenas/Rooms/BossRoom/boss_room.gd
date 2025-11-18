@@ -29,3 +29,7 @@ func switch_process(mode: bool):
 	super.switch_process(mode)
 	if is_instance_valid(boss):
 		boss.set_active(mode)
+		
+func reset():
+	super.reset()
+	boss.reset()

@@ -27,5 +27,10 @@ func _on_exit_button_down() -> void:
 	get_tree().quit()
 
 func _on_finish_round_pressed() -> void:
+	
+	if Globals.player.is_getting_key:
+		hide_menu()
+		return 
+		
 	Globals.player.take_damage(100)
 	hide_menu()

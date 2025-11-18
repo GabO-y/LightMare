@@ -11,28 +11,42 @@ class_name UpgradeSizeItem
 @export var player: Player
 @export var armor_menu: ArmorChestMenu
 
+var type: String
+
 func _ready() -> void:
-	pass
-	
-func setup_button():
 	button.button_down.connect(try_upgrade)
 	
+func setup():
+	match  item_name.text.replace("\n", "").to_lower():
+		"dano": type = "damage"
+		"distância": type = "distance"
+		"tempo de ataque": type = "time_attack"
+
 func try_upgrade():
-	
-	if player.coins <= float(item_price.text):
+		
+	if player.coins <= int(item_price.text):
 		armor_menu.chess_menu._insuffient_coisn()
 		return
+				
+	var armor = armor_menu.armor_manager.get_selected_armor()
 		
-	print(item_name.text)
+	var price = armor.general_infos.get_price_level(type)
 		
-	match  item_name.text:
-		"Dano":
-			var infos = armor_menu.armor_manager.get_armor(item_name.text).upgrade("damage")
-			player._spend_coins(infos.get_damage_price())
-
+	if armor.upgrade(type):
+		
+		player._spend_coins(price)
+		
+		armor_menu.chess_menu.update_label_coins()
+		
+		_update_price(armor)
+		
+		armor._update()
+		armor_menu._update(armor.name)
+		
+func _update_price(armor: LightArmor):
+		if armor.is_max(type):
+			item_price.text = "MAX"
+		else:
+			item_price.text = str(armor.get_price_level(type))
 			
-						
-func _update_price(amount: int):
-	item_price.text = str(amount)
-	
 signal selected(my_name: String)

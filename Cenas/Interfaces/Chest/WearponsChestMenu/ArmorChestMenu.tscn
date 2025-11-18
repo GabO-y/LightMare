@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://caveueqjt1kyd" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponSize/WearponSize.tscn" id="2_8quyv"]
 [ext_resource type="PackedScene" uid="uid://nlmjik0ymw8o" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/UpgradeSizeItem.tscn" id="3_s6aqg"]
 
-[node name="ArmorChestMenu" type="Control" node_paths=PackedStringArray("damage", "time_to_attack", "distamce", "lantern", "lighter", "fairy_light")]
+[node name="ArmorChestMenu" type="Control" node_paths=PackedStringArray("damage", "time_to_attack", "distance", "lantern", "lighter", "fairy_light")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_vertical = 2
 script = ExtResource("1_jwrmq")
 damage = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Damage")
 time_to_attack = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/TimeAttack")
-distamce = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Distance")
+distance = NodePath("PanelContainer/HBoxContainer/MarginContainer/VBoxContainer2/Distance")
 lantern = NodePath("PanelContainer/HBoxContainer/Wearpons/Lantern")
 lighter = NodePath("PanelContainer/HBoxContainer/Wearpons/Lighter")
 fairy_light = NodePath("PanelContainer/HBoxContainer/Wearpons/FairyLight")

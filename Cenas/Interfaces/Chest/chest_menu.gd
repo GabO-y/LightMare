@@ -49,7 +49,9 @@ func _ready() -> void:
 	hide_pop_up()
 	
 	armor_menu.armor_manager = player.armor_manager
+	
 	armor_menu.setup_sizes()
+	
 	armor_menu._update("lantern")
 		
 	player.spend_coins.connect(_update_label_coins)
@@ -119,28 +121,13 @@ func hide_pop_up():
 	set_visible_pop_up(false)
 	
 func show_menu():
-	
 	if !menu: return
 	set_active(true)
-	
-	#Globals.player.hud.visible = false
-	#update_label_coins()
-	#
-	#get_tree().paused = true
-	#set_visible_menu(true)
-	#set_process_input(true)
-	#set_process_unhandled_input(true)
 
 func hide_menu():
 	if !menu: return
 	set_active(false)
-	
-	#if Globals.player:
-		#Globals.player.hud.visible = true
-#
-	#get_tree().paused = false
-	#set_visible_menu(false)
-	#menu.process_mode = Node.PROCESS_MODE_INHERIT
+
 	
 func set_visible_pop_up(mode: bool):
 	if popup == null: return
@@ -168,8 +155,10 @@ func set_active(mode: bool):
 	super.set_active(mode)
 	set_visible_menu(mode)
 	update_label_coins()
+	$MarginContainer/VBoxMain/Options/Wearpons.grab_focus()
 
 func _buy_item(item: ChestItem):
+	
 	Globals.player.coins -= item.price
 	update_label_coins()
 	

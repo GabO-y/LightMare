@@ -64,10 +64,7 @@ func _ready() -> void:
 	
 	set_process(false)
 	set_physics_process(false)
-	
-	#area_to_ghost_run.body_entered.connect(_ghost_out)
-	
-	screen_notifier.screen_exited.connect(test_exited)
+
 	screen_notifier.screen_exited.connect(_ghost_out)
 	
 	super._ready()
@@ -186,9 +183,8 @@ func create_ghosts(pos: Vector2):
 			ghost.screen_notifier.screen_exited.connect(
 				func():
 					_ghost_out(ghost)
-					print("ajshdkjh")
 			)
-
+			reseted.connect(ghost.queue_free)
 	)
 	
 	
@@ -254,7 +250,8 @@ func create_ghosts_and_run():
 	var set_behavior_func: Callable = get_behavior_func(type)
 	
 	for gho in ghosts_array:
-		set_ghost_generic(set_behavior_func, gho)
+		if is_instance_valid(gho):
+			set_ghost_generic(set_behavior_func, gho)
 	
 func get_behavior_func(type: int):
 	match type:
@@ -307,9 +304,7 @@ func _animation_logic():
 	anim.play(play)
 
 func setup():
-	
-	print("asas")
-	
+		
 	set_process(true)
 	set_physics_process(true)
 	
@@ -328,6 +323,20 @@ func setup():
 	speed = 80
 	is_toward_ghost_run = false
 	damage_bar.visible = true
+
+func reset():
+	setup()
+	
+	print("boss resetado")
+	
+	set_process(false)
+	set_physics_process(false)
+	is_active = false
+	damage_bar.visible = false
+	
+	reseted.emit()
+
+
 
 func chase_move():
 		
@@ -490,8 +499,6 @@ func color_to_white():
 	tween.tween_property(self, "modulate", Color.RED, 0.2)
 	tween.finished.connect(color_to_normal)
 	
-	
-	
 func color_to_normal():
 	var tween = create_tween()
 	tween.tween_property(self, "modulate", Color.WHITE, 0.2)
@@ -499,8 +506,8 @@ func color_to_normal():
 	if is_flicking:
 		tween.finished.connect(color_to_white)
 		
-func test_exited():
-	print("saiu")
 	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	_ghost_out(self)
+	
+signal reseted

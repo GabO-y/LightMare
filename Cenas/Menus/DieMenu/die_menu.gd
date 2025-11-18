@@ -37,7 +37,6 @@ func reset():
 	
 func _process(delta: float) -> void:
 	
-	
 	if Input.is_anything_pressed():
 		if can_skip_1:
 			can_skip_1 = false
@@ -204,7 +203,6 @@ func part_1_tweens():
 	tween.set_parallel()
 	
 	final_results["player_pos"] = house.room_manager.current_room.camera.global_position
-	print(final_results["player_pos"])
 	final_results["player_scala"] = Vector2(4.0, 4.0)
 	final_results["tween"] = tween
 	
@@ -215,15 +213,11 @@ func part_1_tweens():
 	
 	Globals.player.anim.play("die")
 	
-func set_visi(mode: bool, type: int = 0):
-	
-	print(type)
-	
+func set_visi(mode: bool, type: int = 0):	
 	for child in anim.get_children():
 		if child.name.contains(str(type)) or type == 0:
 			for c in child.get_children():
 				c.visible = mode
-				print(c.name)
 						
 						
 	

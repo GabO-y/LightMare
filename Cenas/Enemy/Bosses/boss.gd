@@ -36,10 +36,15 @@ func desable():
 func setup():
 	pass
 	
+func reset():
+	pass
+	
 func take_damage(damage):
 	life -= damage
 	is_damaged.emit()
 	life += damage
 	super.take_damage(damage)
+
+
 
 signal is_damaged

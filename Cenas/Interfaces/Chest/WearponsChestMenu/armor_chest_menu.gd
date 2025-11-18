@@ -7,7 +7,7 @@ class_name ArmorChestMenu
 
 @export var damage: UpgradeSizeItem
 @export var time_to_attack: UpgradeSizeItem
-@export var distamce: UpgradeSizeItem
+@export var distance: UpgradeSizeItem
 
 @export var lantern: WearponSizeItem
 @export var lighter: WearponSizeItem
@@ -18,12 +18,20 @@ var armor_options: Array[WearponSizeItem]
 
 func _ready() -> void:
 	
+	damage.type = "damage"
+	time_to_attack.type = "time_attack"
+	distance.type = "distance"
+	
 	up_options.append_array([
-		damage, time_to_attack, distamce
+		damage, time_to_attack, distance
 	])
 	
+	#armor_options.append_array([
+		#lantern, lighter, fairy_light
+	#])
+	
 	armor_options.append_array([
-		lantern, lighter, fairy_light
+		lantern, lighter
 	])
 	
 	lantern.price_label.visible = false
@@ -42,23 +50,18 @@ func _ready() -> void:
 	time_to_attack.item_name.text = "Tempo de\n Ataque"
 	time_to_attack.item_name.label_settings.font_size = 31
 	
-	distamce.item_icon.texture = load("res://Assets/LightArmor/AssestsUpgrades/distance_icon.png")
-	distamce.item_name.text = "Distância"
+	distance.item_icon.texture = load("res://Assets/LightArmor/AssestsUpgrades/distance_icon.png")
+	distance.item_name.text = "Distância"
 
 	
 func _update(a_name: String):
 	
 	var arm = armor_manager.get_armor(a_name)
 	
-	damage.progress_bar.value = arm.infos["level"]["damage"]
-	distamce.progress_bar.value =  arm.infos["level"]["distance"]
-	time_to_attack.progress_bar.value =  arm.infos["level"]["time_attack"]
+	for up in up_options:
+		up.progress_bar.value = arm.general_infos.get_level(up.type)
 	
-	damage.item_price.text = str(arm.get_price("damage"))
-	distamce.item_price.text = str(arm.get_price("distance"))
-	time_to_attack.item_price.text = str(arm.get_price("time_attack"))
-	
-	if arm.infos["is_locked"]: return
+	if arm.general_infos.is_locked: return
 	
 	armor_manager.select_armor(arm.name)
 	
@@ -74,10 +77,17 @@ func _update(a_name: String):
 func setup_sizes():
 
 	for armor in armor_options:
+		armor.armor_menu = self
+		armor.armor_manager = armor_manager
+		armor.setup_button()
 		_update(armor.name_label.text)
 
-	for w in armor_options:
-		w.armor_menu = self
-		w.armor_manager = chess_menu.player.armor_manager
-		w.setup_button()
+	for upgrade in up_options:
+		
+		upgrade.armor_menu = self
+		upgrade.player = chess_menu.player
+		
+		upgrade.setup()
+		upgrade._update_price(armor_manager.get_selected_armor())
+		
 		

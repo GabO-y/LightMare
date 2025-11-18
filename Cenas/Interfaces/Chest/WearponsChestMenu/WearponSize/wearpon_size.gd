@@ -27,15 +27,13 @@ func setup(name_item: String, path_icon: String):
 	
 func setup_button():
 	
-	#var price = wearpon_infos.get_armor(name_label.text).price
-	var price = armor_manager.get_armor(name_label.text).infos["price"]
+	var price = armor_manager.get_armor(name_label.text).get_price()
 	
 	price_label.text = str(price)
 	
 	button.button_down.connect(_press_button)
 	
 func _press_button():
-	
 	if armor_manager.try_buy(name_label.text):
 		armor_menu._update(name_label.text)
 		

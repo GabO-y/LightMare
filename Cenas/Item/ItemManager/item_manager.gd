@@ -68,17 +68,9 @@ func create_item(item_name: String, pos: Vector2 = Vector2.ZERO) -> Item:
 	return item
 	
 func create_coin(pos: Vector2) -> Item:
-	var item = load("res://Cenas/Item/Item.tscn").instantiate() as Item
 	
+	var item = load("res://Cenas/Item/Coin/Coin.tscn").instantiate() as Coin
 	item.global_position = pos
-	item.type = item_type.COIN
-	
-	var spr = Sprite2D.new()
-	spr.texture = load("res://Assets/Objects/Coins/coin_test.png")
-	
-	item.add_child(spr)
-	spr.global_position = pos
-	
 	return item
 
 func setup_key(key: Key) -> Item:
@@ -126,8 +118,9 @@ func drop_by_name(item: String, pos: Vector2):
 	var i = create_item(item, pos)
 		
 	i.manager = self
+	
 	i.collected.connect(_collect_item)
-		
+			
 	i.start_drop_down(create_defalt_drop_curve(i.global_position))
 		
 	items_node.add_child(i)
@@ -158,20 +151,27 @@ func make_items_chase_player():
 		item.start_chase_player()	
 		
 func _collect_item(item: Item):
-			
+						
 	if Globals.player.is_dead:
 		item.queue_free()
 		return
-			
+		
+	if item is Coin:
+		Globals.conquited_coins += item.get_value()
+		Globals.player.coins += item.get_value()
+		Globals.player.update_label_coins()
+		item.queue_free()
+		return
+
 	match item.type:
 		
-		item_type.COIN:
-			
-			Globals.conquited_coins += 1
-			Globals.player.coins += 1
-			Globals.player.update_label_coins()
-			item.queue_free()
-			
+		#item_type.COIN:
+			#
+			#Globals.conquited_coins += 1
+			#Globals.player.coins += 1
+			#Globals.player.update_label_coins()
+			#item.queue_free()
+
 		item_type.KEY:
 			# caso a chave esteja indo em direçao a porta
 			if item.is_going_to_door: return
