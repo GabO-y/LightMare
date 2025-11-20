@@ -21,6 +21,7 @@ var is_flicking: bool = false
 
 var max_heart: int = 2
 var hearts: int = 2
+
 var is_invencible: bool = false
 var invencible_duration: float = 1.2
 var invencible_timer: float = 0
@@ -248,10 +249,12 @@ func _unlocked_doors():
 	
 func take_damage(damage: int):
 	
-	if not can_die: return
 	
 	if is_invencible: return
 	is_invencible = true
+	
+	if not can_die: return
+
 	
 	hearts -= damage;
 	update_hearts()
@@ -373,13 +376,13 @@ func upgrade_heart(amount: int):
 	
 func reset():
 	
-	Globals.player.set_process(true)
-	Globals.player.set_physics_process(true)
+	set_process(true)
+	set_physics_process(true)
 	
-	Globals.player.armor.set_process(true)
-	Globals.player.armor.set_physics_process(true)
+	armor.set_process(true)
+	armor.set_physics_process(true)
 	
-	Globals.player.process_mode = Node.PROCESS_MODE_INHERIT
+	process_mode = Node.PROCESS_MODE_INHERIT
 	
 	can_dash = false   
 	armor.can_active = true

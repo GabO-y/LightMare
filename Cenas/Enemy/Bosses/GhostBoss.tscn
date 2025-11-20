@@ -302,14 +302,16 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7115"]
 bg_color = Color(0.928641, 2.79158e-06, 5.77569e-07, 1)
 
-[node name="GhostBoss" type="Node2D" node_paths=PackedStringArray("slash_node", "slash_node_timer", "area_attack_ghosts_run", "life_bar", "damage_bar", "body", "anim")]
+[node name="GhostBoss" type="Node2D" node_paths=PackedStringArray("screen_notifier", "slash_node", "slash_node_timer", "area_attack_ghosts_run", "ghost_spawn_node", "life_bar", "damage_bar", "body", "anim")]
 script = ExtResource("1_21eog")
+screen_notifier = NodePath("BossBody/SpecialUtils/VisibleOnScreenNotifier2D")
 slash_node = NodePath("BossBody/SlashNode")
 slash_node_timer = NodePath("BossBody/SlashNode/SlashView/TimerToHideView")
 area_attack_ghosts_run = NodePath("BossBody/SpecialUtils/AreaAttackToGhostsRun")
+ghost_spawn_node = NodePath("UtilsStatic/GhostSpawn")
 life_bar = NodePath("DinamicLifeBar/DamageBar/LifeBar")
 damage_bar = NodePath("DinamicLifeBar/DamageBar")
-speed = 80
+heath = 100.0
 body = NodePath("BossBody")
 anim = NodePath("BossBody/AnimatedSprite2D")
 metadata/_edit_horizontal_guides_ = [-82.0]
@@ -394,6 +396,11 @@ show_percentage = false
 [node name="UpdateLifeTimer" type="Timer" parent="DinamicLifeBar"]
 wait_time = 2.0
 autostart = true
+
+[node name="UtilsStatic" type="Node2D" parent="."]
+
+[node name="GhostSpawn" type="Node2D" parent="UtilsStatic"]
+scale = Vector2(1.3, 1.3)
 
 [connection signal="body_entered" from="BossBody/SlashNode/SlashArea" to="." method="_on_slash_player_body_entered"]
 [connection signal="body_exited" from="BossBody/SlashNode/SlashArea" to="." method="_on_slash_area_player_body_exited"]

@@ -47,7 +47,7 @@ func _ready() -> void:
 	)
 	
 	time_to_attack.item_icon.texture = load("res://Assets/LightArmor/AssestsUpgrades/time_to_attack.png")
-	time_to_attack.item_name.text = "Tempo de\n Ataque"
+	time_to_attack.item_name.text = "Tempo de Ataque"
 	time_to_attack.item_name.label_settings.font_size = 31
 	
 	distance.item_icon.texture = load("res://Assets/LightArmor/AssestsUpgrades/distance_icon.png")
@@ -59,7 +59,9 @@ func _update(a_name: String):
 	var arm = armor_manager.get_armor(a_name)
 	
 	for up in up_options:
+		up.progress_bar.max_value = arm.general_infos.get_max_level(up.type)
 		up.progress_bar.value = arm.general_infos.get_level(up.type)
+		up._update_price(arm)
 	
 	if arm.general_infos.is_locked: return
 	

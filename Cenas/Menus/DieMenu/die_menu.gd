@@ -46,7 +46,7 @@ func _process(delta: float) -> void:
 			skip_3()
 		elif can_reset:
 			can_reset = false
-			house.restart()
+			house.reset()
 			c_coins.global_position = original_c_coin_pos
 	
 	if is_awaiting:
@@ -144,7 +144,6 @@ func start_anim_2():
 	duration = 0.5
 	is_awaiting = true	
 	
-
 func start_anim_3():
 	
 	final_results["type"] = 3

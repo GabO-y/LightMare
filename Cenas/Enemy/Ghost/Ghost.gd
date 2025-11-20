@@ -38,18 +38,16 @@ var current_state: State
 @export var screen_notifier: VisibleOnScreenNotifier2D
 
 func _ready() -> void:
-		
 	animation_type = randi_range(1, 4)
-							
-	#anim.show()
-		
+	
 	super._ready()
-
+	
+	default_setup()
+	
 func _process(delta: float) -> void:
 	
-	#print("g layer: ", body.collision_layer)
-	#print("g mask: ", body.collision_mask)
-		
+	$CharacterBody2D/Label.text = str(heath)
+	
 	if is_stop: return
 	
 	var dist = dist_to_player()
@@ -173,6 +171,7 @@ func _player_enter_hit(body: Node2D) -> void:
 	
 	player.take_knockback(dir, 10)
 	player.take_damage(damage)
+
 	
 func refrash():
 	body.collision_layer = Globals.layers["enemy"] | Globals.layers["ghost"]
@@ -195,5 +194,21 @@ func ghosts_run_move():
 	body.velocity = dir * speed
 	body.move_and_slide()
 
-func take_damage(damage: int):
+func take_damage(damage: float):
 	super.take_damage(damage)
+
+func default_setup():
+	
+	atributes.append_array([
+		heath_att, speed_att, damage_att
+	])
+				
+	speed_att.setup(100, 200, "value")
+	damage_att.setup(1, 4, "value")
+	heath_att.setup(5, 15, "value")
+	
+	set_level(9, "max")
+
+	
+
+	

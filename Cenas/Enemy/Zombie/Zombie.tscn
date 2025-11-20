@@ -543,7 +543,6 @@ path_desired_distance = 3.0
 target_desired_distance = 3.0
 path_postprocessing = 1
 radius = 30.0
-debug_enabled = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 texture_filter = 1

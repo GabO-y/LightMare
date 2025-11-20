@@ -1,16 +1,36 @@
-[gd_scene load_steps=6 format=3 uid="uid://nlmjik0ymw8o"]
+[gd_scene load_steps=9 format=3 uid="uid://nlmjik0ymw8o"]
 
 [ext_resource type="Script" uid="uid://j0b1r2n44rty" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/upgrade_size_item.gd" id="1_wu3um"]
 [ext_resource type="Texture2D" uid="uid://br8rd7e65byo6" path="res://Assets/LightArmor/AssestsUpgrades/power_icon.png" id="2_lplic"]
 [ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_ver8n"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_yie43"]
-font = ExtResource("3_ver8n")
-font_size = 40
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ver8n"]
+bg_color = Color(0.0728426, 0.0728426, 0.0728426, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lplic"]
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [sub_resource type="LabelSettings" id="LabelSettings_r556p"]
 font = ExtResource("3_ver8n")
 font_size = 40
+
+[sub_resource type="LabelSettings" id="LabelSettings_yie43"]
+font = ExtResource("3_ver8n")
+font_size = 40
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wu3um"]
+bg_color = Color(0.156863, 0.156863, 0.156863, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
 
 [node name="UpgradeSize" type="Control" node_paths=PackedStringArray("button", "item_icon", "item_name", "item_price", "progress_bar")]
 layout_mode = 3
@@ -21,10 +41,88 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_wu3um")
 button = NodePath("Button")
-item_icon = NodePath("Button/HBoxContainer/VBoxContainer/TextureRect")
-item_name = NodePath("Button/HBoxContainer/VBoxContainer/Label")
-item_price = NodePath("Button/HBoxContainer/Label2")
-progress_bar = NodePath("Button/HBoxContainer/VBoxContainer2/ProgressBar")
+item_icon = NodePath("HBoxContainer/TextureRect")
+item_name = NodePath("Label")
+item_price = NodePath("HBoxContainer/Label2")
+progress_bar = NodePath("HBoxContainer/VBoxContainer2/ProgressBar")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+texture = ExtResource("2_lplic")
+expand_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HSeparator2" type="HSeparator" parent="HBoxContainer/VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/background = SubResource("StyleBoxFlat_ver8n")
+theme_override_styles/fill = SubResource("StyleBoxFlat_lplic")
+max_value = 10.0
+value = 5.0
+show_percentage = false
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer/VBoxContainer2"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "100.00"
+label_settings = SubResource("LabelSettings_r556p")
+
+[node name="VSeparator3" type="VSeparator" parent="HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Label" type="Label" parent="."]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -72.5
+offset_top = -41.0
+offset_right = 72.5
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 1
+text = "Dano"
+label_settings = SubResource("LabelSettings_yie43")
+horizontal_alignment = 1
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
@@ -34,62 +132,5 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 3
+theme_override_styles/normal = SubResource("StyleBoxFlat_wu3um")
 expand_icon = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Button"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Button/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 0
-alignment = 1
-
-[node name="TextureRect" type="TextureRect" parent="Button/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-texture = ExtResource("2_lplic")
-expand_mode = 2
-
-[node name="Label" type="Label" parent="Button/HBoxContainer/VBoxContainer"]
-layout_mode = 2
-text = "Dano"
-label_settings = SubResource("LabelSettings_yie43")
-horizontal_alignment = 1
-
-[node name="VSeparator" type="VSeparator" parent="Button/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 30
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="Button/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="HSeparator2" type="HSeparator" parent="Button/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ProgressBar" type="ProgressBar" parent="Button/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-max_value = 10.0
-value = 5.0
-show_percentage = false
-
-[node name="HSeparator" type="HSeparator" parent="Button/HBoxContainer/VBoxContainer2"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="VSeparator2" type="VSeparator" parent="Button/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Label2" type="Label" parent="Button/HBoxContainer"]
-layout_mode = 2
-text = "100.00"
-label_settings = SubResource("LabelSettings_r556p")

@@ -249,15 +249,16 @@ size = Vector2(11.5, 12.2222)
 [node name="Player" type="Node2D" node_paths=PackedStringArray("body", "anim", "hit_area", "hud", "label_coins", "armor_node", "armor_manager", "heart_conteiner") groups=["player"]]
 modulate = Color(1, 0.992157, 1, 1)
 script = ExtResource("1_yjlpd")
+can_die = false
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/AnimatedSprite2D")
 hit_area = NodePath("CharacterBody2D/HitArea")
+coins = 10000
 hud = NodePath("Hud")
 label_coins = NodePath("Hud/Coins")
 armor_node = NodePath("CharacterBody2D/Armors")
 armor_manager = NodePath("ArmorManager")
 heart_conteiner = NodePath("Hud/HBoxContainer")
-life = 1
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
 position = Vector2(4, -2)

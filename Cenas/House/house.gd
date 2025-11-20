@@ -36,10 +36,6 @@ func _ready() -> void:
 			door.open()
 			
 		process_mode = Node.PROCESS_MODE_ALWAYS
-		
-func _input(event: InputEvent) -> void:
-	if Input.is_key_label_pressed(KEY_1):
-		restart()
 
 func _process(delta: float) -> void:
 		
@@ -69,7 +65,7 @@ func desable_camera():
 	room_manager.current_room.camera.enabled = true
 		
 		
-func restart():
+func reset():
 	
 	player.reset()
 	

@@ -47,6 +47,6 @@ func _update_price(armor: LightArmor):
 		if armor.is_max(type):
 			item_price.text = "MAX"
 		else:
-			item_price.text = str(armor.get_price_level(type))
+			item_price.text = str(armor.general_infos.get_price_level(type))
 			
 signal selected(my_name: String)

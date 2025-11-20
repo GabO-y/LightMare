@@ -17,41 +17,6 @@ var time_attack_infos: Infos = Infos.new("time_attack")
 
 var general_infos: GeneralInfos = GeneralInfos.new()
 
-var infos: Dictionary = {
-	"price": 0,
-	"is_locked": true,
-	"max": {
-		"price": {
-			"damage": 0.0,
-			"distance": 0.0,
-			"time_attack": 0.0
-		},
-		"damage": 0.0,
-		"distance": Vector2.ONE,
-		"time_attack": 0.0
-	},
-	"min": {
-		"price": {
-			"damage": 0,
-			"distance": 0,
-			"time_attack": 0
-		},
-		"damage": 0.0,
-		"distance": Vector2.ONE,
-		"time_attack": 0.0
-	},
-	"level":{
-		"damage": 1,
-		"distance": 1,
-		"time_attack": 1,
-		"max": {
-			"damage": 10,
-			"distance": 10,
-			"time_attack": 10
-		}
-	}
-}
-
 var enemies_on_light: Dictionary[Enemy, float] = {}
 var mouse_move = false
 
@@ -233,10 +198,10 @@ class GeneralInfos:
 		_get_type(type).set_min_price(min)
 		
 	func set_max_level(max, type: String):
-		_get_type(type).set_max(max)
+		_get_type(type).set_max_level(max)
 		
 	func set_min_level(min: int, type: String):
-		_get_type(type).set_min(min)
+		_get_type(type).set_min_level(min)
 		
 	func set_max_value(max, type: String):
 		_get_type(type).max_value = max
@@ -246,6 +211,9 @@ class GeneralInfos:
 		
 	func get_value(type: String):
 		return _get_type(type).get_value()
+		
+	func get_max_level(type: String):
+		return _get_type(type).level_infos.max_level
 		
 	func is_max(type: String):
 		return _get_type(type).is_max()
@@ -290,6 +258,9 @@ class Infos:
 	func get_value():
 		
 		var level = level_infos.level as float
+		
+		if level == 1:
+			return min_value
 	
 		var max_level = level_infos.max_level
 		var min_level = level_infos.min_level 

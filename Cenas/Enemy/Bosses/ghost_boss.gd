@@ -23,10 +23,15 @@ var is_laugh_animation: bool = false
 @export var slash_node_timer: Timer
 
 @export var area_attack_ghosts_run: Area2D
+@export var ghost_spawn_node: Node2D
 
 var is_prepere_attack: bool = false
-var prepere_attack_duration: float = 1
+var prepere_attack_duration: float = 0.0
 var prepere_attack_timer: float = 0.0
+# conforme a logica de ataque, dependendo, o tempo que ele precisa
+# esperar muda, essa são para padronizar
+var prepere_attack_duration_when_await: float = 1.0
+var prepere_attack_duration_normal: float = 0.5
 var is_player_area_attack: bool = false
 
 # quando player entra na area, o boss entra em modo de ataque, 
@@ -38,13 +43,13 @@ var is_toward_ghost_run: bool = false
 # a medida que os fantasmas são gerados, eles ficam
 # parados por um tempo, essa varivel que controlará isso
 var time_await_ghost_run: float = 0.1 # 1
-var is_finish_ghosts_run: bool = false
+var is_entrece: bool = false
 var quant_ghost_create:int = 10
 var ghost_count:int = 0
 var min_dist_ghost_run: int = 90
 
-var timer_special = 0
-@export var special_coldown: float = 1.0
+var timer_special = 0.0
+@export var special_coldown: float = 10.0
 
 var stop_timer: float = 0.0
 var stop_duration: float = 2.0
@@ -59,22 +64,26 @@ var coldown_to_drop: float = 0.1
 var is_flicking: bool = false
 
 func _ready() -> void:
-	
+		
 	z_index = 2
 	
 	set_process(false)
 	set_physics_process(false)
 
-	screen_notifier.screen_exited.connect(_ghost_out)
+	#screen_notifier.screen_exited.connect(_ghost_out)
 	
 	super._ready()
-
+	
 func _process(delta: float) -> void:
 	_animation_logic()
-	
+
 func _physics_process(delta: float) -> void:
 	
+	print("heath: ", heath)
+	print("life_bar: ", life_bar.value)
+	
 	if not is_active: return
+	
 	if is_dying:
 		current_state = State.DYING
 		
@@ -116,7 +125,6 @@ func _physics_process(delta: float) -> void:
 	if timer_special >= special_coldown and not is_on_special:
 		start_special()
 		
-
 func special_move():	
 	match current_special:
 		Specials.GHOSTS_RUN:
@@ -136,11 +144,11 @@ func setup_ghost_run():
 	#area_to_ghost_run.collision_mask = Globals.layers["boss"]
 	
 	speed = 150
-
+	
 func ghost_run_move():
 				
-	if is_finish_ghosts_run:
-		emerge_boss_ghosts_run_move()
+	if is_entrece:
+		entrace()
 		return
 		
 	if is_toward_ghost_run:
@@ -158,13 +166,18 @@ func set_ghost_to_1(ghost: Ghost):
 	ghost.type_special = 1
 	time_await_ghost_run += 0.5
 	await Globals.time(time_await_ghost_run)
-	ghost.is_stop = false
+	
+	if is_instance_valid(ghost):
+		ghost.is_stop = false
 	
 func set_ghost_to_2(ghost: Ghost):	
 	ghost.type_special = 2		
 	time_await_ghost_run += 0.01
+	
 	await Globals.time(time_await_ghost_run)
-	ghost.is_stop = false
+	
+	if is_instance_valid(ghost):
+		ghost.is_stop = false
 
 func create_ghosts(pos: Vector2):
 	
@@ -173,21 +186,17 @@ func create_ghosts(pos: Vector2):
 	ghost.is_stop = true
 	ghost.current_state = Ghost.State.SPECIAL
 	
-	call_deferred("add_child", ghost)
+	ghost_spawn_node.add_child(ghost)
 
-	ghost.global_position = pos
+	ghost.global_position = pos 
 	ghost.speed = 300
 
-	ghost.tree_entered.connect(
-		func():
-			ghost.screen_notifier.screen_exited.connect(
+	
+	ghost.screen_notifier.screen_exited.connect(
 				func():
 					_ghost_out(ghost)
-			)
-			reseted.connect(ghost.queue_free)
 	)
-	
-	
+
 	return ghost
 	
 func get_random_point_in_line(line: Line2D) -> Vector2:
@@ -213,7 +222,7 @@ func get_random_point_in_line(line: Line2D) -> Vector2:
 	# posição original no mundo, pois os fantamas que nascem dele, precisam do
 	# no mundo e não relativo a seu pai
 	
-	return Vector2(x, y) - global_position
+	return Vector2(x, y)
 
 func create_ghosts_and_run():
 		
@@ -230,7 +239,8 @@ func create_ghosts_and_run():
 		var line = get_random_line()
 		var gho = create_ghosts(get_random_point_in_line(line)) as Ghost
 		
-		gho.speed = 150
+		gho.speed_att.set_min(150, "value")
+		gho.setup()
 		
 		gho.dir = {
 			"Up": Vector2(0, 1), "Down": Vector2(0, -1),
@@ -267,20 +277,22 @@ func finish_ghosts_run():
 	# com a chance dele nascer em baixo, ele fica perto o suficiente para
 	# colidir com a area que faz o ghosts nascerem, o setup torna true denovo
 	#area_to_ghost_run.monitoring = false
+	
 	body.global_position = get_random_point_in_line(get_random_line())
-	is_finish_ghosts_run = true
+	is_entrece = true
+	
 		
 func get_random_line() -> Line2D:	
 	return segs_to_ghost_run.get_children().pick_random() as Line2D
 	
-func emerge_boss_ghosts_run_move():
+func entrace():
 	
 	chase_move()
 	
 	if dist_to_player() < min_dist_ghost_run - 40 :
 		prepare_attack()
 		prepere_attack_timer = 0
-		prepere_attack_duration = 0.5
+		prepere_attack_duration = 0.3
 		await Globals.time(0.6)
 		setup()
 	
@@ -304,7 +316,7 @@ func _animation_logic():
 	anim.play(play)
 
 func setup():
-		
+			
 	set_process(true)
 	set_physics_process(true)
 	
@@ -318,27 +330,18 @@ func setup():
 	is_on_special = false
 	ghost_count = 0
 	quant_ghost_create = 10
-	is_finish_ghosts_run = false
+	is_entrece = false
 	#area_to_ghost_run.monitoring = true
 	speed = 80
 	is_toward_ghost_run = false
 	damage_bar.visible = true
 
 func reset():
-	setup()
+	segs_to_ghost_run = room.segs_to_ghost_room
 	
-	print("boss resetado")
-	
-	set_process(false)
-	set_physics_process(false)
-	is_active = false
-	damage_bar.visible = false
-	
-	reseted.emit()
-
-
-
 func chase_move():
+		
+	speed += 0.1
 		
 	if is_player_area_attack and dist_to_player() <= 40 and not is_on_special:
 		prepare_attack()
@@ -352,7 +355,6 @@ func prepare_attack():
 	current_state = State.PREPERE_ATTACK
 	is_prepere_attack = true
 	prepere_attack_timer = 0
-	prepere_attack_duration = 1
 	wait_attack_finish = true
 
 func prepere_attack_logic(delta: float):
@@ -364,22 +366,25 @@ func prepere_attack_logic(delta: float):
 		# se o player permanecer na area de ataque, msm
 		# dps dele já ter atacado, ele não desativa a varievel,
 		# apenas aumenta a duração pro proximo ataque
+		
 		if is_player_area_attack:
 			prepare_attack()
-			prepere_attack_duration = 2
+			prepere_attack_duration = prepere_attack_duration_when_await
 			wait_attack_finish = false
-
 		else: 
 			is_prepere_attack = false
-
-
+			prepere_attack_duration = prepere_attack_duration_normal
+			
 		slash(dir_to_player())
 
 func slash(dir: Vector2):
+	
+	
 	slash_node.visible = true
 	var angle = dir.angle() - PI/4
 	slash_node.rotation = angle
 	slash_node_timer.start()
+	speed = 80
 	
 	if is_player_area_attack:
 		Globals.player.take_knockback(dir, 20)
@@ -455,7 +460,6 @@ func _ghost_out(me):
 	if me is Ghost:
 		me.die()
 		
-
 func die():
 	is_dead = true
 	is_dying = true
@@ -506,8 +510,5 @@ func color_to_normal():
 	if is_flicking:
 		tween.finished.connect(color_to_white)
 		
-	
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	_ghost_out(self)
-	
-signal reseted

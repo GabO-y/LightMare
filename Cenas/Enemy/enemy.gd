@@ -2,8 +2,15 @@ extends Character
 
 class_name Enemy
 
-@export var speed = 200 #velocidade de movimentação
-@export var damage = 1 #dano que o inimigo da
+var damage_att: Attribute = Attribute.new()
+var speed_att: Attribute = Attribute.new()
+var heath_att: Attribute = Attribute.new()
+
+@export var speed: float = 0.0
+@export var heath: float = 0.0
+@export var damage: float = 0.0
+
+var atributes: Array[Attribute]
 
 @export var body: CharacterBody2D #Corpo do inimigo
 @export var anim: AnimatedSprite2D
@@ -20,33 +27,38 @@ var is_active: bool = false
 var knockback_force: float = 500.0
 var is_dead: bool = false
 var last_dir: Vector2
-#exclusivo dos fantasmas
-var is_running_attack = false
-var is_wrapped: bool = false
+
 
 func _ready() -> void:
 	
 	player = Globals.player
 	
-	if level > 1:
-		life *= 1 + (0.5 * level)
-		damage *= 1 + (0.5 * level)
-			
+	atributes.append_array([
+		damage_att, speed_att, heath_att
+	])
+		
 	for i in body.get_children():
 		if i is ProgressBar:
 			bar = i
 
 	if bar != null:
-		bar.max_value = life
-		bar.value = life
-	
+		bar.max_value = heath
+		bar.value = heath
+		
 func _process(_delta: float) -> void:
 	update_bar()
 	
 func update_bar():
 	if bar == null:
 		return
-	bar.value = life
+	bar.value = heath
+
+func set_level(lv: int, what):
+	for att in atributes:
+		match what:
+			"current": att.level.current = lv
+			"max": att.level.max = lv
+			"min": att.level.min = lv
 
 func set_active(mode):
 		
@@ -62,16 +74,15 @@ func set_active(mode):
 	body.collision_layer = layer
 	body.collision_mask = mask
 
-	
-func take_damage(damage: int):
+func take_damage(damage: float):
 	
 	if is_dead: return
 	
-	life -= damage
+	heath -= damage
 	
 	drop_damage_label(damage)
 	
-	if life <= 0 and !is_dead:
+	if heath <= 0 and !is_dead:
 		die()
 	else:
 		change_color_damage()
@@ -112,7 +123,7 @@ func change_color_damage():
 	await get_tree().create_timer(0.1).timeout
 	sprite.modulate = original_color
 	
-func drop_damage_label(damage: int):
+func drop_damage_label(damage: float):
 	var label := Label.new()
 	label.text = str("-", damage)
 	label.modulate = Color.RED
@@ -146,4 +157,60 @@ func dir_to_player() -> Vector2:
 func dist_to_player() -> float: 
 	return body.global_position.distance_to(Globals.player_pos())
 	
+func setup():
+	heath = heath_att.get_value()
+	speed = speed_att.get_value()
+	damage = damage_att.get_value()
+
+func default_setup():
+	pass
+	
 signal enemy_die(ene: Enemy)
+
+class Attribute:
+	
+	var type: String
+	var level: HasRange = HasRange.new()
+	var value: HasRange = HasRange.new()
+
+	func get_value():
+				
+		if level.current == 1:
+			return value.min
+						
+		var mid = value.max - value.min
+		
+		var p = float(level.current) / level.max
+		
+		value.current = value.min + (mid * p)
+		
+		print("min: ", value.min)
+		print("max: ", value.max)
+		print("mid: ", mid)
+		print("p: ", p)
+				
+		return value.current
+		
+	func set_max(max, what: String):
+		match what:
+			"value":
+				value.max = max
+			"level":
+				level.max = max
+				
+	func set_min(min, what: String):
+		match what:
+			"value":
+				value.min = min
+			"level":
+				level.min = min
+				
+	func setup(min, max, what):
+		set_max(max, what)
+		set_min(min,  what)
+		
+class HasRange:
+	var current = 1
+	var min = 0
+	var max = 1
+	

@@ -11,6 +11,8 @@ var center_pos: Vector2
 var special_time_ghost_run = 2
 var curren_menu: Control
 
+var current_level = 0
+
 var enemies_defalted: int = 0
 var conquited_coins: int = 0
 

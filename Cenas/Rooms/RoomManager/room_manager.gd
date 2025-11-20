@@ -72,10 +72,12 @@ func _change_room(goTo):
 	
 	Globals.can_teleport = false
 	
+	Globals.current_level += 1
+	
 	if current_room is BossRoom:
 		current_room.boss.setup()
 	else:
-		round_manager.make_ramdom_round(1)
+		round_manager.make_ramdom_round(1, Globals.current_level)
 		round_manager.play_round()  
 	
 	print("current room: ", current_room.finish)

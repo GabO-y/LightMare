@@ -19,6 +19,7 @@ var delay_timer: float = 0.0
 var quantity: int
 var is_spawn_ene: bool = false
 var count_ene: int = 0
+var level_ene: int = 0
 
 var last_ene: Enemy
 
@@ -53,8 +54,10 @@ func _process(delta: float) -> void:
 			if delay_timer >= delay:
 				for s in spawners:
 					
-					var ene = s.spawn(ene_name, self)
-					
+					print("spawn")
+					var ene = s.spawn(ene_name, self, level_ene)
+					print("spawn fim")
+						
 				count_ene += 1
 				delay_timer = 0.0
 				
@@ -119,6 +122,7 @@ func exe():
 			ene_name = inst["ene_name"] 
 			delay = inst["delay"]
 			quantity = inst["quantity"]
+			level_ene = inst["level"]
 			count_ene = 0
 				
 
@@ -134,12 +138,13 @@ func reset():
 	instruction.clear()
 	queue_free()
 	
-func add_horder(ene_name: String, quantity: int, delay: float = 0.5):
+func add_horder(ene_name: String, quantity: int, level: int ,delay: float = 0.5):
 	instruction.append({
 		"type": "horder",
 		"ene_name": ene_name,
 		"quantity": quantity,
-		"delay": delay
+		"delay": delay,
+		"level": level
 	})
 	
 func show_exe():

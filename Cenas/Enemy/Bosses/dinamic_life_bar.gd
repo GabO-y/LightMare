@@ -8,11 +8,10 @@ var is_to_update: bool = true
 func _ready() -> void:
 	boss.is_damaged.connect(
 		func():
-			boss.life_bar.value = boss.life
+			boss.life_bar.value = boss.heath
 			timer.start()
 	)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if is_to_update:
 		if boss.damage_bar.value > boss.life_bar.value:

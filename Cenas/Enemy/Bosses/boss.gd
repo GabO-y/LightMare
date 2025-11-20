@@ -2,15 +2,15 @@ extends Enemy
 class_name Boss
 
 # quarto que o boss se encontra
-@export var room: Room
+@export var room: GhostBossRoom
 @export var life_bar: ProgressBar
 @export var damage_bar: ProgressBar
 
 func _ready() -> void:
-	damage_bar.max_value = life
-	life_bar.max_value = life
-	damage_bar.value = life
-	life_bar.value = life
+	damage_bar.max_value = heath
+	life_bar.max_value = heath
+	damage_bar.value = heath
+	life_bar.value = heath
 
 func set_active(mode):
 	
@@ -40,11 +40,9 @@ func reset():
 	pass
 	
 func take_damage(damage):
-	life -= damage
-	is_damaged.emit()
-	life += damage
 	super.take_damage(damage)
-
+	is_damaged.emit()
+	
 
 
 signal is_damaged

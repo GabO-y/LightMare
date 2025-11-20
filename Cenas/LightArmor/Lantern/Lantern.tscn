@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b0ycmxpkip27y"]
+[gd_scene load_steps=5 format=3 uid="uid://b0ycmxpkip27y"]
 
 [ext_resource type="Script" uid="uid://endjb4wi0jx7" path="res://Cenas/LightArmor/Lantern/lantern.gd" id="1_ix4eb"]
-[ext_resource type="Texture2D" uid="uid://cybjamgolcp2e" path="res://icon.svg" id="2_ix4eb"]
 
 [sub_resource type="Gradient" id="Gradient_ix4eb"]
 offsets = PackedFloat32Array(0, 0.633333, 1)
@@ -21,11 +20,6 @@ light_mask = 3
 visibility_layer = 3
 script = ExtResource("1_ix4eb")
 area = NodePath("Light")
-
-[node name="Icon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-4, 48)
-texture = ExtResource("2_ix4eb")
 
 [node name="Light" type="Area2D" parent="."]
 collision_layer = 0

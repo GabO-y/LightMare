@@ -111,11 +111,16 @@ func _on_timer_to_spawn_a_enemy() -> void:
 	else:
 		timer.stop()
 		
-func spawn(ene_name: String, round: Round) -> Enemy:
+func spawn(ene_name: String, round: Round, level: int) -> Enemy:
+	
 	var ene = load("res://Cenas/Enemy/" + ene_name + "/" + ene_name + ".tscn").instantiate() as Enemy
 		
 	Globals.room_manager.current_room.call_deferred("add_child", ene)
-	
+
+	ene.default_setup()
+	ene.set_level(level, "current")
+	ene.setup()
+
 	Globals.house.reseted.connect(
 		func():
 			if ene:
@@ -128,6 +133,7 @@ func spawn(ene_name: String, round: Round) -> Enemy:
 	ene.enemy_die.connect(_free_enemy)
 	ene.enemy_die.connect(round._check_finish_round)
 	ene.enemy_die.connect(room.manager.item_manager.try_drop)
+	
 	ene.enemy_die.connect(
 		func(ene):
 			print(Globals.enemies_defalted)
