@@ -9,6 +9,8 @@ enum State {PREPARE_ATTACK, DASHING, AWAITING}
 
 var attack_coldown: float = 3.0
 
+var prepere_attack_update: float = 1.5
+
 var duration: float = 0.0
 var timer: float = 0.0
 
@@ -26,7 +28,7 @@ var current_state: State
 func _ready() -> void:
 	current_state = State.PREPARE_ATTACK
 	setup_prepere_attack()
-	speed.set_min(80, "value")
+	speed = 80
 
 func _process(delta: float) -> void:
 	animation_logic()
@@ -44,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	
 func dash_move(delta: float):
 	
-	var collison = body.move_and_collide((dir * speed.get_value()).normalized())
+	var collison = body.move_and_collide(dir)
 	
 	if collison:
 		count_collision += 1
@@ -59,11 +61,8 @@ func dash_move(delta: float):
 		return
 		
 	timer += delta
-	var test = dir * speed.get_value()
 	
-	print("TEST: ", test)
-	
-	body.velocity = test
+	body.velocity = dir * speed
 	body.move_and_slide()
 	
 func animation_logic():
@@ -141,7 +140,7 @@ func setup_dash():
 
 	
 func setup_prepere_attack():
-	duration = 3.0
+	duration = 3.0 - (prepere_attack_update * (float(level)/9.0))
 	timer = 0.0
 	current_state = State.PREPARE_ATTACK
 	
@@ -157,5 +156,24 @@ func rotate_ray(t: float):
 		return null
 		
 	return ray.target_position
+	
+func setup():
+	super.setup()
+	
+func set_level(lv: int, what):
+	super.set_level(lv, what)
+	level = lv
+	
+func default_setup():
+	atributes.append_array([
+		damage_att, speed_att, heath_att
+	])
+	
+	damage_att.setup(1, 5,"value")
+	speed_att.setup(100, 150, "value")
+	heath_att.setup(5, 15, "value")
+	
+	set_level(9, "max")
+
 	
 	

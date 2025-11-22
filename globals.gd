@@ -11,7 +11,10 @@ var center_pos: Vector2
 var special_time_ghost_run = 2
 var curren_menu: Control
 
-var current_level = 0
+var current_level:int = 0
+var quantity_ene:  float = 1
+var quantity_horder: float = 1
+var quantity_spawns: float = 1
 
 var enemies_defalted: int = 0
 var conquited_coins: int = 0
@@ -22,6 +25,8 @@ var key_manager: KeyManager
 var house: House
 
 var only_use_key: bool = false
+
+var ene_to_default: int = 0
 
 # mapa de qual nova diagonal ele deve ir dependendo de onde bate
 var dir_possibles_crash_wall = {
@@ -110,6 +115,29 @@ func get_special_time_ghost_run():
 
 func dir_to(current: Vector2, target: Vector2):
 	return current.direction_to(target)
+	
+func setup_next_round():
+	
+	current_level += 1
+	
+	quantity_ene += 0.5
+	quantity_horder += 0.5
+	quantity_spawns += 0.5
+		
+	if quantity_ene > 3.0:
+		quantity_ene = 3.0
+	if quantity_horder > 3.0:
+		quantity_horder = 3.0
+	if quantity_spawns > 3.0:
+		quantity_spawns = 3.0
+		
+	print(quantity_ene)
+	print(quantity_horder)
+	print(quantity_spawns)
+		
+	player.current_ene_defalut = 0
+	ene_to_default = int(floor(Globals.quantity_ene) * floor(Globals.quantity_horder) * floor(Globals.quantity_spawns)) 
+
 	
 signal goint_to_center
 

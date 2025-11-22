@@ -15,6 +15,8 @@ var is_await_moment: bool = false
 var finish_key_moment: bool = false
 var finish_await_moment: bool = false
 
+var key_manager: KeyManager
+
 func _ready() -> void:
 	super._ready()
 	
@@ -35,6 +37,7 @@ func start_chase_player():
 # Fazer a parte de quando a sala nao finalizadas pra que ele crie uma chave
 	
 func use():
+	key_manager.key = null
 	door1.open()
 	queue_free()
 	

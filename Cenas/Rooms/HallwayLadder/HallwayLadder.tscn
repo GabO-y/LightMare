@@ -71,11 +71,11 @@ position = Vector2(139, 74)
 [node name="EnemieSpawaner" parent="Spawners" instance=ExtResource("13_2uq8x")]
 position = Vector2(42, 108)
 
-[node name="EnemieSpawaner2" parent="Spawners" instance=ExtResource("13_2uq8x")]
-position = Vector2(166, 66)
+[node name="EnemieSpawaner6" parent="Spawners" instance=ExtResource("13_2uq8x")]
+position = Vector2(169, 108)
 
-[node name="EnemieSpawaner3" parent="Spawners" instance=ExtResource("13_2uq8x")]
-position = Vector2(43, 406)
+[node name="EnemieSpawaner7" parent="Spawners" instance=ExtResource("13_2uq8x")]
+position = Vector2(109, 108)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(103, 313)

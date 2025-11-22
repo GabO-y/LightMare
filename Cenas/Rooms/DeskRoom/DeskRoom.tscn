@@ -56,6 +56,9 @@ position = Vector2(49, 111)
 [node name="EnemieSpawaner2" parent="Spawners" instance=ExtResource("11_q46pm")]
 position = Vector2(189, 111)
 
+[node name="EnemieSpawaner5" parent="Spawners" instance=ExtResource("11_q46pm")]
+position = Vector2(121, 121)
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="HallwayLadder" parent="Doors" instance=ExtResource("12_qlwsa")]

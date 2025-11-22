@@ -48,12 +48,9 @@ func _process(delta: float) -> void:
 # Como o canvasLayer tem que tá na cena main, é ele ativa e desativa o chestMenu 
 # basedo no sinal que o room_manager tem, vendo se é o saferoom
 func active_menu(room: Room):
-	
 	var is_safe_room = room.name == "SafeRoom"
+	$MenuManager/Interatives/ChestMenu.visible = is_safe_room
 	
-	$MenuManager/Menus/ChestMenu.set_process(is_safe_room)
-	$MenuManager/ChestMenuInteratives.visible = is_safe_room
-
 func set_camare_in(thing: Node2D, zoom: Vector2):
 	camera.enabled = true
 	room_manager.current_room.camera.enabled = false

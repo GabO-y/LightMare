@@ -12,8 +12,7 @@ var armors: Array[LightArmor]
 
 func _ready() -> void:
 	
-	#for name in ["Lantern", "Lighter", "FairyLight"]:
-	for name in ["Lantern", "Lighter"]:
+	for name in ["Lantern", "Lighter", "FairyLight"]:
 		var path: String = str("res://Cenas/LightArmor/", name, "/", name, ".tscn")
 		var armor = load(path).instantiate() as LightArmor
 

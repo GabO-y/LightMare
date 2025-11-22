@@ -17,12 +17,7 @@
 [node name="ToyLibrary" type="Node2D" node_paths=PackedStringArray("moveis_altos", "camera")]
 script = ExtResource("1_vl68h")
 moveis_altos = NodePath("Layers/moveis_alto_1")
-is_clear = null
-finish = null
-spread = null
 camera = NodePath("Camera2D")
-is_camera_chase_mode = null
-can_return = null
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -75,6 +70,9 @@ position = Vector2(248, 41)
 
 [node name="EnemieSpawaner" parent="Spawners" instance=ExtResource("12_3p2ht")]
 position = Vector2(31, 162)
+
+[node name="EnemieSpawaner5" parent="Spawners" instance=ExtResource("12_3p2ht")]
+position = Vector2(155, 137)
 
 [node name="EnemieSpawaner2" parent="Spawners" instance=ExtResource("12_3p2ht")]
 position = Vector2(275, 164)

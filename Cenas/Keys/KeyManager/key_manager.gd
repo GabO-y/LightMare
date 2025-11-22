@@ -107,7 +107,6 @@ func try_open_door():
 		
 func open_random_door(doors: Array[Door]):
 	
-	
 	if doors.is_empty(): return
 	
 	var door = doors.pick_random() as Door
@@ -123,7 +122,9 @@ func try_open_normal_room(doors: Array[Door]):
 			
 func setup_key(key: Key) -> Item:
 		
-	if !key: return
+	if !key or self.key: return
+	self.key = key
+	key.key_manager = self
 	
 	call_deferred("add_child", key)
 	

@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://k46xf6sum86h"]
 
-[ext_resource type="Script" uid="uid://u2ejs4d5e3b5" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/armor_chest_menu.gd" id="1_jwrmq"]
-[ext_resource type="PackedScene" uid="uid://caveueqjt1kyd" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponSize/WearponSize.tscn" id="2_8quyv"]
-[ext_resource type="PackedScene" uid="uid://nlmjik0ymw8o" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/UpgradeSizeItem.tscn" id="3_s6aqg"]
+[ext_resource type="Script" uid="uid://u2ejs4d5e3b5" path="res://Cenas/Menus/Chest/WearponsChestMenu/armor_chest_menu.gd" id="1_jwrmq"]
+[ext_resource type="PackedScene" uid="uid://caveueqjt1kyd" path="res://Cenas/Menus/Chest/WearponsChestMenu/WearponSize/WearponSize.tscn" id="2_8quyv"]
+[ext_resource type="PackedScene" uid="uid://nlmjik0ymw8o" path="res://Cenas/Menus/Chest/WearponsChestMenu/ItemsPowerUps/UpgradeSizeItem.tscn" id="3_s6aqg"]
 
 [node name="ArmorChestMenu" type="Control" node_paths=PackedStringArray("damage", "time_to_attack", "distance", "lantern", "lighter", "fairy_light")]
 layout_mode = 3

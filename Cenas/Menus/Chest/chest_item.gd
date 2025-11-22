@@ -15,7 +15,7 @@ enum TypeBuy {
 
 static func create(item_name, price, icon: Texture2D) -> ChestItem:
 	
-	var item = load("res://Cenas/Interfaces/Chest/ChestItem.tscn").instantiate() as ChestItem
+	var item = load("res://Cenas/Menus/Chest/ChestItem.tscn").instantiate() as ChestItem
 	
 	item.item_name = item_name
 	item.price = price

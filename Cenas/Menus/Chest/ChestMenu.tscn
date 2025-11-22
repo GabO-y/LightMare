@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://bb4ttu771sbb6"]
 
-[ext_resource type="Script" uid="uid://cxhx4lbgt2i12" path="res://Cenas/Interfaces/Chest/chest_menu.gd" id="1_qanw0"]
+[ext_resource type="Script" uid="uid://cxhx4lbgt2i12" path="res://Cenas/Menus/Chest/chest_menu.gd" id="1_qanw0"]
 [ext_resource type="Texture2D" uid="uid://ds33n7jap68rc" path="res://Assets/Interfaces/ChestUI/LanternIcon.png" id="2_e48bf"]
 [ext_resource type="Texture2D" uid="uid://i61i268vkyxl" path="res://Assets/Interfaces/ChestUI/PowerUpsIcon.png" id="3_rcjur"]
-[ext_resource type="PackedScene" uid="uid://k46xf6sum86h" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ArmorChestMenu.tscn" id="4_nnnol"]
+[ext_resource type="PackedScene" uid="uid://k46xf6sum86h" path="res://Cenas/Menus/Chest/WearponsChestMenu/ArmorChestMenu.tscn" id="4_nnnol"]
 [ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="4_qanw0"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_e48bf"]

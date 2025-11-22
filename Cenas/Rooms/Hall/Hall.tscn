@@ -90,6 +90,10 @@ type_enemie = ExtResource("12_2wqts")
 position = Vector2(70, 108)
 type_enemie = ExtResource("12_2wqts")
 
+[node name="EnemieSpawaner3" parent="Spawners" instance=ExtResource("11_kegp6")]
+position = Vector2(72, 174)
+type_enemie = ExtResource("12_2wqts")
+
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(157, 164)
 zoom = Vector2(2.5, 2.5)

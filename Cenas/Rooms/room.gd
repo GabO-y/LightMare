@@ -25,9 +25,6 @@ var spread_one:bool = false
 var total_enemies: int = 0
 var already_drop_key: bool = false
 
-var rounds: Array[Round]
-var current_round: Round
-
 func _ready() -> void:
 	
 	for child in get_children():
@@ -99,10 +96,7 @@ func switch_process(mode: bool):
 			spawn.set_active(mode)
 
 	for layer in layers:
-		
-		if name.contains("Boss"):
-			print("hKJASDHKSA")
-	
+
 		layer.collision_enabled = mode
 		layer.navigation_enabled = mode
 		
@@ -181,11 +175,31 @@ func reset():
 	is_clear = false
 	
 	for spawn in spaweners:		
-			spawn.set_active(false)
-			
+		spawn.set_active(false)
+		
 	for door in doors:
 		door.is_locked = true
 		door.set_active(false)
+
+func get_random_spawns(quant: int):
+	
+	if quant <= 0:
+		return 
+	
+	if quant >= spaweners.size():
+		return spaweners
+	
+	var spawns: Array[Spawn]
+	
+	while quant > 0:
+		var spawn = spaweners.pick_random()
+		if spawn in spawns:
+			quant += 1
+			continue
+		spawns.append(spawn)
+		quant -= 1
+		
+	return spawns
 
 # fazendo a parte de items, quando sala limpa, item segue player
 signal clear

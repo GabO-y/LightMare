@@ -6,7 +6,6 @@ class_name ItemManager
 @export var key_manager: KeyManager
 @export var round_manager: RoundManagar
 
-
 # É para armazenar todos os items dropados numa sala
 @export var items_node: Node2D
 
@@ -129,7 +128,7 @@ func drop_by_name(item: String, pos: Vector2):
 	# há chance do sinal que é emitido para verificar se
 	# a sala atual está limpa, sejá associonado, antes do
 	# item entrar na cena, ai ele não percegue, ent verifaca aqui tbm
-	if not round_manager.is_playing_round:
+	if not round_manager.is_round_playing:
 		i.start_chase_player()
 
 # Fiz no caso do player trocar de sala, mas nem todos os items foram coletados
@@ -164,18 +163,9 @@ func _collect_item(item: Item):
 		return
 
 	match item.type:
-		
-		#item_type.COIN:
-			#
-			#Globals.conquited_coins += 1
-			#Globals.player.coins += 1
-			#Globals.player.update_label_coins()
-			#item.queue_free()
-
 		item_type.KEY:
 			# caso a chave esteja indo em direçao a porta
 			if item.is_going_to_door: return
-			
 			
 			await Globals.player.get_key_animation(item)
 			

@@ -186,12 +186,12 @@ collision_enabled = true
 
 [node name="Doors" type="Node2D" parent="."]
 
-[node name="GhostBossRoom" parent="Doors" node_paths=PackedStringArray("open_door_sprite") instance=ExtResource("10_ko388")]
+[node name="HallwayRooms" parent="Doors" node_paths=PackedStringArray("open_door_sprite") instance=ExtResource("10_ko388")]
 position = Vector2(232, 56)
 is_locked = false
 open_door_sprite = NodePath("../../Layers/Porta_aberta")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Doors/GhostBossRoom"]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Doors/HallwayRooms"]
 occluder = SubResource("OccluderPolygon2D_t81q4")
 
 [node name="Spawners" type="Node2D" parent="."]

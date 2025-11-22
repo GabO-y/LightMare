@@ -2,192 +2,241 @@ extends Node2D
 
 class_name RoundManagar
 
-@export var room_managar: RoomManager
+var rounds: Array[Round]
+var is_round_playing: bool = false
+var round_playing: Round = null
 
-var round_queue: Array[Round]
-var expecific_round: Dictionary
+@export var room_manager: RoomManager
 
-var is_playing_round: bool = false
-var round_playing: Round
+func get_random_round(size: int) -> Round:
+	
+	var quantity = floor(Globals.quantity_ene)
+	var time_spawn = 1.5
+	var level = Globals.current_level
+	var spawns = room_manager.current_room.get_random_spawns(floor(clamp(Globals.quantity_spawns, 0.0, 3.0)))
 
-var expected_quantity: int = 3
-
-func _ready() -> void:	
-	#room_managar.changed_room.connect(_check_round_room)
-	
-	# type, ene_name, quantity, time_to_spawn
-	
-	#add_round(create_round(
-		#[
-			#["horder", "Zombie", "1", "2"],
-			#["await", "2"],
-			#["horder", "Ghost", "3", "0.1"]
-		#]
-	#))
-	#
-	
-	
-	pass
-		
-# toda vez que é trocado de sala, ele verifica
-# se naquela sala tem um round agendado, se sim
-# ele toca o round
-#func _check_round_room(room: Room):
-	#if room.has_rounds():
-		#room.start_round()
-		
-# ao final de cada instrução, é necessario uma virgula
-#func add_round(room_name: String, instrucs: String):
-	#
-	#var regex = RegEx.new()
-	#regex.compile(r"(.*),+")
-	#
-	#var result = regex.search_all(instrucs)
-	#
-	#var seq_instruc: Array[String]
-	#
-	#for matches in result:
-		#seq_instruc.append(matches.strings[1])
-		#
-	#regex.compile(r"([a-z]*)\s*\{([^}]*)\}")
-		#
-	#var round = load("res://Cenas/Round/Round.tscn").instantiate() as Round
-	#
-	#for inst in seq_instruc:
-		#
-		#result = regex.search(inst)
-		#
-		#var type: String = result.get_string(1)	
-		#
-		#var content: Array[String] = []
-#
-		#if result.get_string(2).contains(","):
-			#for s in result.get_string(2).split(","):
-				#s.replace(" ", "")
-				#content.append(s)
-		#else:
-			#var s = result.get_string(2).replace(" ", "")
-			#content.append(s)
-#
-		#match type:
-			#"horder":
-#
-				#var ene_name: String = content[0]
-				#var quantity: int = content[1] as int
-				#var delay: float = content[2] as float
-				#
-				##print("horder:")
-				##print("\t", ene_name)
-				##print("\t", quantity)
-				##print("\t", delay)
-				#
-				#
-				#round.add_horder(
-					#ene_name, quantity, delay
-				#)
-				#
-			#"await":
-				#var time: float = content[0] as float
-				#
-				##print("await:")
-				##print("\t", time)
-				#
-				#round.await_time(time)
-				#
-	#var room = room_managar.find_room(room_name)
-	#
-	#round.set_room(room)
-		#
-	
-func add_especific_round(room_name: String, round: Round):
-	expecific_round[room_name] = round
-	
-func create_round(instruc: Array):
-	
 	var round = Round.new()
+	round.manager = self
 	
-	for args in instruc: 
-	
-		match args.get(0):
-			"horder":
-				
-				var ene_name: String = args.get(1)
-				var quantity: int = int(args.get(2))
-				var time_spawn: float = float(args.get(3))
-				
-				round.add_horder(ene_name, quantity, time_spawn)
-				
-			"await":
-				var time: float = float(args.get(1))				
-				round.add_await(time)
-				
-	return round
-
-func add_round(round: Round):
-	round_queue.append(round)
-	
-func play_round():
-	
-	if is_playing_round: return
-	
-	if not has_rounds():
-		round_finished.emit()
-		print("round_finished emitido")
-		return
-	
-	is_playing_round = true
-	room_managar.current_room.lock_all_doors()
-	
-	var round = round_queue.get(0) as Round
-	
-	call_deferred("add_child", round)
-	
-	await get_tree().process_frame
-	
-	round.finished.connect(
-		func():
-			is_playing_round = false
-			round_finished.emit()
-	)
-	
-	round.set_room(room_managar.current_room)
-	round.start()
-	
-	round_playing = round
-	
-	round_queue.erase(round)
-
-func has_rounds() -> bool:
-	return round_queue.size() > 0
-	
-func make_ramdom_round(size: int, level: int):
-	
-	var type = "horder"
-	var round: Round = Round.new()
+	var is_horder: bool = true
 	
 	while size > 0:
+		var exe: Exe
 		
-		match type:
-			"horder": 
-				
-				var ene_name = ["Zombie", "Ghost"].pick_random()
-				ene_name = "Ghost"
-				var quantity = randi_range(int(expected_quantity * 0.5), expected_quantity)
-				var time_spawn = randf_range(0.5, 2.0)
-				round.add_horder(ene_name, quantity, level ,time_spawn)
-				size -= 1
-				
-			"await": 
-				var time = randf_range(3.0, 5.0)
-				round.add_await(time)
+		if is_horder:
+			var ene_name = ["Ghost", "Zombie", "Skeleton"].pick_random()
+			exe = create_horder(ene_name, quantity, time_spawn, level, spawns)
+			size -= 1
+		else:
+			exe = create_await(0.5)
+			
+		is_horder = !is_horder
 		
-		type = "horder" if type == "await" else "await"
-		
-	add_round(round)
-		
+		exe.round = round
+		round.add_exe(exe)
+	
+	return round
+
+func start_random_round():
+	var round = get_random_round(floor(Globals.quantity_horder))
+	
+	add_child(round)
+	
+	round.play()
+	is_round_playing = true
+	
+	round.finished.connect(round_finished.emit)
+	
+	round_finished.connect(
+		func():
+			is_round_playing = false
+	)
+
+func create_horder(ene_name: String, quantity: int, time_spawn: float, level: int, spawns: Array[Spawn]) -> Exe:
+	var horder = Horder.new()
+
+	horder.ene_name = ene_name
+	horder.quantity = quantity
+	horder.time_spawn = time_spawn
+	horder.level = level
+	horder.spawns = spawns
+	
+	return horder
+
+func create_await(time: float) -> Exe:
+	var aw = Await.new()
+	aw.time = time
+	return aw
+
+func create_round(exes: Array[Exe]):
+	var round = Round.new()
+	round.exes = exes
+	rounds.append(round)
+	
 func reset():
-	is_playing_round = false
-	round_queue.clear()
-	expecific_round.clear()
+	reset_rounds.emit()
 		
+
 signal round_finished
+
+signal reset_rounds
+
+class Round extends Node2D:
+		
+	var manager: RoundManagar
+		
+	var exes: Array[Exe]
+	var _can_consume_exe: bool = true
+	var _current_exe: Exe
+	var _is_last_exe: bool = false
+	
+	func _ready() -> void:
+		set_process(false)
+		manager.reset_rounds.connect(queue_free)
+		
+	
+	func add_exe(exe: Exe):
+		exes.append(exe)
+		
+	func play():
+		set_process(true)
+		
+	func _process(delta: float) -> void:
+		
+		if _can_consume_exe:
+			consume_exe()
+			_can_consume_exe = false
+		elif _current_exe.is_finished:
+			
+			exes.erase(_current_exe)
+			
+			if is_finish():
+				finished.emit()
+				set_process(false)
+				return
+			
+			_can_consume_exe = true
+		else:
+			_current_exe.play(delta)
+
+	func _check_finish():
+		if is_finish():
+			finished.emit()
+			set_process(false)
+
+	func is_finish():
+	
+		if exes.size() > 0:
+			return false
+	
+		if _current_exe is Horder:
+			print(Globals.player.current_ene_defalut, "/", Globals.ene_to_default)
+			if Globals.player.current_ene_defalut < Globals.ene_to_default:
+				return false
+					
+		if _current_exe is Await:
+			if _current_exe.time > 0.0:
+				return false
+
+		return true
+		
+	func consume_exe():
+		
+		if exes.size() <= 0:
+			set_process(false)
+			return
+			
+		if exes.size() == 1:
+			_is_last_exe = true
+		
+		_current_exe = exes.get(0)
+		exes.remove_at(0)
+		
+	func reset():
+		for exe in exes:
+			if is_instance_valid(exe):
+				exe.is_finished = true
+				exe.reset()
+				exes.erase(exe)
+				exe.queue_free()
+		queue_free()
+		
+	signal finished
+			
+		
+class Exe:
+	
+	var is_finished: bool = false
+	var round: Round
+	
+	func play(delta: float):
+		pass
+		
+	func reset():
+		pass
+	
+class Horder extends Exe:
+		
+	var ene_name: String
+	var quantity: int
+	var time_spawn: float
+	var level: int
+	var spawns: Array[Spawn]
+	var count: int = 0
+	var is_first: bool = true
+	
+	var _timer: float = 0.0
+	var _ene_spawned: Array[Enemy]
+	
+	func play(delta):
+
+		if quantity <= 0:
+			is_finished = true
+		
+		if is_finished: return
+		
+		if _timer >= time_spawn:
+			
+			for s in spawns:
+				var ene = s.spawn(ene_name, level)
+				
+				_ene_spawned.append(ene)
+				
+				ene.enemy_die.connect(
+					func(ene):
+						Globals.player.current_ene_defalut += 1
+						round._check_finish()
+				)
+				
+				round.finished.connect(
+					ene.queue_free
+				)
+				
+				round.manager.reset_rounds.connect(
+					func():
+						if ene:
+							ene.queue_free()
+				)
+				
+			_timer = 0.0
+			quantity -= 1
+		
+		_timer += delta
+		
+		
+class Await extends Exe:
+	var time: float
+	var _timer: float = 0.0
+	
+	func play(delta):
+		
+		if _timer >= time:
+			is_finished = true
+		
+		if is_finished:
+			return
+			
+		_timer += delta
+		
+	
+	

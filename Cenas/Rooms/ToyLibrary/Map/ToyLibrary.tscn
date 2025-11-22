@@ -1,14 +1,14 @@
 [gd_scene load_steps=10 format=4 uid="uid://csxry8oj5mmaf"]
 
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/teto_0.tscn" id="0_id"]
-[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_alto_1.tscn" id="1_id"]
+[ext_resource type="PackedScene" uid="uid://cx6f6r17dycqy" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_alto_1.tscn" id="1_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/moveis_baixos_2.tscn" id="2_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/tapete_3.tscn" id="3_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/porta_4.tscn" id="4_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/parede_2_5.tscn" id="5_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/parede_6.tscn" id="6_id"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/chão_7.tscn" id="7_id"]
-[ext_resource type="PackedScene" path="res://Cenas/Rooms/ToyLibrary/Map/bg_8.tscn" id="8_id"]
+[ext_resource type="PackedScene" uid="uid://kxifv60lgedl" path="res://Cenas/Rooms/ToyLibrary/Map/bg_8.tscn" id="8_id"]
 
 [node name="map" type="Node2D"]
 

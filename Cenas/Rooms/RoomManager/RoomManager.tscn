@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://bjyhdo23kbxbt" path="res://Cenas/Keys/KeyManager/KeyManager.tscn" id="7_0t272"]
 [ext_resource type="PackedScene" uid="uid://oe80bdy752yx" path="res://Cenas/Rooms/ToyLibrary/ToyLibrary.tscn" id="7_sq71m"]
 [ext_resource type="PackedScene" uid="uid://exmsdws53g2l" path="res://Cenas/Rooms/BathRoom/BathRoom.tscn" id="8_2fcsa"]
-[ext_resource type="PackedScene" uid="uid://c8pmycrg74u1x" path="res://Cenas/Round/RoundManager/RoundManagar.tscn" id="8_e6a6c"]
 [ext_resource type="PackedScene" uid="uid://rj84xueqnc2o" path="res://Cenas/Rooms/DeskRoom/DeskRoom.tscn" id="9_oxtvy"]
+[ext_resource type="Script" uid="uid://dccrwr71sgn2w" path="res://Cenas/Round/RoundManager/round_managar.gd" id="12_oxtvy"]
 
 [node name="RoomManager" type="Node2D" node_paths=PackedStringArray("roomsNode", "item_manager", "key_manager", "round_manager")]
 script = ExtResource("1_n2tco")
@@ -28,21 +28,28 @@ color = Color(0.258125, 0.1475, 0.59, 1)
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Hall" parent="Rooms" instance=ExtResource("5_ow6w0")]
+visible = false
 texture_filter = 1
 
 [node name="HallwayLadder" parent="Rooms" instance=ExtResource("6_sq71m")]
+visible = false
 
 [node name="ToyLibrary" parent="Rooms" instance=ExtResource("7_sq71m")]
+visible = false
 
 [node name="BathRoom" parent="Rooms" instance=ExtResource("8_2fcsa")]
+visible = false
 
 [node name="DeskRoom" parent="Rooms" instance=ExtResource("9_oxtvy")]
+visible = false
 
 [node name="SafeRoom" parent="Rooms" instance=ExtResource("2_rqem0")]
 
 [node name="HallwayRooms" parent="Rooms" instance=ExtResource("6_o0csn")]
+visible = false
 
 [node name="GhostBossRoom" parent="Rooms" instance=ExtResource("6_ow6w0")]
+visible = false
 
 [node name="Managers" type="Node2D" parent="."]
 
@@ -53,5 +60,7 @@ key_manager = NodePath("../KeyManager")
 [node name="KeyManager" parent="Managers" node_paths=PackedStringArray("room_manager") instance=ExtResource("7_0t272")]
 room_manager = NodePath("../..")
 
-[node name="RoundManagar" parent="Managers" node_paths=PackedStringArray("room_managar") instance=ExtResource("8_e6a6c")]
-room_managar = NodePath("../..")
+[node name="RoundManagar" type="Node2D" parent="Managers" node_paths=PackedStringArray("room_manager")]
+script = ExtResource("12_oxtvy")
+room_manager = NodePath("../..")
+metadata/_custom_type_script = "uid://dccrwr71sgn2w"

@@ -15,6 +15,8 @@ var damage_infos: Infos = Infos.new("damage")
 var distance_infos: Infos = Infos.new("distance")
 var time_attack_infos: Infos = Infos.new("time_attack")
 
+var upgrades: Array[Infos] = []
+
 var general_infos: GeneralInfos = GeneralInfos.new()
 
 var enemies_on_light: Dictionary[Enemy, float] = {}
@@ -64,7 +66,6 @@ func toggle_activate():
 
 	setup_area()
 	
-
 func setup_area():
 	if not area: 
 		if name != "FairyLight":
@@ -76,7 +77,6 @@ func setup_area():
 
 	area.collision_layer = layer
 	area.collision_mask = mask
-	
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse:
@@ -116,7 +116,6 @@ func _update():
 	scale = distance
 	
 	time_to_damage = get_time_attak()
-	
 	
 func get_damage() -> float:
 	return general_infos.get_value("damage")

@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dgfh7kk6xl761"]
-
-[ext_resource type="Script" uid="uid://cbmg3xbpl63ta" path="res://Cenas/Round/round.gd" id="1_7adwj"]
-
-[node name="Round" type="Node2D"]
-script = ExtResource("1_7adwj")

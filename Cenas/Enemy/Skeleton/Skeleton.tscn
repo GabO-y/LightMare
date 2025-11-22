@@ -224,8 +224,6 @@ height = 16.0
 
 [node name="Skeleton" type="Node2D" node_paths=PackedStringArray("ray", "ray_marker", "body", "anim")]
 script = ExtResource("1_8f034")
-life = null
-level = null
 ray = NodePath("CharacterBody2D/RollRay/RayCast2D")
 ray_marker = NodePath("CharacterBody2D/RollRay/RayCast2D/Marker2D")
 body = NodePath("CharacterBody2D")

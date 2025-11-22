@@ -53,9 +53,9 @@ var is_getting_key: bool = false
 
 var wearpowns = [Lantern]
 
-var power_ups = {}
-
 var enemies_touch = {}
+
+var current_ene_defalut: int = 0
 
 var is_dead: bool = false
 

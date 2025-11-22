@@ -122,6 +122,17 @@ func animation_logic():
 	
 	anim.play(play)
 	
+func default_setup():
+	atributes.append_array([
+		damage_att, speed_att, heath_att
+	])
+	
+	damage_att.setup(1, 5,"value")
+	speed_att.setup(100, 150, "value")
+	heath_att.setup(5, 15, "value")
+	
+	set_level(9, "max")
+
 func _hit_play(player_body: Node2D) -> void:
 	var player_area = player_body.get_parent() as Player
 	if player_area:

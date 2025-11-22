@@ -529,10 +529,8 @@ radius = 14.0
 script = ExtResource("1_21gwn")
 agent = NodePath("CharacterBody2D/NavigationAgent2D")
 time = NodePath("Timer")
-speed = 100
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/AnimatedSprite2D")
-life = 5
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 motion_mode = 1

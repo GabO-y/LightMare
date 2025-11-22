@@ -65,11 +65,14 @@ tile_map_data = PackedByteArray("AAACAAIAAAACAAAAAAASAAIAAAACAAAAAAADAAIAAAACAAA
 
 [node name="Spawners" type="Node2D" parent="."]
 
-[node name="EnemieSpawaner" parent="Spawners" instance=ExtResource("10_usc55")]
-position = Vector2(292, 81)
+[node name="EnemieSpawaner4" parent="Spawners" instance=ExtResource("10_usc55")]
+position = Vector2(365, 103)
 
-[node name="EnemieSpawaner2" parent="Spawners" instance=ExtResource("10_usc55")]
-position = Vector2(48, 81)
+[node name="EnemieSpawaner5" parent="Spawners" instance=ExtResource("10_usc55")]
+position = Vector2(0, 103)
+
+[node name="EnemieSpawaner7" parent="Spawners" instance=ExtResource("10_usc55")]
+position = Vector2(167, 91)
 
 [node name="Doors" type="Node2D" parent="."]
 

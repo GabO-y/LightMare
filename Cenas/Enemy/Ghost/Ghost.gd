@@ -197,13 +197,18 @@ func ghosts_run_move():
 func take_damage(damage: float):
 	super.take_damage(damage)
 
+func die():
+	super.die()
+	area_hit.collision_layer = 0
+	area_hit.collision_mask = 0
+
 func default_setup():
 	
 	atributes.append_array([
 		heath_att, speed_att, damage_att
 	])
 				
-	speed_att.setup(100, 200, "value")
+	speed_att.setup(80, 150, "value")
 	damage_att.setup(1, 4, "value")
 	heath_att.setup(5, 15, "value")
 	

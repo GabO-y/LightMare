@@ -17,6 +17,8 @@ var atributes: Array[Attribute]
 
 @export var bar: ProgressBar #Barra de progresso
 
+var spawn: Spawn
+
 var is_stop = false
 
 var player: Player #Proprio jogador
@@ -103,15 +105,15 @@ func die():
 	
 	body.collision_layer = 0
 	body.collision_mask = 0
-	if not self is Boss:	
+	
+	if not self is Boss:
 		anim.play("die")
 	anim.flip_h = last_dir.x > 0
 	
 	await anim.animation_finished
 
+	visible = false
 	enemy_die.emit(self)
-		
-	queue_free()
 
 func change_color_damage():
 	body.move_and_slide()
@@ -183,12 +185,7 @@ class Attribute:
 		var p = float(level.current) / level.max
 		
 		value.current = value.min + (mid * p)
-		
-		print("min: ", value.min)
-		print("max: ", value.max)
-		print("mid: ", mid)
-		print("p: ", p)
-				
+
 		return value.current
 		
 	func set_max(max, what: String):
