@@ -28,9 +28,7 @@ func _ready() -> void:
 	die_menu.house = self
 	
 	player._die.connect(die_menu.start_anim_1)
-	
-	room_manager.changed_room.connect(active_menu)
-	
+		
 	if room_manager.current_room.name == "SafeRoom":
 		for door in room_manager.current_room.doors:
 			door.open()
@@ -47,10 +45,7 @@ func _process(delta: float) -> void:
 
 # Como o canvasLayer tem que tá na cena main, é ele ativa e desativa o chestMenu 
 # basedo no sinal que o room_manager tem, vendo se é o saferoom
-func active_menu(room: Room):
-	var is_safe_room = room.name == "SafeRoom"
-	$MenuManager/Interatives/ChestMenu.visible = is_safe_room
-	
+
 func set_camare_in(thing: Node2D, zoom: Vector2):
 	camera.enabled = true
 	room_manager.current_room.camera.enabled = false
@@ -60,7 +55,6 @@ func set_camare_in(thing: Node2D, zoom: Vector2):
 func desable_camera():
 	camera.enabled = false
 	room_manager.current_room.camera.enabled = true
-		
 		
 func reset():
 	
@@ -85,9 +79,7 @@ func reset():
 	Globals.enemies_defalted = 0
 	
 	die_menu.reset()
-	
-	active_menu(room_manager.current_room)
-	
+		
 	reseted.emit()
 	
 signal reseted

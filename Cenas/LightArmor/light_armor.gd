@@ -23,6 +23,7 @@ var enemies_on_light: Dictionary[Enemy, float] = {}
 var mouse_move = false
 
 var armor_dir: Vector2 = Vector2.ZERO
+var last_armor_dir: Vector2
 
 func _ready() -> void:
 	
@@ -206,6 +207,7 @@ class GeneralInfos:
 		_get_type(type).max_value = max
 		
 	func set_min_value(min, type: String):
+		print("HDASDKH ", type)
 		_get_type(type).min_value = min
 		
 	func get_value(type: String):

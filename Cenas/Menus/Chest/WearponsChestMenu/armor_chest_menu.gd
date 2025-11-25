@@ -26,13 +26,13 @@ func _ready() -> void:
 		damage, time_to_attack, distance
 	])
 	
-	#armor_options.append_array([
-		#lantern, lighter, fairy_light
-	#])
-	
 	armor_options.append_array([
-		lantern, lighter
+		lantern, lighter, fairy_light
 	])
+	
+	#armor_options.append_array([
+		#lantern, lighter
+	#])
 	
 	lantern.price_label.visible = false
 	

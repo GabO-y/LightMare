@@ -7,7 +7,8 @@ class_name Bullet
 @export var speed: float = 10.0
 
 var current_dist: float
-var dir: Vector2
+var dir: Vector2 = Vector2.RIGHT
+var last_dir: Vector2 = Vector2.RIGHT
 
 func _ready() -> void:
 	set_physics_process(false)
@@ -22,6 +23,11 @@ func _physics_process(delta: float) -> void:
 		return
 	
 	current_dist += delta
+	
+	if dir == Vector2.ZERO:
+		dir = last_dir
+	else:
+		last_dir = dir
 	
 	global_position += dir.normalized() * speed
 	

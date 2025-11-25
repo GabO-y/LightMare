@@ -138,7 +138,11 @@ func setup_next_round():
 	player.current_ene_defalut = 0
 	ene_to_default = int(floor(Globals.quantity_ene) * floor(Globals.quantity_horder) * floor(Globals.quantity_spawns)) 
 
-	
+func debug_area(area: Area2D):
+	print(area.get_path())
+	print("\tlayer: ", area.collision_layer)
+	print("\tmask: ", area.collision_mask)
+
 signal goint_to_center
 
 signal emerge_boss

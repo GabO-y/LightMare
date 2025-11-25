@@ -152,6 +152,11 @@ func enable():
 	set_active(true)
 	
 func set_active(mode: bool):
+	
+	var is_safe_room = Globals.room_manager.current_room.name == "SafeRoom"
+	if not is_safe_room: 
+		mode = false
+	
 	super.set_active(mode)
 	set_visible_menu(mode)
 	update_label_coins()
