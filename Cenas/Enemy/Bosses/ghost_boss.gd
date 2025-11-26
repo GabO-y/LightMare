@@ -79,9 +79,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	
-	print("heath: ", heath)
-	print("life_bar: ", life_bar.value)
-	
 	if not is_active: return
 	
 	if is_dying:

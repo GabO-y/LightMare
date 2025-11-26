@@ -334,7 +334,6 @@ func _kill_entered(area: Area2D) -> void:
 	if hit_kill:
 		ene.take_damage(ene.life)
 
-
 func update_label_coins():
 	label_coins.text = str(coins)
 	
@@ -370,14 +369,12 @@ func update_hearts():
 		if text.texture:
 			heart_conteiner.call_deferred("add_child", text)
 				
-
 func upgrade_heart(amount: int):
 	max_heart += amount
 	
 func reset():
 	
-	set_process(true)
-	set_physics_process(true)
+	set_active(true)
 	
 	armor.set_process(true)
 	armor.set_physics_process(true)
@@ -394,6 +391,26 @@ func reset():
 	
 	z_index = 0
 	is_dead = false
+	
+func set_active(mode: bool):
+	set_process(mode)
+	set_physics_process(mode)
+	
+	var layer = Globals.layers["player"] if mode else 0
+	var mask = Globals.layers["enemy"] | Globals.layers["current_wall"] | Globals.layers["ghost"] if mode else 0
+	
+	body.collision_layer = layer
+	body.collision_mask = mask
+	
+	set_process_input(mode)
+	
+	if not mode:
+		if armor.is_active:
+			armor.toggle_activate()
+		anim.play("idle")
+		
+	armor.can_active = mode
+
 	
 signal _die
 

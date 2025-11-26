@@ -34,7 +34,6 @@ func reset():
 	
 	original_c_coin_pos = c_coins.global_position
 	
-	
 func _process(delta: float) -> void:
 	
 	if Input.is_anything_pressed():
@@ -218,5 +217,3 @@ func set_visi(mode: bool, type: int = 0):
 			for c in child.get_children():
 				c.visible = mode
 						
-						
-	

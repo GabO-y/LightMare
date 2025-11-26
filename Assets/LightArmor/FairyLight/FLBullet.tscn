@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdgajjjuk7df6"]
+[gd_scene load_steps=6 format=3 uid="uid://bdgajjjuk7df6"]
 
 [ext_resource type="Script" uid="uid://bb2nvlxo062du" path="res://Cenas/LightArmor/FairyLight/BulletFairyLight/bullet.gd" id="1_gv2so"]
 [ext_resource type="Texture2D" uid="uid://cgb467h0a8e2c" path="res://Assets/Objects/Bullet/FairyLight/fairy_light_bullet.png" id="2_vlmqe"]
-[ext_resource type="Texture2D" uid="uid://cybjamgolcp2e" path="res://icon.svg" id="3_vlmqe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vlmqe"]
 radius = 24.2857
@@ -23,12 +22,6 @@ icon = NodePath("FairyLightBullet")
 light_area = NodePath("LightArea")
 area = NodePath("BodyArea")
 speed = 3.0
-
-[node name="Icon" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(-8.57143, -7.14286)
-scale = Vector2(1, 1)
-texture = ExtResource("3_vlmqe")
 
 [node name="FairyLightBullet" type="Sprite2D" parent="."]
 texture_filter = 1

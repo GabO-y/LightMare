@@ -4,6 +4,7 @@ class_name RoomManager
 var rooms: Array[Room]
 
 @export var roomsNode: Node2D
+
 @export var item_manager: ItemManager
 @export var key_manager: KeyManager
 @export var round_manager: RoundManagar
@@ -49,65 +50,39 @@ func get_doors(room: Room) -> Array[Door]:
 	return doors
 	
 func _change_room(goTo):
-		
-	print("a")
-		
+
 #	Para o caso do player mudar de sala, 
 #   mas ainda haver items que não foram coletados
 	item_manager.get_all_items(null)
-	
-	print("b")
-	
+
 	# Caso vc passe pela porta e não tenha tocado na chave
 	item_manager.finish_get_key()
-	
-	print("c")
-	
+
 	current_room.desable()
-	
-	print("d")
 
 	var room_name = current_room.name
-	
-	print("e")
-	
+
 	current_room = goTo
 	current_room.enable()
-	
-	print("f")
-	
+
 	var door_target = current_room.get_door(room_name)
 
-	print("g")
-
 	Globals.player.body.global_position = door_target.area.global_position
-	
-	print("h")
-	
+
 	Globals.can_teleport = false
-	
-	print("i")
-	
+
 	Globals.setup_next_round()
 	
-	print("j")
-	
+
 	if current_room is BossRoom:
-		print("k")
 		current_room.boss.setup()
-		print("l")
 	else:
-		print("m")
 		round_manager.start_random_round()
-		print("n")
 		
-	print("o")
 	await get_tree().create_timer(0.2).timeout
-	print("p")
 	Globals.can_teleport = true
-	print("q")
 	changed_room.emit(current_room)
-	print("r")
+	
 func find_room(room_name: String) -> Room:
 		
 	for room in rooms:
@@ -184,7 +159,6 @@ func set_mode_room(room_name: String, mode: bool):
 func get_room(room_name: String):
 	for room in rooms:
 		if room.name == room_name:
-			print("quarto: ", room_name, ", encontrado")
 			return room
 			
 	print("room: ", room_name, ", não encontrado")
@@ -214,6 +188,12 @@ func show_rounds():
 			room.show_rounds()
 			
 func _clear_effects():
+	
+	if current_room is BossRoom:
+		boss_finished.emit()
+		item_manager.get_all_items(current_room)
+		return
+	
 	key_manager.try_open_door()
 	item_manager.make_items_chase_player()
 
@@ -229,3 +209,9 @@ func reset():
 	current_room.finish = true
 	
 signal changed_room(room: Room)
+
+signal boss_finished
+
+func _input(event: InputEvent) -> void:
+	if Input.is_key_pressed(KEY_1):
+		boss_finished.emit()

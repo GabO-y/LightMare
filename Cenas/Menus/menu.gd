@@ -31,6 +31,7 @@ func set_active(mode: bool):
 			manager.current_menu = null
 			
 		for menu in manager.menus:
+			if menu is FinishMenu: continue
 			menu.set_process(true)
 			
 func reset():

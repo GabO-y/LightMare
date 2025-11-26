@@ -207,7 +207,6 @@ class GeneralInfos:
 		_get_type(type).max_value = max
 		
 	func set_min_value(min, type: String):
-		print("HDASDKH ", type)
 		_get_type(type).min_value = min
 		
 	func get_value(type: String):

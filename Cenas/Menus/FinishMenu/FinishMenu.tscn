@@ -1,0 +1,267 @@
+[gd_scene load_steps=10 format=3 uid="uid://dsi5d8k7xbh8s"]
+
+[ext_resource type="Script" uid="uid://caepm67rjkqyt" path="res://Cenas/Menus/FinishMenu/finish_menu.gd" id="1_oody7"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_lsw61"]
+
+[sub_resource type="Animation" id="Animation_oody7"]
+resource_name = "1"
+length = 10.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Labels/TextureRect:texture:gradient")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Labels/TextureRect:texture:gradient:offsets")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 9.96667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedFloat32Array(0.99359, 1), PackedFloat32Array(0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Labels/Parabens:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.6, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Labels/TempJogo:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(5.59, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Labels/Time:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(5.6, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Gradient" id="Gradient_lsw61"]
+offsets = PackedFloat32Array(0.99359, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="Animation" id="Animation_8dslt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Labels/TextureRect:texture:gradient")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("Gradient_lsw61")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationPlayer/Labels/TextureRect:texture:gradient:offsets")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedFloat32Array(0.99359, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimationPlayer/Labels/Parabens:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimationPlayer/Labels/TempJogo:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationPlayer/Labels/Time:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_au0an"]
+_data = {
+&"1": SubResource("Animation_oody7"),
+&"RESET": SubResource("Animation_8dslt")
+}
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dqdgq"]
+gradient = SubResource("Gradient_lsw61")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8dslt"]
+font = ExtResource("2_lsw61")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_lsw61"]
+font = ExtResource("2_lsw61")
+font_size = 40
+font_color = Color(0, 0, 0, 1)
+
+[node name="FinishMenu" type="CanvasLayer" node_paths=PackedStringArray("particles", "anim", "labels_node", "time_label")]
+script = ExtResource("1_oody7")
+particles = [NodePath("CPUParticles2D"), NodePath("CPUParticles2D2"), NodePath("CPUParticles2D3"), NodePath("CPUParticles2D4"), NodePath("CPUParticles2D5")]
+anim = NodePath("AnimationPlayer")
+labels_node = NodePath("AnimationPlayer/Labels")
+time_label = NodePath("AnimationPlayer/Labels/Time")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_au0an")
+}
+
+[node name="Labels" type="Control" parent="AnimationPlayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="AnimationPlayer/Labels"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_dqdgq")
+
+[node name="Parabens" type="Label" parent="AnimationPlayer/Labels"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 460.0
+offset_top = 36.0
+offset_right = 667.0
+offset_bottom = 98.0
+text = "Parabéns"
+label_settings = SubResource("LabelSettings_8dslt")
+
+[node name="TempJogo" type="Label" parent="AnimationPlayer/Labels"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 697.0
+offset_top = 167.0
+offset_right = 1012.0
+offset_bottom = 229.0
+text = "Tempo de Jogo:"
+label_settings = SubResource("LabelSettings_lsw61")
+
+[node name="Time" type="Label" parent="AnimationPlayer/Labels"]
+modulate = Color(1, 1, 1, 0)
+offset_left = 934.0
+offset_top = 166.0
+offset_right = 1249.0
+offset_bottom = 228.0
+text = "20:20"
+label_settings = SubResource("LabelSettings_lsw61")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(158, 854)
+amount = 100
+lifetime = 20.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -10)
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(314, 880)
+amount = 100
+lifetime = 20.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -10)
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(533, 874)
+amount = 100
+lifetime = 20.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -10)
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="."]
+position = Vector2(799, 866)
+amount = 100
+lifetime = 20.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -10)
+scale_amount_min = 2.0
+scale_amount_max = 10.0
+
+[node name="CPUParticles2D5" type="CPUParticles2D" parent="."]
+position = Vector2(1048, 864)
+amount = 100
+lifetime = 20.0
+local_coords = true
+emission_shape = 2
+emission_sphere_radius = 128.0
+gravity = Vector2(0, -10)
+scale_amount_min = 2.0
+scale_amount_max = 10.0

@@ -11,7 +11,9 @@ func _ready() -> void:
 func reset():
 	super.reset()
 	
-	boss.queue_free()
+	if is_instance_valid(boss):
+		boss.queue_free()
+		
 	boss = load("res://Cenas/Enemy/Bosses/GhostBoss.tscn").instantiate() as GhostBoss
 	add_child(boss)
 	

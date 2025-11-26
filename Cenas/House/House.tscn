@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cxexjlkqbs61u"]
+[gd_scene load_steps=10 format=3 uid="uid://cxexjlkqbs61u"]
 
 [ext_resource type="Script" uid="uid://c3svmxorsnj3i" path="res://Cenas/House/house.gd" id="1_rmjq6"]
 [ext_resource type="PackedScene" uid="uid://clp3coh5mf60x" path="res://Cenas/Player/Player.tscn" id="2_iqu7b"]
@@ -7,10 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://bb4ttu771sbb6" path="res://Cenas/Menus/Chest/ChestMenu.tscn" id="7_1rbih"]
 [ext_resource type="PackedScene" uid="uid://f8wn68c73ads" path="res://Cenas/Menus/PauseMenu/MenuPause.tscn" id="7_6pdaa"]
 [ext_resource type="PackedScene" uid="uid://d0tbbrjem3h7v" path="res://Cenas/Menus/DieMenu/DieMenu.tscn" id="7_k5gof"]
+[ext_resource type="PackedScene" uid="uid://dsi5d8k7xbh8s" path="res://Cenas/Menus/FinishMenu/FinishMenu.tscn" id="8_k5gof"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iqu7b"]
 
-[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu")]
+[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu", "finish_menu")]
 script = ExtResource("1_rmjq6")
 player = NodePath("Player")
 room_manager = NodePath("RoomManager")
@@ -18,6 +19,7 @@ camera = NodePath("Camera2D")
 menu_manager = NodePath("MenuManager")
 initial_position = NodePath("InitialPosition")
 die_menu = NodePath("MenuManager/Menus/DieMenu")
+finish_menu = NodePath("MenuManager/Menus/FinishMenu")
 
 [node name="RoomManager" parent="." instance=ExtResource("4_6pdaa")]
 position = Vector2(0, -2)
@@ -43,6 +45,9 @@ manager = NodePath("../..")
 popup = NodePath("../../Interatives/ChestMenu/PopUp")
 area = NodePath("../../Interatives/ChestMenu/AreaBear")
 player = NodePath("../../../Player")
+
+[node name="FinishMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("8_k5gof")]
+manager = NodePath("../..")
 
 [node name="Interatives" type="Node2D" parent="MenuManager"]
 

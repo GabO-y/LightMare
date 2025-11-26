@@ -7,11 +7,15 @@ class_name House
 @export var camera: Camera2D
 @export var menu_manager: MenuManager
 @export var initial_position: Marker2D
+
 @export var die_menu: DieMenu
+@export var finish_menu: FinishMenu
 
 var can_reset: bool = false
 
 var follow: Node2D
+
+var start_time: int
 
 func _ready() -> void:
 	
@@ -28,12 +32,16 @@ func _ready() -> void:
 	die_menu.house = self
 	
 	player._die.connect(die_menu.start_anim_1)
-		
+	
+	room_manager.boss_finished.connect(finish_menu.start)
+	
 	if room_manager.current_room.name == "SafeRoom":
 		for door in room_manager.current_room.doors:
 			door.open()
 			
-		process_mode = Node.PROCESS_MODE_ALWAYS
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	start_time = Time.get_ticks_msec()
 
 func _process(delta: float) -> void:
 		
@@ -81,5 +89,9 @@ func reset():
 	die_menu.reset()
 		
 	reseted.emit()
+	
+func calc_game_time_sec():
+	var time = Time.get_ticks_msec() - start_time
+	return time / 1000
 	
 signal reseted
