@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://cxexjlkqbs61u"]
+
+[ext_resource type="Script" uid="uid://c3svmxorsnj3i" path="res://Cenas/House/house.gd" id="1_rmjq6"]
+[ext_resource type="PackedScene" uid="uid://clp3coh5mf60x" path="res://Cenas/Player/Player.tscn" id="2_iqu7b"]
+[ext_resource type="PackedScene" uid="uid://b0ntae4uqgnun" path="res://Cenas/Rooms/RoomManager/RoomManager.tscn" id="4_6pdaa"]
+[ext_resource type="PackedScene" uid="uid://oapef3dqlad" path="res://Cenas/Menus/GameOver/TransactionScene.tscn" id="4_rmjq6"]
+
+[node name="House" type="Node2D"]
+script = ExtResource("1_rmjq6")
+
+[node name="RoomManager" parent="." instance=ExtResource("4_6pdaa")]
+position = Vector2(0, -2)
+
+[node name="Player" parent="." instance=ExtResource("2_iqu7b")]
+position = Vector2(50, 86)
+
+[node name="TransitionScene" parent="." instance=ExtResource("4_rmjq6")]
+position = Vector2(-251, -171)
