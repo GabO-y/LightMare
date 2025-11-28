@@ -50,41 +50,40 @@ func get_doors(room: Room) -> Array[Door]:
 	return doors
 	
 func _change_room(goTo):
-
+	
 #	Para o caso do player mudar de sala, 
 #   mas ainda haver items que não foram coletados
 	item_manager.get_all_items(null)
 
 	# Caso vc passe pela porta e não tenha tocado na chave
 	item_manager.finish_get_key()
-
 	current_room.desable()
-
+	
 	var room_name = current_room.name
-
 	current_room = goTo
+	
 	current_room.enable()
-
+	
 	var door_target = current_room.get_door(room_name)
-
+	
 	Globals.player.body.global_position = door_target.area.global_position
 
 	Globals.can_teleport = false
 
-	Globals.setup_next_round()
+	round_manager.setup_next_level()
 	
-
 	if current_room is BossRoom:
 		current_room.boss.setup()
 	else:
 		round_manager.start_random_round()
 		
-	await get_tree().create_timer(0.2).timeout
-	Globals.can_teleport = true
-	changed_room.emit(current_room)
+	await get_tree().create_timer(0.3).timeout
 	
-func find_room(room_name: String) -> Room:
+	Globals.can_teleport = true
+	
+	changed_room.emit(current_room)
 		
+func find_room(room_name: String) -> Room:
 	for room in rooms:
 		if room.name.to_lower() == room_name.to_lower():
 			return room

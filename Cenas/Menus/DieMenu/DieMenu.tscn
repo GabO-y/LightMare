@@ -243,58 +243,88 @@ texture = SubResource("GradientTexture2D_ijqvd")
 
 [node name="Part2" type="Control" parent="AnimationPlayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CoinText" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 803.0
-offset_top = 195.0
-offset_right = 910.0
-offset_bottom = 236.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Moedas"
 label_settings = SubResource("LabelSettings_ijqvd")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EneText" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 762.0
-offset_top = 39.0
-offset_right = 941.0
-offset_bottom = 124.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 97.0
+offset_bottom = 97.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "Inimigos
  derrotados"
 label_settings = SubResource("LabelSettings_6w1pf")
 horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AlreadyCoin" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 953.0
-offset_top = 193.0
-offset_right = 1056.0
-offset_bottom = 234.0
-text = "0 +"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 129.0
+offset_top = -1.0
+offset_right = 129.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "100"
 label_settings = SubResource("LabelSettings_aj38n")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ConqCoin" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1057.0
-offset_top = 193.0
-offset_right = 1102.0
-offset_bottom = 234.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 223.0
+offset_top = -2.0
+offset_right = 223.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "100"
 label_settings = SubResource("LabelSettings_y25e6")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="EneCount" type="Label" parent="AnimationPlayer/Part2"]
 modulate = Color(1, 1, 1, 0)
-layout_mode = 0
-offset_left = 1025.0
-offset_top = 62.0
-offset_right = 1070.0
-offset_bottom = 103.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 161.0
+offset_top = 96.0
+offset_right = 161.0
+offset_bottom = 96.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "100"
 label_settings = SubResource("LabelSettings_hsttx")
+horizontal_alignment = 1
+vertical_alignment = 1

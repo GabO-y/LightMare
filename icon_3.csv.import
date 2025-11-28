@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://b1orqaaudx6sf"
+
+[deps]
+
+files=["res://icon_3. TVPaint.translation", "res://icon_3. CSV 1.0.translation"]
+
+source_file="res://icon_3.csv"
+dest_files=["res://icon_3. TVPaint.translation", "res://icon_3. CSV 1.0.translation"]
+
+[params]
+
+compress=true
+delimiter=0

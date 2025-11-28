@@ -38,15 +38,16 @@ enabled = false
 house = NodePath("../../..")
 manager = NodePath("../..")
 
-[node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
+[node name="FinishMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("8_k5gof")]
 manager = NodePath("../..")
 
-[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "player") instance=ExtResource("7_1rbih")]
+[node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "player", "manager") instance=ExtResource("7_1rbih")]
 popup = NodePath("../../Interatives/ChestMenu/PopUp")
 area = NodePath("../../Interatives/ChestMenu/AreaBear")
 player = NodePath("../../../Player")
+manager = NodePath("../..")
 
-[node name="FinishMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("8_k5gof")]
+[node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
 manager = NodePath("../..")
 
 [node name="Interatives" type="Node2D" parent="MenuManager"]

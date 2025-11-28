@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://nlmjik0ymw8o"]
 
-[ext_resource type="Script" uid="uid://j0b1r2n44rty" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/ItemsPowerUps/upgrade_size_item.gd" id="1_wu3um"]
+[ext_resource type="Script" uid="uid://j0b1r2n44rty" path="res://Cenas/Menus/Chest/WearponsChestMenu/ItemsPowerUps/upgrade_size_item.gd" id="1_wu3um"]
 [ext_resource type="Texture2D" uid="uid://br8rd7e65byo6" path="res://Assets/LightArmor/AssestsUpgrades/power_icon.png" id="2_lplic"]
 [ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_ver8n"]
 

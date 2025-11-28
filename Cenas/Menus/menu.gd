@@ -6,7 +6,7 @@ class_name Menu
 @export var is_active: bool = false
 
 func set_active(mode: bool):
-				
+		
 	if Globals.player:
 		Globals.player.hud.visible = not mode
 	
@@ -17,18 +17,21 @@ func set_active(mode: bool):
 	
 	is_active = mode
 	visible = mode
-	
-	manager.is_in_menu = mode
+
 
 	if mode:
+		
 		manager.current_menu = self
+		manager.is_in_menu = true
 		
 		for menu in manager.menus:
 			if menu != self:
 				menu.set_process(false)
 	else:
+		
 		if manager.current_menu == self:
 			manager.current_menu = null
+			manager.is_in_menu = false
 			
 		for menu in manager.menus:
 			if menu is FinishMenu: continue

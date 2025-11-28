@@ -46,8 +46,6 @@ func _ready() -> void:
 	
 func _process(delta: float) -> void:
 	
-	$CharacterBody2D/Label.text = str(heath)
-	
 	if is_stop: return
 	
 	var dist = dist_to_player()
@@ -209,7 +207,7 @@ func default_setup():
 	])
 				
 	speed_att.setup(80, 150, "value")
-	damage_att.setup(1, 4, "value")
+	damage_att.setup(1, 1, "value")
 	heath_att.setup(5, 15, "value")
 	
 	set_level(9, "max")

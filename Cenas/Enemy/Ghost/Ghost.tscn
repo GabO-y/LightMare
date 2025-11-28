@@ -300,9 +300,4 @@ debug_color = Color(0.999259, 0, 0.118767, 0.42)
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="CharacterBody2D/ToBoss"]
 scale = Vector2(0.6, 0.65)
 
-[node name="Label" type="Label" parent="CharacterBody2D"]
-offset_left = -19.0
-offset_top = -23.0
-offset_right = 21.0
-
 [connection signal="body_entered" from="CharacterBody2D/Areas/HitArea" to="." method="_player_enter_hit"]

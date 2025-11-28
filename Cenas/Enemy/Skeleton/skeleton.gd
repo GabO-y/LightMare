@@ -169,7 +169,7 @@ func default_setup():
 		damage_att, speed_att, heath_att
 	])
 	
-	damage_att.setup(1, 5,"value")
+	damage_att.setup(1, 1,"value")
 	speed_att.setup(100, 150, "value")
 	heath_att.setup(5, 15, "value")
 	

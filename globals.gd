@@ -124,16 +124,12 @@ func setup_next_round():
 	quantity_horder += 0.5
 	quantity_spawns += 0.5
 		
-	if quantity_ene > 3.0:
-		quantity_ene = 3.0
-	if quantity_horder > 3.0:
-		quantity_horder = 3.0
-	if quantity_spawns > 3.0:
-		quantity_spawns = 3.0
-		
-	print(quantity_ene)
-	print(quantity_horder)
-	print(quantity_spawns)
+	if quantity_ene > 2.0:
+		quantity_ene = 2.0
+	if quantity_horder > 2.0:
+		quantity_horder = 2.0
+	if quantity_spawns > 2.0:
+		quantity_spawns = 2.0
 		
 	player.current_ene_defalut = 0
 	ene_to_default = int(floor(Globals.quantity_ene) * floor(Globals.quantity_horder) * floor(Globals.quantity_spawns)) 

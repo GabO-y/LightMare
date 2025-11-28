@@ -6,15 +6,34 @@ var rounds: Array[Round]
 var is_round_playing: bool = false
 var round_playing: Round = null
 
+var aux_times: int = 1
+var quant_spawn: int = 1
+var quant_ene: int = 1
+var quant_horder: int = 1
+var current_lv = 1
+
+var count_ene_defaulted: int = 0
+
 @export var room_manager: RoomManager
 
 func get_random_round(size: int) -> Round:
 	
-	var quantity = floor(Globals.quantity_ene)
-	var time_spawn = 1.5
-	var level = Globals.current_level
-	var spawns = room_manager.current_room.get_random_spawns(floor(clamp(Globals.quantity_spawns, 0.0, 3.0)))
 
+	var quantity = quant_ene
+	var time_spawn = 1.5
+	var level = current_lv
+	
+	var spawns: Array[Spawn]
+
+	for i in range(quant_spawn):
+		
+		var s = Globals.room_manager.current_room.spaweners.get(i)
+		
+		if s is Spawn:
+			spawns.append(s)
+			
+	quant_spawn = spawns.size()
+			
 	var round = Round.new()
 	round.manager = self
 	
@@ -25,7 +44,7 @@ func get_random_round(size: int) -> Round:
 		
 		if is_horder:
 			var ene_name = ["Ghost", "Zombie", "Skeleton"].pick_random()
-			exe = create_horder(ene_name, quantity, time_spawn, level, spawns)
+			exe = create_horder(ene_name, quantity, time_spawn, current_lv, spawns)
 			size -= 1
 		else:
 			exe = create_await(0.5)
@@ -35,22 +54,49 @@ func get_random_round(size: int) -> Round:
 		exe.round = round
 		round.add_exe(exe)
 	
+	Globals.ene_to_default = quant_ene * quant_spawn * quant_horder
 	return round
 
+func setup_next_level():
+	
+	if aux_times % 2 == 0:
+		quant_ene += 1
+		quant_spawn += 1
+	if aux_times % 3 == 0:
+		quant_horder += 1
+		
+	if quant_ene >= 3:
+		quant_ene = 3
+		
+	if quant_spawn >= 2:
+		quant_spawn = 2
+	
+	if quant_horder >= 2:
+		quant_ene = 2
+		
+	current_lv += 1
+	aux_times += 1
+	
+	
+	Globals.player.current_ene_defalut = 0
+	
 func start_random_round():
-	var round = get_random_round(floor(Globals.quantity_horder))
-	
+
+	var round = get_random_round(quant_horder)
+
 	add_child(round)
-	
+
 	round.play()
+	
 	is_round_playing = true
 	
 	round.finished.connect(round_finished.emit)
 	
 	round_finished.connect(
 		func():
-			is_round_playing = false
+			is_round_playing = false		
 	)
+	
 
 func create_horder(ene_name: String, quantity: int, time_spawn: float, level: int, spawns: Array[Spawn]) -> Exe:
 	var horder = Horder.new()
@@ -74,6 +120,15 @@ func create_round(exes: Array[Exe]):
 	rounds.append(round)
 	
 func reset():
+	
+	aux_times = 1
+	
+	quant_spawn = 1
+	quant_ene = 1
+	quant_horder = 1
+	
+	current_lv = 1
+	
 	reset_rounds.emit()
 		
 
@@ -205,6 +260,7 @@ class Horder extends Exe:
 				ene.enemy_die.connect(
 					func(ene):
 						Globals.player.current_ene_defalut += 1
+						Globals.enemies_defalted += 1
 						round._check_finish()
 				)
 				

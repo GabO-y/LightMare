@@ -24,11 +24,13 @@ var hearts: int = 2
 
 var is_invencible: bool = false
 var invencible_duration: float = 1.2
+var invencible_duration_bonus: float = 1.0
 var invencible_timer: float = 0
 
 var input_vector: Vector2
 
 var speed: float = 100
+var speed_bonus: float = 1.0
 var dash_speed: float = 600
 var dash_duration: float = 0.1
 var can_dash = true
@@ -94,9 +96,13 @@ func set_armor(armor: LightArmor):
 
 func _spend_coins(amount: int):
 	
+	print("a")
+	
 	if amount > coins:
 		print("quantidade a ser gasta, execede a quantidade de moedas: Player/spend_coins()")
 		return
+		
+	print("b")
 		
 	coins -= amount
 	update_label_coins()
@@ -133,10 +139,10 @@ func _physics_process(delta: float) -> void:
 	dir = move_logic()
 	dash_logic(delta)
 	
-	body.velocity = dir * speed
+	body.velocity = dir * (speed * speed_bonus) 
 
 	if is_invencible:
-		if invencible_timer >= invencible_duration:
+		if invencible_timer >= (invencible_duration * invencible_duration_bonus):
 			is_invencible = false
 			invencible_timer = 0
 			return
@@ -249,7 +255,6 @@ func _unlocked_doors():
 	
 func take_damage(damage: int):
 	
-	
 	if is_invencible: return
 	is_invencible = true
 	
@@ -325,9 +330,7 @@ func take_knockback(direction: Vector2, force: int):
 func _on_hit_area_body_entered(body: Node2D) -> void:
 	var ene = body.get_parent() as Enemy
 	if ene == null: return
-	if hit_kill:
-		ene.take_damage(ene.life)
-		
+	
 func _kill_entered(area: Area2D) -> void:
 	var ene = area.get_parent() as Enemy
 	if ene == null: return

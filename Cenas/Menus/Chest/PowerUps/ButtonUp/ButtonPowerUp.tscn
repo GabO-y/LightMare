@@ -1,0 +1,90 @@
+[gd_scene load_steps=6 format=3 uid="uid://kyphdhhtbj7g"]
+
+[ext_resource type="Texture2D" uid="uid://0tbwimurwf3n" path="res://icon_3.png" id="1_h0xgu"]
+[ext_resource type="Script" uid="uid://dx80nk8k3g0cm" path="res://Cenas/Menus/Chest/PowerUps/ButtonUp/button_power_up.gd" id="2_2m40k"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_c88e1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ncvaf"]
+font = ExtResource("3_c88e1")
+font_size = 30
+
+[sub_resource type="LabelSettings" id="LabelSettings_h0xgu"]
+font = ExtResource("3_c88e1")
+font_size = 40
+
+[node name="ButtonPowerUp" type="TextureRect" node_paths=PackedStringArray("l_price", "l_name", "l_value", "bar", "button")]
+offset_right = 384.0
+offset_bottom = 128.0
+texture = ExtResource("1_h0xgu")
+stretch_mode = 3
+script = ExtResource("2_2m40k")
+l_price = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Label2")
+l_name = NodePath("MarginContainer/PanelContainer/VBoxContainer/HBoxContainer/Label")
+l_value = NodePath("MarginContainer/PanelContainer/VBoxContainer/ProgressBar/ValueLabel")
+bar = NodePath("MarginContainer/PanelContainer/VBoxContainer/ProgressBar")
+button = NodePath("MarginContainer/PanelContainer/Button")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Nome do item"
+label_settings = SubResource("LabelSettings_ncvaf")
+horizontal_alignment = 1
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Label2" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Preço do item"
+label_settings = SubResource("LabelSettings_ncvaf")
+horizontal_alignment = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+min_value = 1.0
+max_value = 10.0
+value = 1.0
+show_percentage = false
+
+[node name="ValueLabel" type="Label" parent="MarginContainer/PanelContainer/VBoxContainer/ProgressBar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Value"
+label_settings = SubResource("LabelSettings_h0xgu")
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="MarginContainer/PanelContainer"]
+layout_mode = 2
+flat = true
+
+[connection signal="button_down" from="MarginContainer/PanelContainer/Button" to="." method="_on_button_upgrade"]

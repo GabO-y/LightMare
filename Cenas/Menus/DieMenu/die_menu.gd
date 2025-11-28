@@ -115,6 +115,8 @@ func skip_3():
 				
 func start_anim_1():
 	
+	Globals.house.menu_manager.is_in_menu = true
+	
 	anim.play("1")
 	final_results["part"] = 1
 
@@ -200,8 +202,9 @@ func part_1_tweens():
 	var tween = create_tween()
 	tween.set_parallel()
 	
-	final_results["player_pos"] = house.room_manager.current_room.camera.global_position
-	final_results["player_scala"] = Vector2(4.0, 4.0)
+	final_results["player_pos"] = house.room_manager.current_room.camera.global_position + Vector2(0, -30)
+	
+	final_results["player_scala"] = Vector2(2.5, 2.5)
 	final_results["tween"] = tween
 	
 	var durarion: float = 5.0

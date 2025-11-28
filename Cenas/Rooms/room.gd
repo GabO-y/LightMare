@@ -34,8 +34,9 @@ func _ready() -> void:
 		
 		if child.name == "Spawners":
 			for spawn in child.get_children():
-				spaweners.append(spawn)
-				spawn.room = self
+				if spawn is Spawn:
+					spaweners.append(spawn)
+					spawn.room = self
 					
 		if child.name == "Doors":
 			for door in child.get_children():
@@ -180,24 +181,52 @@ func reset():
 	for door in doors:
 		door.is_locked = true
 		door.set_active(false)
+		
+func get_random_spawn():
+	return spaweners.pick_random()
 
 func get_random_spawns(quant: int):
 	
+	var original_quant = quant
+	
 	if quant <= 0:
 		return 
-	
+		
 	if quant >= spaweners.size():
 		return spaweners
 	
-	var spawns: Array[Spawn]
+	var spawns: Array[Spawn] = []
+	
+	var error = false
 	
 	while quant > 0:
+		
+		if abs(quant) > 100:
+			error = true
+			break
+		
 		var spawn = spaweners.pick_random()
+		
 		if spawn in spawns:
 			quant += 1
 			continue
+			
 		spawns.append(spawn)
 		quant -= 1
+		
+	if error:
+		
+		spawns.clear()
+		
+		for i in range(original_quant - 1):
+			
+			var s = spaweners.get(i)
+			
+			if  not s is Spawn:
+				print("deu nao")
+				get_tree().quit()
+				
+			spawns.append(spaweners.get(i))
 		
 	return spawns
 

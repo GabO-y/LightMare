@@ -19,10 +19,10 @@ script/source = "extends Room
 
 [node name="Hall" type="Node2D" node_paths=PackedStringArray("camera", "door_node")]
 script = SubResource("GDScript_16r42")
-camera = NodePath("Camera2D")
-door_node = NodePath("Doors")
 is_camera_chase_mode = true
 can_return = true
+camera = NodePath("Camera2D")
+door_node = NodePath("Doors")
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -83,7 +83,7 @@ position = Vector2(152, 312)
 [node name="Spawners" type="Node2D" parent="."]
 
 [node name="EnemieSpawaner" parent="Spawners" instance=ExtResource("11_kegp6")]
-position = Vector2(67, 248)
+position = Vector2(72, 240)
 type_enemie = ExtResource("12_2wqts")
 
 [node name="EnemieSpawaner2" parent="Spawners" instance=ExtResource("11_kegp6")]

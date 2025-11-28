@@ -31,7 +31,11 @@ func _ready() -> void:
 	
 	die_menu.house = self
 	
-	player._die.connect(die_menu.start_anim_1)
+	player._die.connect(
+		func():
+			die_menu.set_active(true)
+			die_menu.start_anim_1()
+	)
 	
 	room_manager.boss_finished.connect(finish_menu.start)
 	
@@ -82,10 +86,7 @@ func reset():
 		door.open()
 		
 	get_tree().paused = false
-	
-	Globals.conquited_coins = 0
-	Globals.enemies_defalted = 0
-	
+		
 	die_menu.reset()
 		
 	reseted.emit()

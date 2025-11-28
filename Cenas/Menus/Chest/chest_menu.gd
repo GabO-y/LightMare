@@ -35,12 +35,6 @@ func _ready() -> void:
 	
 	player.armor_manager.chess_menu = self
 	
-	add_power_up(
-		"vida",
-		10,
-		load("res://Assets/Interfaces/ChestUI/Icons/heart_icon.png")
-	)
-	
 	menu.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	await get_tree().process_frame
@@ -59,14 +53,6 @@ func _ready() -> void:
 func _update_label_coins(amount: int):
 	coins_label.text = str(player.coins)
 	
-func add_power_up(item_name: String, price: float, icon: Texture2D):
-	
-	var item: ChestItem = ChestItem.create(item_name, price, icon) 
-	
-	item.item_buyed.connect(_buy_item)
-	item.insufficient_coins.connect(_insuffient_coisn)
-	
-	power_ups_node.add_child(item)
 	
 func _process(delta: float) -> void:
 	
