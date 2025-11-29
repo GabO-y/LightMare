@@ -6,6 +6,9 @@ class_name Item
 @export var area: Area2D
 @export var manager: ItemManager
 
+@export var audio: AudioStreamPlayer
+
+
 var dist = 1
 var type
 
@@ -114,7 +117,9 @@ func _on_player_body_entered(body: Node2D) -> void:
 	var player = body.get_parent() as Player
 	if player == null: return
 	
-	
+	if audio:
+		audio.play()
+		
 	collected.emit(self)
 			
 signal collected(item: Item)

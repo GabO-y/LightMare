@@ -19,10 +19,10 @@ script/source = "extends Room
 
 [node name="Hall" type="Node2D" node_paths=PackedStringArray("camera", "door_node")]
 script = SubResource("GDScript_16r42")
-is_camera_chase_mode = true
-can_return = true
 camera = NodePath("Camera2D")
 door_node = NodePath("Doors")
+is_camera_chase_mode = true
+can_return = true
 
 [node name="Layers" type="Node2D" parent="."]
 
@@ -95,5 +95,5 @@ position = Vector2(72, 174)
 type_enemie = ExtResource("12_2wqts")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(157, 164)
+position = Vector2(171, 161)
 zoom = Vector2(2.5, 2.5)

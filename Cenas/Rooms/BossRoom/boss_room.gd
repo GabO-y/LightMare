@@ -24,8 +24,8 @@ func enable():
 	boss.enable()
 	super.enable()
 	
-func switch_process(mode: bool):	
-	super.switch_process(mode)
+func set_active(mode: bool):	
+	super.set_active(mode)
 	if is_instance_valid(boss):
 		boss.set_active(mode)
 		

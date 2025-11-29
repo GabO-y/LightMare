@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://dw3qalysdkhwx"]
+[gd_scene load_steps=9 format=3 uid="uid://dw3qalysdkhwx"]
 
 [ext_resource type="Script" uid="uid://dihntck648mlm" path="res://Cenas/Keys/key.gd" id="1_ah1dp"]
 [ext_resource type="Texture2D" uid="uid://diy5gp5mllksu" path="res://Assets/Keys/key_common.png" id="2_gac03"]
+[ext_resource type="AudioStream" uid="uid://sej6hah1qyw5" path="res://Assets/Sound/get_key.mp3" id="3_3ouih"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ccyvf"]
 radius = 4.12311
@@ -24,10 +25,11 @@ gradient = SubResource("Gradient_3ouih")
 fill = 1
 fill_from = Vector2(0.472934, 0.464387)
 
-[node name="Key" type="Node2D" node_paths=PackedStringArray("particles_node", "area")]
+[node name="Key" type="Node2D" node_paths=PackedStringArray("particles_node", "area", "audio")]
 script = ExtResource("1_ah1dp")
 particles_node = NodePath("CPUParticles2D")
 area = NodePath("Area2D")
+audio = NodePath("AudioStreamPlayer2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -53,3 +55,7 @@ emission_sphere_radius = 39.45
 direction = Vector2(0, 0)
 gravity = Vector2(0, 0)
 radial_accel_min = -100.0
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_3ouih")
+parameters/looping = true

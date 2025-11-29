@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://dsi5d8k7xbh8s"]
 
 [ext_resource type="Script" uid="uid://caepm67rjkqyt" path="res://Cenas/Menus/FinishMenu/finish_menu.gd" id="1_oody7"]
-[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_lsw61"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="2_lsw61"]
 
 [sub_resource type="Animation" id="Animation_oody7"]
 resource_name = "1"

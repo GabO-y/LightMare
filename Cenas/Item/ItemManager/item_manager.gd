@@ -156,10 +156,15 @@ func _collect_item(item: Item):
 		return
 		
 	if item is Coin:
+			
 		Globals.conquited_coins += item.get_value()
 		Globals.player.coins += item.get_value()
 		Globals.player.update_label_coins()
-		item.queue_free()
+		
+		item.visible = false
+		
+		item.audio.finished.connect(item.queue_free)
+		
 		return
 
 	match item.type:

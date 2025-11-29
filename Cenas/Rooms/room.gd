@@ -13,7 +13,6 @@ class_name Room
 @export var door_node: Node2D
 
 @export var is_camera_chase_mode: bool = false
-
 @export var can_return: bool = false
 
 var is_camera_chase: bool = true
@@ -73,12 +72,12 @@ func calculate_total_enemies() -> int:
 	return total_enemies
 	
 func desable():
-	switch_process(false)
+	set_active(false)
 			
 func enable():
-	switch_process(true)
+	set_active(true)
 
-func switch_process(mode: bool):
+func set_active(mode: bool):
 	visible = mode
 		
 	if camera: camera.enabled = mode

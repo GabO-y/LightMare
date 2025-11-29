@@ -1,10 +1,11 @@
-[gd_scene load_steps=38 format=3 uid="uid://clp3coh5mf60x"]
+[gd_scene load_steps=39 format=3 uid="uid://clp3coh5mf60x"]
 
 [ext_resource type="Script" uid="uid://cyt1w5e4h0e4" path="res://Cenas/Player/player.gd" id="1_yjlpd"]
 [ext_resource type="Texture2D" uid="uid://cd4to1qh32730" path="res://Assets/Player/Animations/knockback_animaiton.png" id="3_5akqg"]
 [ext_resource type="Texture2D" uid="uid://8qj0ov3p7avy" path="res://Assets/Player/Animations/spr_player_assets.png" id="4_4o7c8"]
 [ext_resource type="Script" uid="uid://chamii6y3xgja" path="res://Cenas/Player/ghost_dash_effect.gd" id="4_6ihxy"]
 [ext_resource type="PackedScene" uid="uid://mcuhgoenbx6w" path="res://Cenas/Player/WearponsInfos/WearponsInfos.tscn" id="6_4o7c8"]
+[ext_resource type="AudioStream" uid="uid://csl4jnmpwav2c" path="res://Assets/Sound/dash_sound.mp3" id="7_bsnao"]
 [ext_resource type="PackedScene" uid="uid://df6rl28qpnweo" path="res://Cenas/LightArmor/ArmorManager/ArmorManager.tscn" id="7_xjvfg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8ryd"]
@@ -246,7 +247,7 @@ size = Vector2(11.5, 12.2222)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yjlpd"]
 
-[node name="Player" type="Node2D" node_paths=PackedStringArray("body", "anim", "hit_area", "hud", "label_coins", "armor_node", "armor_manager", "heart_conteiner") groups=["player"]]
+[node name="Player" type="Node2D" node_paths=PackedStringArray("body", "anim", "hit_area", "hud", "label_coins", "armor_node", "armor_manager", "dash_audio", "heart_conteiner") groups=["player"]]
 modulate = Color(1, 0.992157, 1, 1)
 script = ExtResource("1_yjlpd")
 body = NodePath("CharacterBody2D")
@@ -257,6 +258,7 @@ hud = NodePath("Hud")
 label_coins = NodePath("Hud/Coins")
 armor_node = NodePath("CharacterBody2D/Armors")
 armor_manager = NodePath("ArmorManager")
+dash_audio = NodePath("DashSound")
 heart_conteiner = NodePath("Hud/HBoxContainer")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." groups=["player"]]
@@ -319,6 +321,9 @@ layout_mode = 2
 
 [node name="ArmorManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("7_xjvfg")]
 player = NodePath("..")
+
+[node name="DashSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_bsnao")
 
 [connection signal="area_entered" from="CharacterBody2D/HitArea" to="." method="_kill_entered"]
 [connection signal="body_entered" from="CharacterBody2D/HitArea" to="." method="_on_hit_area_body_entered"]

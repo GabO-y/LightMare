@@ -12,6 +12,7 @@ func _ready() -> void:
 	anim.play(str(type))
 	is_move = true
 	
+
 func get_value() -> int:
 	
 	var value: int = 0
@@ -36,6 +37,8 @@ func get_type():
 			break
 			
 	return type
+	
+
 
 		
 	

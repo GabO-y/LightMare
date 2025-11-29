@@ -146,7 +146,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAEAAAAAAAEAAAABAAEAAAAAAAIAAAABAAE
 tile_set = SubResource("TileSet_dkjpy")
 
 [node name="GhostBoss" parent="." node_paths=PackedStringArray("segs_to_ghost_run") instance=ExtResource("3_kj66o")]
-position = Vector2(359, 128)
+position = Vector2(193, 37)
 segs_to_ghost_run = NodePath("../Exports/SegsToGhostRun")
 
 [node name="Camera2D" type="Camera2D" parent="."]

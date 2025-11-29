@@ -1,7 +1,8 @@
-[gd_scene load_steps=35 format=3 uid="uid://25uf0g24cox"]
+[gd_scene load_steps=36 format=3 uid="uid://25uf0g24cox"]
 
 [ext_resource type="Script" uid="uid://bmmrcde8nrn5d" path="res://Cenas/Enemy/Ghost/Ghost.gd" id="1_8icm7"]
 [ext_resource type="Texture2D" uid="uid://ba5o5r15gpsgu" path="res://Assets/Enemies/Fantasm/spr_ghost_tileset.png" id="2_ucp1k"]
+[ext_resource type="AudioStream" uid="uid://ntbk785g70rv" path="res://Assets/Sound/ghost_voice.mp3" id="3_636iv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_j8ghm"]
 atlas = ExtResource("2_ucp1k")
@@ -250,13 +251,14 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v7o7"]
 radius = 8.0
 
-[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "screen_notifier", "body", "anim", "bar")]
+[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "screen_notifier", "body", "anim", "bar", "gnaw_audio")]
 script = ExtResource("1_8icm7")
 area_hit = NodePath("CharacterBody2D/Areas/HitArea")
 screen_notifier = NodePath("CharacterBody2D/ToBoss/VisibleOnScreenNotifier2D")
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/Animation")
 bar = NodePath("CharacterBody2D/ProgressBar")
+gnaw_audio = NodePath("GwanAudio")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
 collision_layer = 0
@@ -299,5 +301,8 @@ debug_color = Color(0.999259, 0, 0.118767, 0.42)
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="CharacterBody2D/ToBoss"]
 scale = Vector2(0.6, 0.65)
+
+[node name="GwanAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_636iv")
 
 [connection signal="body_entered" from="CharacterBody2D/Areas/HitArea" to="." method="_player_enter_hit"]

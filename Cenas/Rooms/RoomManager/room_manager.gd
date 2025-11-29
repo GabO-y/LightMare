@@ -16,6 +16,8 @@ var last_ene_pos: Vector2
 
 var current_room: Room
 
+var sounds_to_play: Array[Dictionary] = []
+
 func _ready() -> void:
 		
 	for room in roomsNode.get_children():
@@ -42,6 +44,9 @@ func _ready() -> void:
 				current_room.finish = true
 			_clear_effects()
 	)
+	
+func _process(delta: float) -> void:
+	sound_ene_logic(delta)
 
 func get_doors(room: Room) -> Array[Door]:
 	var doors: Array[Door]
@@ -201,11 +206,14 @@ func reset():
 	for room in rooms: 
 		room.reset()
 		
+	sounds_to_play.clear()
+		
 	current_room.desable()
 	current_room = get_room("SafeRoom")
 	current_room.enable()
 	
 	current_room.finish = true
+	
 	
 signal changed_room(room: Room)
 
@@ -214,3 +222,64 @@ signal boss_finished
 func _input(event: InputEvent) -> void:
 	if Input.is_key_pressed(KEY_1):
 		boss_finished.emit()
+		
+func sound_ene_logic(delta):
+	
+	for key in sounds_to_play:
+		if key["timer"] >= key["duration"]:
+			
+			var path = str("EneSounds/" + key["ene"])
+			
+			var audio = get_node(path)
+			
+			if audio:
+				audio.play()
+			
+			key["timer"] = 0.0
+			key["duration"] = randf_range(3.0, 5.0)
+			
+		key["timer"] += delta
+
+func update_sound(enes: Array[Enemy]):
+	
+	var to_put = ["Ghost", "Zombie", "Skeleton"]
+	var ene_names: Array[String]
+	
+	for ene in enes:
+		if not ene.name in ene_names: 
+			ene_names.append(ene.name)
+			
+	sounds_to_play.clear()
+			
+	for ene_n in ene_names:
+		sounds_to_play.append(
+			{
+				"ene": ene_n,
+				"timer": 0.0,
+				"duration": 1.0
+			}
+		)
+		
+	return
+			
+	for put in to_put:
+		if not put in ene_names:
+			to_put.erase(put)
+			
+	sounds_to_play.clear()
+			
+	print(to_put)
+			
+	for put in to_put:
+		sounds_to_play.append(
+			{
+				"ene": put,
+				"timer": 0.0,
+				"duration": 1.0
+			}
+		)
+		
+		
+
+	 
+	

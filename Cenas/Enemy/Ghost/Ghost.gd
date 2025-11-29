@@ -23,6 +23,9 @@ var wait_duration = 1.2
 
 var special_attack = ""
 
+var voice_random_time: float = 1.0
+var voice_timer: float = 0.0
+
 enum State {
 	CHASE,
 	PREPARE_ATTACKING,
@@ -67,6 +70,8 @@ func _process(delta: float) -> void:
 			special_move()
 			
 	animation_logic()
+	
+	
 		
 	super._process(delta)
 	

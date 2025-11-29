@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://dsa5vodvq7v6n"]
+[gd_scene load_steps=6 format=3 uid="uid://dsa5vodvq7v6n"]
 
 [ext_resource type="Script" uid="uid://ncnlve3s8qvp" path="res://Cenas/Rooms/Door/door.gd" id="1_8re4r"]
+[ext_resource type="AudioStream" uid="uid://cynx2ee2mokb2" path="res://Assets/Sound/unlock_door.mp3" id="2_wkhpe"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6rchu"]
 radius = 7.0
@@ -14,11 +15,12 @@ gradient = SubResource("Gradient_8re4r")
 fill = 1
 fill_from = Vector2(0.48433, 0.464387)
 
-[node name="Door" type="Node2D" node_paths=PackedStringArray("area", "light")]
+[node name="Door" type="Node2D" node_paths=PackedStringArray("area", "light", "unlock_audio")]
 script = ExtResource("1_8re4r")
 area = NodePath("Area2D")
 is_locked = true
 light = NodePath("Area2D/PointLight2D")
+unlock_audio = NodePath("UnlockSound")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 
@@ -35,3 +37,8 @@ position = Vector2(-7.62939e-06, 0)
 scale = Vector2(2.96094, 3.02394)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_wkhpe")
+
+[node name="UnlockSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_wkhpe")
+volume_db = -5.0
+pitch_scale = 0.8

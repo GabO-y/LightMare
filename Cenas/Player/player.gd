@@ -13,6 +13,7 @@ class_name Player
 @export var label_coins: Label
 @export var armor_node: Node2D
 @export var armor_manager: ArmorManager
+@export var dash_audio: AudioStreamPlayer
 
 var original_modulate = self.modulate
 var modulate_timer: float = 0.0
@@ -153,6 +154,7 @@ func _physics_process(delta: float) -> void:
 func dash_logic(delta):
 				
 	if Input.is_action_just_pressed("dash") and not is_dashing and can_dash:
+		dash_audio.play()
 		can_dash = false
 		is_dashing = true
 		dash_dir = last_direction if dir == Vector2.ZERO else dir

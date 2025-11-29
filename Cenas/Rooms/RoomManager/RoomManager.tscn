@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0ntae4uqgnun"]
+[gd_scene load_steps=16 format=3 uid="uid://b0ntae4uqgnun"]
 
 [ext_resource type="Script" uid="uid://dfmjhfvr5f5kx" path="res://Cenas/Rooms/RoomManager/room_manager.gd" id="1_n2tco"]
 [ext_resource type="PackedScene" uid="uid://cirgr2k7g1tgi" path="res://Cenas/Rooms/SafeRoom/SafeRoom.tscn" id="2_rqem0"]
@@ -12,6 +12,9 @@
 [ext_resource type="PackedScene" uid="uid://exmsdws53g2l" path="res://Cenas/Rooms/BathRoom/BathRoom.tscn" id="8_2fcsa"]
 [ext_resource type="PackedScene" uid="uid://rj84xueqnc2o" path="res://Cenas/Rooms/DeskRoom/DeskRoom.tscn" id="9_oxtvy"]
 [ext_resource type="Script" uid="uid://dccrwr71sgn2w" path="res://Cenas/Round/RoundManager/round_managar.gd" id="12_oxtvy"]
+[ext_resource type="AudioStream" uid="uid://ntbk785g70rv" path="res://Assets/Sound/ghost_voice.mp3" id="13_m3jl5"]
+[ext_resource type="AudioStream" uid="uid://cowqvpvyqhw6i" path="res://Assets/Sound/zombie_sound.mp3" id="14_mx1pn"]
+[ext_resource type="AudioStream" uid="uid://clokbwbb82k82" path="res://Assets/Sound/skeleton_voice.mp3" id="15_ei4sg"]
 
 [node name="RoomManager" type="Node2D" node_paths=PackedStringArray("roomsNode", "item_manager", "key_manager", "round_manager")]
 script = ExtResource("1_n2tco")
@@ -64,3 +67,14 @@ room_manager = NodePath("../..")
 script = ExtResource("12_oxtvy")
 room_manager = NodePath("../..")
 metadata/_custom_type_script = "uid://dccrwr71sgn2w"
+
+[node name="EneSounds" type="Node2D" parent="."]
+
+[node name="Ghost" type="AudioStreamPlayer" parent="EneSounds"]
+stream = ExtResource("13_m3jl5")
+
+[node name="Zombie" type="AudioStreamPlayer" parent="EneSounds"]
+stream = ExtResource("14_mx1pn")
+
+[node name="Skeleton" type="AudioStreamPlayer" parent="EneSounds"]
+stream = ExtResource("15_ei4sg")

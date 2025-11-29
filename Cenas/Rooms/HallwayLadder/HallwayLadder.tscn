@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dx3muepll3ebb"]
+[gd_scene load_steps=14 format=4 uid="uid://dx3muepll3ebb"]
 
 [ext_resource type="Script" uid="uid://da4o2uqsfwbq0" path="res://Cenas/Rooms/HallwayLadder/hallway_ladder.gd" id="1_tgvn6"]
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/HallwayLadder/Map/bg_9.tscn" id="2_pr8dl"]
@@ -13,7 +13,6 @@
 [ext_resource type="PackedScene" path="res://Cenas/Rooms/HallwayLadder/Map/teto_0.tscn" id="11_cf3ly"]
 [ext_resource type="PackedScene" uid="uid://dsa5vodvq7v6n" path="res://Cenas/Rooms/Door/Door.tscn" id="12_0er1k"]
 [ext_resource type="PackedScene" uid="uid://csvmtodty8e68" path="res://Cenas/Enemy/Spawner/EnemySpawner.tscn" id="13_2uq8x"]
-[ext_resource type="Texture2D" uid="uid://cybjamgolcp2e" path="res://icon.svg" id="13_ep3q4"]
 
 [node name="HallwayLadder" type="Node2D" node_paths=PackedStringArray("camera")]
 script = ExtResource("1_tgvn6")
@@ -80,8 +79,3 @@ position = Vector2(109, 108)
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(103, 313)
 zoom = Vector2(2.5, 2.5)
-
-[node name="Icon" type="Sprite2D" parent="Camera2D"]
-visible = false
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("13_ep3q4")

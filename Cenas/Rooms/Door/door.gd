@@ -9,6 +9,7 @@ var goTo: Room #Room que ele deve ir
 @export var is_locked: bool			
 @export var light: PointLight2D 
 @export var open_door_sprite: TileMapLayer
+@export var unlock_audio: AudioStreamPlayer
 
 func _ready():
 	area.body_entered.connect(_player_enter)
@@ -54,7 +55,6 @@ func all_lock():
 			return
 			
 func open():
-		
 	is_locked = false
 	set_active(true)
 		

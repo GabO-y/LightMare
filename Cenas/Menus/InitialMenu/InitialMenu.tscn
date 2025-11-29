@@ -1,0 +1,191 @@
+[gd_scene load_steps=12 format=3 uid="uid://bobuc127k7o1n"]
+
+[ext_resource type="Script" uid="uid://dcvxcggal32qh" path="res://Cenas/Menus/InitialMenu/initial_menu.gd" id="1_0kox7"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="2_51tdx"]
+[ext_resource type="Texture2D" uid="uid://de7xav36r8sue" path="res://Assets/LightMare.jpg" id="2_jcdgm"]
+
+[sub_resource type="Animation" id="Animation_7yfuj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/TextureRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedFloat32Array(0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_51tdx"]
+resource_name = "start"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/TextureRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedFloat32Array(0.99359, 1), PackedFloat32Array(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_jcdgm"]
+resource_name = "start2"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimationPlayer/Control/TextureRect:texture:gradient:offsets")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedFloat32Array(0, 0), PackedFloat32Array(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7yfuj"]
+_data = {
+&"RESET": SubResource("Animation_7yfuj"),
+&"start": SubResource("Animation_51tdx"),
+&"start2": SubResource("Animation_jcdgm")
+}
+
+[sub_resource type="Gradient" id="Gradient_51tdx"]
+colors = PackedColorArray(0.137, 0.137, 0.137, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7yfuj"]
+gradient = SubResource("Gradient_51tdx")
+fill = 1
+fill_from = Vector2(0.495726, 0.509971)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7yfuj"]
+font = ExtResource("2_51tdx")
+font_size = 60
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_51tdx"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[node name="InitialMenu" type="CanvasLayer" node_paths=PackedStringArray("anim", "anim_control_node", "control_node")]
+script = ExtResource("1_0kox7")
+anim = NodePath("AnimationPlayer")
+anim_control_node = NodePath("AnimationPlayer/Control")
+control_node = NodePath("Control")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_7yfuj")
+}
+
+[node name="Control" type="Control" parent="AnimationPlayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="AnimationPlayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_7yfuj")
+
+[node name="Control" type="Control" parent="."]
+z_index = -1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_jcdgm")
+expand_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = -23.0
+offset_right = 66.0
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="Start" type="Label" parent="Control/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+text = "Jogar"
+label_settings = SubResource("LabelSettings_7yfuj")
+horizontal_alignment = 1
+
+[node name="Start" type="Button" parent="Control/VBoxContainer/Start"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.266
+anchor_right = 0.737
+anchor_bottom = 1.0
+offset_left = -38.112
+offset_right = 40.716
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
+
+[node name="Exit" type="Label" parent="Control/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+text = "Sair"
+label_settings = SubResource("LabelSettings_7yfuj")
+horizontal_alignment = 1
+
+[node name="Start2" type="Button" parent="Control/VBoxContainer/Exit"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31
+anchor_right = 0.69
+anchor_bottom = 1.0
+offset_left = -27.92
+offset_top = -3.0
+offset_right = 24.92
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
+
+[connection signal="button_down" from="Control/VBoxContainer/Start/Start" to="." method="_on_start_button_down"]

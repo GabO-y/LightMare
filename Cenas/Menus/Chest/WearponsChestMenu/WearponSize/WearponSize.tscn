@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://caveueqjt1kyd"]
+[gd_scene load_steps=8 format=3 uid="uid://caveueqjt1kyd"]
 
 [ext_resource type="Texture2D" uid="uid://b8w10j8p6lcri" path="res://Assets/LightArmor/Lantern/lantern_icon.png" id="1_hcmeu"]
-[ext_resource type="Script" uid="uid://b113485jhbhy8" path="res://Cenas/Interfaces/Chest/WearponsChestMenu/WearponSize/wearpon_size.gd" id="1_tfpph"]
-[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_tfpph"]
+[ext_resource type="Script" uid="uid://b113485jhbhy8" path="res://Cenas/Menus/Chest/WearponsChestMenu/WearponSize/wearpon_size.gd" id="1_tfpph"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="2_tfpph"]
+[ext_resource type="AudioStream" uid="uid://b8aq7128vm88f" path="res://Assets/Sound/get_new_armor.mp3" id="4_0q4xn"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_1nmvd"]
 font = ExtResource("2_tfpph")
@@ -19,7 +20,7 @@ corner_radius_top_right = 100
 corner_radius_bottom_right = 100
 corner_radius_bottom_left = 100
 
-[node name="WearponSizeItem" type="Control" node_paths=PackedStringArray("button", "name_label", "price_label")]
+[node name="WearponSizeItem" type="Control" node_paths=PackedStringArray("button", "name_label", "price_label", "audio")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -30,6 +31,7 @@ script = ExtResource("1_tfpph")
 button = NodePath("MarginContainer/Button")
 name_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Name")
 price_label = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Price")
+audio = NodePath("AudioStreamPlayer")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -80,3 +82,6 @@ size_flags_horizontal = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_tfpph")
 icon = ExtResource("1_hcmeu")
 expand_icon = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_0q4xn")

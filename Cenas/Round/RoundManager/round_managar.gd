@@ -90,7 +90,11 @@ func start_random_round():
 	
 	is_round_playing = true
 	
-	round.finished.connect(round_finished.emit)
+	round.finished.connect(
+		func():
+			round_finished.emit()	
+			room_manager.sounds_to_play.clear()
+	)
 	
 	round_finished.connect(
 		func():
@@ -256,9 +260,10 @@ class Horder extends Exe:
 				var ene = s.spawn(ene_name, level)
 				
 				_ene_spawned.append(ene)
+				ene._update_sound(_ene_spawned)
 				
 				ene.enemy_die.connect(
-					func(ene):
+					func(ene: Enemy):
 						Globals.player.current_ene_defalut += 1
 						Globals.enemies_defalted += 1
 						round._check_finish()

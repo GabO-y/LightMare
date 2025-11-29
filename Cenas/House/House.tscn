@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cxexjlkqbs61u"]
+[gd_scene load_steps=12 format=3 uid="uid://cxexjlkqbs61u"]
 
 [ext_resource type="Script" uid="uid://c3svmxorsnj3i" path="res://Cenas/House/house.gd" id="1_rmjq6"]
 [ext_resource type="PackedScene" uid="uid://clp3coh5mf60x" path="res://Cenas/Player/Player.tscn" id="2_iqu7b"]
@@ -8,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://f8wn68c73ads" path="res://Cenas/Menus/PauseMenu/MenuPause.tscn" id="7_6pdaa"]
 [ext_resource type="PackedScene" uid="uid://d0tbbrjem3h7v" path="res://Cenas/Menus/DieMenu/DieMenu.tscn" id="7_k5gof"]
 [ext_resource type="PackedScene" uid="uid://dsi5d8k7xbh8s" path="res://Cenas/Menus/FinishMenu/FinishMenu.tscn" id="8_k5gof"]
+[ext_resource type="PackedScene" uid="uid://bobuc127k7o1n" path="res://Cenas/Menus/InitialMenu/InitialMenu.tscn" id="9_1rbih"]
+[ext_resource type="AudioStream" uid="uid://dbirbkng1xhcs" path="res://Assets/Sound/main_tema.mp3" id="10_k1pxl"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iqu7b"]
 
-[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu", "finish_menu")]
+[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu", "finish_menu", "inital_menu")]
 script = ExtResource("1_rmjq6")
 player = NodePath("Player")
 room_manager = NodePath("RoomManager")
@@ -20,6 +22,7 @@ menu_manager = NodePath("MenuManager")
 initial_position = NodePath("InitialPosition")
 die_menu = NodePath("MenuManager/Menus/DieMenu")
 finish_menu = NodePath("MenuManager/Menus/FinishMenu")
+inital_menu = NodePath("MenuManager/Menus/InitialMenu")
 
 [node name="RoomManager" parent="." instance=ExtResource("4_6pdaa")]
 position = Vector2(0, -2)
@@ -50,6 +53,9 @@ manager = NodePath("../..")
 [node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
 manager = NodePath("../..")
 
+[node name="InitialMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("9_1rbih")]
+manager = NodePath("../..")
+
 [node name="Interatives" type="Node2D" parent="MenuManager"]
 
 [node name="ChestMenu" type="Node2D" parent="MenuManager/Interatives"]
@@ -70,3 +76,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="InitialPosition" type="Marker2D" parent="."]
 position = Vector2(64, 104)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_k1pxl")
+volume_db = -10.0
+autoplay = true
+parameters/looping = true

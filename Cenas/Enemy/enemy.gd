@@ -12,10 +12,13 @@ var heath_att: Attribute = Attribute.new()
 
 var atributes: Array[Attribute]
 
-@export var body: CharacterBody2D #Corpo do inimigo
+@export var body: CharacterBody2D 
 @export var anim: AnimatedSprite2D
 
-@export var bar: ProgressBar #Barra de progresso
+@export var bar: ProgressBar 
+
+@export var gnaw_audio: AudioStreamPlayer2D	
+var damage_audio: AudioStreamPlayer
 
 var spawn: Spawn
 
@@ -30,6 +33,8 @@ var knockback_force: float = 500.0
 var is_dead: bool = false
 var last_dir: Vector2
 
+var audio_timer: float = 0.0
+var audio_time_play: float = 1.0
 
 func _ready() -> void:
 	
@@ -47,8 +52,28 @@ func _ready() -> void:
 		bar.max_value = heath
 		bar.value = heath
 		
-func _process(_delta: float) -> void:
+	damage_audio = AudioStreamPlayer.new()
+	
+	add_child(damage_audio)
+	
+	damage_audio.stream = load("res://Assets/Sound/ene_damage.mp3")
+	damage_audio.pitch_scale = 1.5
+	damage_audio.volume_db = -10
+
+		
+func _process(delta: float) -> void:
+	
 	update_bar()
+	
+	if gnaw_audio:
+	
+		if audio_timer >= audio_time_play:
+			
+			audio_time_play = randf_range(2.0, 3.0)
+			gnaw_audio.play()
+			audio_timer = 0.0
+			
+		audio_timer += delta
 	
 func update_bar():
 	if bar == null:
@@ -82,6 +107,8 @@ func take_damage(damage: float):
 	
 	heath -= damage
 	
+	damage_audio.play()
+
 	drop_damage_label(damage)
 	
 	if heath <= 0 and !is_dead:
@@ -92,6 +119,9 @@ func take_damage(damage: float):
 func knockback_logic():
 	var knockback_dir = (body.global_position - player.player_body.global_position).normalized()
 	body.velocity = knockback_dir * knockback_force
+	
+func _update_sound(enes: Array[Enemy]):
+	spawn.room.manager.update_sound(enes)
 	
 func die():
 	
@@ -168,6 +198,7 @@ func default_setup():
 	pass
 	
 signal enemy_die(ene: Enemy)
+signal tk_damage
 
 class Attribute:
 	

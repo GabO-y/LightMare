@@ -10,8 +10,8 @@ func _process(delta: float) -> void:
 			shower_particles.emitting = !shower_particles.emitting
 			shower_light.visible = shower_particles.emitting
 
-func switch_process(mode: bool):
-	super.switch_process(mode)
+func set_active(mode: bool):
+	super.set_active(mode)
 	shower_particles.emitting = false
 	shower_light.visible = false
 

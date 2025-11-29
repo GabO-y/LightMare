@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://d0tbbrjem3h7v"]
 
 [ext_resource type="Script" uid="uid://bmfp80wo0gt6p" path="res://Cenas/Menus/DieMenu/die_menu.gd" id="1_fivf0"]
-[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="2_ijqvd"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="2_ijqvd"]
 
 [sub_resource type="Animation" id="Animation_fivf0"]
 resource_name = "1"

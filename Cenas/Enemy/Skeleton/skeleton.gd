@@ -29,6 +29,8 @@ func _ready() -> void:
 	current_state = State.PREPARE_ATTACK
 	setup_prepere_attack()
 	speed = 80
+	
+	super._ready()
 
 func _process(delta: float) -> void:
 	animation_logic()
@@ -94,6 +96,7 @@ func attack():
 	
 	b.global_position = body.global_position
 	
+	b.speed = 4
 	b.dir = dir_to_player()
 	b.rotation = b.dir.angle()
 	b.start()
@@ -165,13 +168,14 @@ func set_level(lv: int, what):
 	level = lv
 	
 func default_setup():
+	
 	atributes.append_array([
 		damage_att, speed_att, heath_att
 	])
 	
 	damage_att.setup(1, 1,"value")
 	speed_att.setup(100, 150, "value")
-	heath_att.setup(5, 15, "value")
+	heath_att.setup(3, 15, "value")
 	
 	set_level(9, "max")
 

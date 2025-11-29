@@ -6,8 +6,13 @@ class_name WearponSizeItem
 @export var name_label: Label
 @export var price_label: Label
 
+@export var audio: AudioStreamPlayer
+
 var armor_manager: ArmorManager
 var armor_menu: ArmorChestMenu
+
+var is_to_play: bool = true
+
 
 func select():
 	
@@ -35,5 +40,10 @@ func setup_button():
 	
 func _press_button():
 	if armor_manager.try_buy(name_label.text):
+		
+		if is_to_play and name_label.text != "Lantern":
+			audio.play()
+			is_to_play = false
+			
 		armor_menu._update(name_label.text)
 		

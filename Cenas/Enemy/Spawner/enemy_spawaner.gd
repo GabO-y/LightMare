@@ -114,7 +114,7 @@ func _on_timer_to_spawn_a_enemy() -> void:
 		timer.stop()
 
 func spawn(ene_name: String, level: int) -> Enemy:
-	
+
 	var path = str("res://Cenas/Enemy/", ene_name, "/", ene_name, ".tscn")
 	var ene = load(path).instantiate() as Enemy
 	
@@ -137,7 +137,6 @@ func spawn(ene_name: String, level: int) -> Enemy:
 	
 	return ene
 	
-
 func get_random_circle_point() -> Vector2:
 	
 	var circle: CircleShape2D
@@ -148,6 +147,5 @@ func get_random_circle_point() -> Vector2:
 	
 	var r_ = circle.radius * sqrt(randf())
 	var t_ = randi_range(0, 360)
-	
 	
 	return Vector2(r_ * cos(t_), r_ * sin(t_)) + global_position

@@ -10,6 +10,7 @@ class_name House
 
 @export var die_menu: DieMenu
 @export var finish_menu: FinishMenu
+@export var inital_menu: InitialMenu
 
 var can_reset: bool = false
 
@@ -45,6 +46,11 @@ func _ready() -> void:
 			
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
+	player.set_active(false)
+
+	await inital_menu.start_play
+	
+	player.set_active(true)
 	start_time = Time.get_ticks_msec()
 
 func _process(delta: float) -> void:

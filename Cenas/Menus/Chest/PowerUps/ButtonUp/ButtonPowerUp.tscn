@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://0tbwimurwf3n" path="res://icon_3.png" id="1_h0xgu"]
 [ext_resource type="Script" uid="uid://dx80nk8k3g0cm" path="res://Cenas/Menus/Chest/PowerUps/ButtonUp/button_power_up.gd" id="2_2m40k"]
-[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Pixel_Font/Pixel Game.otf" id="3_c88e1"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="3_c88e1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_ncvaf"]
 font = ExtResource("3_c88e1")

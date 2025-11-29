@@ -85,7 +85,8 @@ func finish_await():
 func _open_door_and_wait():
 	
 	visible = false
-	
+
+	door1.unlock_audio.play()
 	door1.open()
 	
 	is_await_moment = true

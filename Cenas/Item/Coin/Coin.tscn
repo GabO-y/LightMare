@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://dxyu7xpokb642"]
+[gd_scene load_steps=30 format=3 uid="uid://dxyu7xpokb642"]
 
 [ext_resource type="Script" uid="uid://c7cyn1lxvwq5j" path="res://Cenas/Item/Coin/coin.gd" id="1_25g7a"]
 [ext_resource type="Texture2D" uid="uid://d2fqqaevymt3v" path="res://Assets/Objects/Coins/all_coins_and_boot.png" id="1_cnj4g"]
+[ext_resource type="AudioStream" uid="uid://dxiantgjacb8" path="res://Assets/Sound/collect_coin.mp3" id="3_y64d1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnj4g"]
 atlas = ExtResource("1_cnj4g")
@@ -197,10 +198,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_cnj4g"]
 radius = 4.12311
 
-[node name="Coin" type="Node2D" node_paths=PackedStringArray("anim", "area")]
+[node name="Coin" type="Node2D" node_paths=PackedStringArray("anim", "area", "audio")]
 script = ExtResource("1_25g7a")
 anim = NodePath("AnimatedSprite2D")
 area = NodePath("Area2D")
+audio = NodePath("Area2D/AudioStreamPlayer")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
@@ -211,3 +213,6 @@ animation = &"4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_cnj4g")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="Area2D"]
+stream = ExtResource("3_y64d1")
