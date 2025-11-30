@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://b0ntae4uqgnun"]
+[gd_scene load_steps=17 format=3 uid="uid://b0ntae4uqgnun"]
 
 [ext_resource type="Script" uid="uid://dfmjhfvr5f5kx" path="res://Cenas/Rooms/RoomManager/room_manager.gd" id="1_n2tco"]
 [ext_resource type="PackedScene" uid="uid://cirgr2k7g1tgi" path="res://Cenas/Rooms/SafeRoom/SafeRoom.tscn" id="2_rqem0"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://oe80bdy752yx" path="res://Cenas/Rooms/ToyLibrary/ToyLibrary.tscn" id="7_sq71m"]
 [ext_resource type="PackedScene" uid="uid://exmsdws53g2l" path="res://Cenas/Rooms/BathRoom/BathRoom.tscn" id="8_2fcsa"]
 [ext_resource type="PackedScene" uid="uid://rj84xueqnc2o" path="res://Cenas/Rooms/DeskRoom/DeskRoom.tscn" id="9_oxtvy"]
+[ext_resource type="PackedScene" uid="uid://bykulbxi0xxnq" path="res://Cenas/Rooms/TutorialRoom/TutorialRoom.tscn" id="10_gc0uj"]
 [ext_resource type="Script" uid="uid://dccrwr71sgn2w" path="res://Cenas/Round/RoundManager/round_managar.gd" id="12_oxtvy"]
 [ext_resource type="AudioStream" uid="uid://ntbk785g70rv" path="res://Assets/Sound/ghost_voice.mp3" id="13_m3jl5"]
 [ext_resource type="AudioStream" uid="uid://cowqvpvyqhw6i" path="res://Assets/Sound/zombie_sound.mp3" id="14_mx1pn"]
@@ -26,6 +27,7 @@ metadata/_edit_vertical_guides_ = [-149.0, -529.0]
 metadata/_edit_horizontal_guides_ = [135.0]
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.258125, 0.1475, 0.59, 1)
 
 [node name="Rooms" type="Node2D" parent="."]
@@ -52,6 +54,9 @@ visible = false
 visible = false
 
 [node name="GhostBossRoom" parent="Rooms" instance=ExtResource("6_ow6w0")]
+visible = false
+
+[node name="TutorialRoom" parent="Rooms" instance=ExtResource("10_gc0uj")]
 visible = false
 
 [node name="Managers" type="Node2D" parent="."]

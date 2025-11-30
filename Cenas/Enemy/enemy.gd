@@ -107,7 +107,8 @@ func take_damage(damage: float):
 	
 	heath -= damage
 	
-	damage_audio.play()
+	if damage_audio:
+		damage_audio.play()
 
 	drop_damage_label(damage)
 	
@@ -184,7 +185,7 @@ func _drop_damage_animation(t: float, curve: MyCurve, label: Label):
 	label.global_position = p
 	
 func dir_to_player() -> Vector2:
-	return body.global_position.direction_to(Globals.player_pos())
+	return body.global_position.direction_to(Globals.player_pos()).normalized()
 	
 func dist_to_player() -> float: 
 	return body.global_position.distance_to(Globals.player_pos())

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://f8wn68c73ads"]
+[gd_scene load_steps=3 format=3 uid="uid://f8wn68c73ads"]
 
 [ext_resource type="Script" uid="uid://bescn3vpqqiql" path="res://Cenas/Menus/PauseMenu/menu_pause.gd" id="1_bo35q"]
+[ext_resource type="PackedScene" uid="uid://ciq4xboriaopc" path="res://Cenas/Menus/SoundIconMenu/SoundIconMenu.tscn" id="2_amuvb"]
 
 [node name="MenuPause" type="CanvasLayer"]
 script = ExtResource("1_bo35q")
@@ -37,6 +38,8 @@ text = "Finalizar Partida"
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "Sair do Jogo"
+
+[node name="SoundIconMenu" parent="." instance=ExtResource("2_amuvb")]
 
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Resume" to="." method="_on_button_pressed"]
 [connection signal="button_down" from="MarginContainer/VBoxContainer/FinishRound" to="." method="_on_finish_round_button_down"]

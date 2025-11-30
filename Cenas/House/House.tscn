@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cxexjlkqbs61u"]
+[gd_scene load_steps=13 format=3 uid="uid://cxexjlkqbs61u"]
 
 [ext_resource type="Script" uid="uid://c3svmxorsnj3i" path="res://Cenas/House/house.gd" id="1_rmjq6"]
 [ext_resource type="PackedScene" uid="uid://clp3coh5mf60x" path="res://Cenas/Player/Player.tscn" id="2_iqu7b"]
@@ -10,10 +10,11 @@
 [ext_resource type="PackedScene" uid="uid://dsi5d8k7xbh8s" path="res://Cenas/Menus/FinishMenu/FinishMenu.tscn" id="8_k5gof"]
 [ext_resource type="PackedScene" uid="uid://bobuc127k7o1n" path="res://Cenas/Menus/InitialMenu/InitialMenu.tscn" id="9_1rbih"]
 [ext_resource type="AudioStream" uid="uid://dbirbkng1xhcs" path="res://Assets/Sound/main_tema.mp3" id="10_k1pxl"]
+[ext_resource type="PackedScene" uid="uid://dx3nt37r4u3du" path="res://Cenas/Menus/Tutorial/Tutorial.tscn" id="10_knsum"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iqu7b"]
 
-[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu", "finish_menu", "inital_menu")]
+[node name="House" type="Node2D" node_paths=PackedStringArray("player", "room_manager", "camera", "menu_manager", "initial_position", "die_menu", "finish_menu", "inital_menu", "tutorial_menu")]
 script = ExtResource("1_rmjq6")
 player = NodePath("Player")
 room_manager = NodePath("RoomManager")
@@ -23,12 +24,13 @@ initial_position = NodePath("InitialPosition")
 die_menu = NodePath("MenuManager/Menus/DieMenu")
 finish_menu = NodePath("MenuManager/Menus/FinishMenu")
 inital_menu = NodePath("MenuManager/Menus/InitialMenu")
+tutorial_menu = NodePath("MenuManager/Menus/Tutorial")
 
 [node name="RoomManager" parent="." instance=ExtResource("4_6pdaa")]
 position = Vector2(0, -2)
 
 [node name="Player" parent="." instance=ExtResource("2_iqu7b")]
-position = Vector2(59, 105)
+position = Vector2(297, 79)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 enabled = false
@@ -38,25 +40,35 @@ enabled = false
 [node name="Menus" type="Node2D" parent="MenuManager"]
 
 [node name="DieMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("house", "manager") instance=ExtResource("7_k5gof")]
+visible = false
 house = NodePath("../../..")
 manager = NodePath("../..")
 
 [node name="FinishMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("8_k5gof")]
+visible = false
+manager = NodePath("../..")
+
+[node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
+visible = false
+manager = NodePath("../..")
+
+[node name="Tutorial" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("10_knsum")]
+visible = false
 manager = NodePath("../..")
 
 [node name="ChestMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("popup", "area", "player", "manager") instance=ExtResource("7_1rbih")]
+visible = false
 popup = NodePath("../../Interatives/ChestMenu/PopUp")
 area = NodePath("../../Interatives/ChestMenu/AreaBear")
 player = NodePath("../../../Player")
 manager = NodePath("../..")
 
-[node name="MenuPause" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("7_6pdaa")]
-manager = NodePath("../..")
-
 [node name="InitialMenu" parent="MenuManager/Menus" node_paths=PackedStringArray("manager") instance=ExtResource("9_1rbih")]
+visible = false
 manager = NodePath("../..")
 
 [node name="Interatives" type="Node2D" parent="MenuManager"]
+visible = false
 
 [node name="ChestMenu" type="Node2D" parent="MenuManager/Interatives"]
 

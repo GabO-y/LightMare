@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://ciq4xboriaopc"]
+
+[ext_resource type="Script" uid="uid://c1w4sm302jq7" path="res://Cenas/Menus/SoundIconMenu/sound_icon_menu.gd" id="1_q2lb1"]
+[ext_resource type="Texture2D" uid="uid://bme1ainilf1uo" path="res://Assets/Objects/sound_icon1.png" id="2_vta6q"]
+[ext_resource type="Texture2D" uid="uid://bkpdlckegspok" path="res://Assets/Objects/sound_icon2.png" id="3_q8hjm"]
+
+[node name="SoundIconMenu" type="Control" node_paths=PackedStringArray("on", "off")]
+layout_mode = 3
+anchor_left = 0.951
+anchor_top = 0.92
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -0.552002
+offset_top = -0.160034
+grow_horizontal = 0
+grow_vertical = 0
+script = ExtResource("1_q2lb1")
+on = NodePath("On")
+off = NodePath("Off")
+metadata/_edit_use_anchors_ = true
+
+[node name="On" type="TextureRect" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -49.0
+offset_right = -12.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_vta6q")
+
+[node name="Off" type="TextureRect" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -52.0
+offset_top = -49.0
+offset_right = -12.0
+offset_bottom = -9.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("3_q8hjm")
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -6.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[connection signal="button_down" from="Button" to="." method="_on_toggle_button_down"]

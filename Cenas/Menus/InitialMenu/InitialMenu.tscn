@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://bobuc127k7o1n"]
+[gd_scene load_steps=13 format=3 uid="uid://bobuc127k7o1n"]
 
 [ext_resource type="Script" uid="uid://dcvxcggal32qh" path="res://Cenas/Menus/InitialMenu/initial_menu.gd" id="1_0kox7"]
 [ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="2_51tdx"]
 [ext_resource type="Texture2D" uid="uid://de7xav36r8sue" path="res://Assets/LightMare.jpg" id="2_jcdgm"]
+[ext_resource type="PackedScene" uid="uid://ciq4xboriaopc" path="res://Cenas/Menus/SoundIconMenu/SoundIconMenu.tscn" id="4_jcdgm"]
 
 [sub_resource type="Animation" id="Animation_7yfuj"]
 length = 0.001
@@ -164,6 +165,30 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
 
+[node name="Tutorial" type="Label" parent="Control/VBoxContainer"]
+z_index = 1
+layout_mode = 2
+text = "Tutorial"
+label_settings = SubResource("LabelSettings_7yfuj")
+horizontal_alignment = 1
+
+[node name="Tutorial" type="Button" parent="Control/VBoxContainer/Tutorial"]
+z_index = -1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.31
+anchor_right = 0.69
+anchor_bottom = 1.0
+offset_left = -71.07
+offset_top = -3.0
+offset_right = 70.07
+offset_bottom = -3.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
+
 [node name="Exit" type="Label" parent="Control/VBoxContainer"]
 z_index = 1
 layout_mode = 2
@@ -188,4 +213,7 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
 
+[node name="SoundIconMenu" parent="." instance=ExtResource("4_jcdgm")]
+
 [connection signal="button_down" from="Control/VBoxContainer/Start/Start" to="." method="_on_start_button_down"]
+[connection signal="button_down" from="Control/VBoxContainer/Tutorial/Tutorial" to="." method="_on_tutorial_button_down"]

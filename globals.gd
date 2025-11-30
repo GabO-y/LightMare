@@ -28,6 +28,8 @@ var only_use_key: bool = false
 
 var ene_to_default: int = 0
 
+var is_mute: bool = false
+
 # mapa de qual nova diagonal ele deve ir dependendo de onde bate
 var dir_possibles_crash_wall = {
 		Vector2( 1,   1)  : {"right" : Vector2(-1,  1), "down" : Vector2( 1, -1)},
@@ -35,7 +37,7 @@ var dir_possibles_crash_wall = {
 		Vector2(-1,   1)  : {"left"  : Vector2( 1,  1), "down" : Vector2(-1, -1)},
 		Vector2(-1,  -1)  : {"left"  : Vector2( 1, -1), "up"   : Vector2(-1,  1)}
 	}
-		
+
 var layers = {
 	"player" : 1 << 0,
 	"enemy" : 1 << 1,

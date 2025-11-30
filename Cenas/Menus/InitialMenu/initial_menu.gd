@@ -30,3 +30,10 @@ func set_visible_control(control_node: Control, mode: bool):
 	control_node.visible = mode
 	
 signal start_play
+
+
+func _on_tutorial_button_down() -> void:
+	for menu in Globals.house.menu_manager.menus:
+		menu.set_active(false)
+		
+	Globals.house.tutorial_menu.set_active(true)

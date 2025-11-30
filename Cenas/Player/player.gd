@@ -69,11 +69,11 @@ func _ready() -> void:
 	
 	hearts = max_heart
 	
-	hit_area.body_exited.connect(_exit_enemie)
-	
+	#hit_area.body_exited.connect(_exit_enemie)
+	#
 	armor.toggle_activate()
 	
-	body.collision_mask |= Globals.layers["current_wall"]
+	#body.collision_mask |= Globals.layers["current_wall"]
 		
 	update_label_coins()
 	update_hearts()
@@ -94,7 +94,6 @@ func set_armor(armor: LightArmor):
 	armor_node.add_child(armor)
 	self.armor = armor
 		
-
 func _spend_coins(amount: int):
 	
 	print("a")
@@ -118,11 +117,11 @@ func _process(delta: float) -> void:
 	armor.global_position = body.global_position
 	
 	
-func _exit_enemie(body):
-	#pra pegar o corpo e verificar se é enemie
-	if !(body.get_parent() is Enemy): return
-	var ene = body.get_parent()
-	enemies_touch.erase(ene)
+#func _exit_enemie(body):
+	##pra pegar o corpo e verificar se é enemie
+	#if !(body.get_parent() is Enemy): return
+	#var ene = body.get_parent()
+	#enemies_touch.erase(ene)
 		
 func _physics_process(delta: float) -> void:
 	
@@ -158,10 +157,12 @@ func dash_logic(delta):
 		can_dash = false
 		is_dashing = true
 		dash_dir = last_direction if dir == Vector2.ZERO else dir
+		set_collision_ene(false)
 		
 	if is_dashing:
 		dash_timer += delta
 		if dash_timer >= dash_duration:
+			set_collision_ene(true)
 			dash_timer = 0
 			is_dashing = false
 			
@@ -257,12 +258,11 @@ func _unlocked_doors():
 	
 func take_damage(damage: int):
 	
-	if is_invencible: return
+	if is_invencible or is_dashing: return
 	is_invencible = true
 	
 	if not can_die: return
 
-	
 	hearts -= damage;
 	update_hearts()
 	
@@ -321,7 +321,7 @@ func to_original_color():
 	
 func take_knockback(direction: Vector2, force: int):
 	
-	if is_invencible: return
+	if is_invencible or is_dashing: return
 		
 	is_on_knockback = true
 	knockback_dir = direction
@@ -416,6 +416,9 @@ func set_active(mode: bool):
 		
 	armor.can_active = mode
 
+func set_collision_ene(mode: bool):
+	var mask = Globals.layers["enemy"] | Globals.layers["current_wall"] | Globals.layers["ghost"] if mode else Globals.layers["current_wall"]
+	body.collision_mask = mask
 	
 signal _die
 

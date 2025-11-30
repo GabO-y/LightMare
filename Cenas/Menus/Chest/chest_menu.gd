@@ -33,11 +33,12 @@ var label_coin_pos: Vector2
 
 func _ready() -> void:
 	
-	player.armor_manager.chess_menu = self
-	
+
 	menu.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	await get_tree().process_frame
+	
+	Globals.player.armor_manager.chess_menu = self
 	
 	set_active(false)
 	hide_pop_up()

@@ -250,6 +250,7 @@ size = Vector2(11.5, 12.2222)
 [node name="Player" type="Node2D" node_paths=PackedStringArray("body", "anim", "hit_area", "hud", "label_coins", "armor_node", "armor_manager", "dash_audio", "heart_conteiner") groups=["player"]]
 modulate = Color(1, 0.992157, 1, 1)
 script = ExtResource("1_yjlpd")
+can_die = false
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/AnimatedSprite2D")
 hit_area = NodePath("CharacterBody2D/HitArea")

@@ -2,7 +2,7 @@ extends Boss
 class_name GhostBoss
 
 enum State {CHASING, SPECIAL, STOPED, PREPERE_ATTACK, DYING}
-enum Specials {GHOSTS_RUN, CRASH_WALL}
+enum Specials {GHOSTS_RUN, CRASH_WALL, SHOOTING}
 
 var current_state: State
 var current_special: Specials
@@ -63,6 +63,15 @@ var coldown_to_drop: float = 0.1
 
 var is_flicking: bool = false
 
+var shoot_dirs: Array[Vector2]
+var shoot_speed: int = 3
+var total_shoot: int = 10
+var shoot_timer: float = 0.0
+var shoot_coldown: float = 0.5
+var shoot_type: int = 1
+
+var specials_queue: Array[Specials] = [Specials.GHOSTS_RUN, Specials.SHOOTING]
+
 func _ready() -> void:
 		
 	z_index = 2
@@ -94,8 +103,7 @@ func _physics_process(delta: float) -> void:
 			if dist_to_player() > 40 and not is_laugh_animation:
 				current_state = State.CHASING
 		State.SPECIAL:
-			
-			special_move()
+			special_move(delta)
 			
 		State.STOPED:
 			pass
@@ -122,12 +130,14 @@ func _physics_process(delta: float) -> void:
 	if timer_special >= special_coldown and not is_on_special:
 		start_special()
 		
-func special_move():	
+func special_move(delta):	
 	match current_special:
 		Specials.GHOSTS_RUN:
 			ghost_run_move()
 		Specials.CRASH_WALL:
 			pass
+		Specials.SHOOTING:
+			shooting_special_move(delta)
 
 ### Ghosts Run ###
 
@@ -141,6 +151,45 @@ func setup_ghost_run():
 	#area_to_ghost_run.collision_mask = Globals.layers["boss"]
 	
 	speed = 150
+	
+func setup_shooting():
+	speed = 0
+	shoot_type = [1, 2].pick_random()
+
+func shoot(dir: Vector2, speed_to_shoot: int):
+	var b = load("res://Cenas/Objects/Bullet/Bullet.tscn").instantiate() as Bullet
+	
+	add_child(b)
+	b.global_position = body.global_position
+	
+	var sprite = Sprite2D.new()
+	sprite.texture = load("res://Assets/Objects/Bullet/GhostBossBullet.png")
+	sprite.rotation = dir.angle()
+	sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	
+	var area = Area2D.new()
+	
+	var coll = CollisionShape2D.new()
+	coll.shape = CircleShape2D.new()
+	
+	coll.shape.radius = 4
+	
+	area.add_child(coll)
+	area.body_entered.connect(
+		func(body):
+			var player = body.get_parent() as Player
+			if not player: return
+			player.take_knockback(dir, 20)
+			player.take_damage(1)
+	)
+
+	
+	b.add_child(area)
+	b.add_child(sprite)
+	b.dir = dir
+	b.speed = speed_to_shoot
+	b.start()
+	
 	
 func ghost_run_move():
 				
@@ -158,6 +207,36 @@ func ghost_run_move():
 		
 	chase_move()
 	last_dir = dir
+	
+func shooting_special_move(delta):
+	
+	var t = 0.5
+
+	if shoot_type == 1:
+	
+		if shoot_timer >= shoot_coldown:
+			shoot_timer = 0.0
+			shoot(dir_to_player(), 4)
+			total_shoot -= 1
+			
+		shoot_timer += delta
+		
+	elif shoot_type == 2:
+		
+		var dirs: Array[Vector2]
+		
+		for i in range(total_shoot):
+			dirs.append(dir_to_player().rotated(randf_range(-t, t)))
+			
+		while total_shoot > 0:
+			shoot(dirs.pop_front(), 2)
+			total_shoot -= 1
+
+	dir = dir_to_player()
+
+	if total_shoot <= 0:
+			setup()
+			return
 	
 func set_ghost_to_1(ghost: Ghost):
 	ghost.type_special = 1
@@ -332,6 +411,8 @@ func setup():
 	speed = 80
 	is_toward_ghost_run = false
 	damage_bar.visible = true
+	total_shoot = 10
+	shoot_timer = 0.0
 
 func reset():
 	segs_to_ghost_run = room.segs_to_ghost_room
@@ -405,16 +486,22 @@ func start_special():
 	current_state = State.SPECIAL
 	
 	current_special = get_random_special()
-		
+	
 	match current_special:
 		Specials.GHOSTS_RUN:
 			setup_ghost_run()
 		Specials.CRASH_WALL:
 			pass
+		Specials.SHOOTING:
+			setup_shooting()
 			
 func get_random_special() -> Specials:
 	# Logica para ir um ataque por vez
-	return Specials.GHOSTS_RUN
+	
+	if specials_queue.is_empty():
+		specials_queue = [Specials.GHOSTS_RUN, Specials.SHOOTING]
+	
+	return specials_queue.pop_at(randi_range(0, specials_queue.size() - 1))
 
 ########################
 
@@ -438,7 +525,6 @@ func _on_slash_area_player_body_exited(body: Node2D) -> void:
 	if not wait_attack_finish:
 		current_state = State.CHASING
 		
-
 # quando o fantasma esta correndo, se ele atravessar vc, vc toma dano
 func _on_area_attack_to_ghosts_run_player_body_entered(body: Node2D) -> void:	
 	var player = body.get_parent() as Player
@@ -447,7 +533,7 @@ func _on_area_attack_to_ghosts_run_player_body_entered(body: Node2D) -> void:
 	if is_dying or not is_active: return
 	
 	player.take_knockback(dir, 20)
-	player.take_damage(damage)
+	player.take_damage(1)
 	
 func _ghost_out(me):
 							
@@ -509,3 +595,15 @@ func color_to_normal():
 		
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	_ghost_out(self)
+	
+func default_setup():
+	
+	atributes.append_array([
+		heath_att, speed_att, damage_att
+	])
+				
+	speed_att.setup(80, 80, "value")
+	damage_att.setup(2, 2, "value")
+	heath_att.setup(100, 100, "value")
+	
+	set_level(9, "max")
