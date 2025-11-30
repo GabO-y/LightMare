@@ -161,6 +161,7 @@ particles = [NodePath("CPUParticles2D"), NodePath("CPUParticles2D2"), NodePath("
 anim = NodePath("AnimationPlayer")
 labels_node = NodePath("AnimationPlayer/Labels")
 time_label = NodePath("AnimationPlayer/Labels/Time")
+need_focus = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -186,6 +187,7 @@ texture = SubResource("GradientTexture2D_dqdgq")
 
 [node name="Parabens" type="Label" parent="AnimationPlayer/Labels"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = 460.0
 offset_top = 36.0
 offset_right = 667.0
@@ -195,6 +197,7 @@ label_settings = SubResource("LabelSettings_8dslt")
 
 [node name="TempJogo" type="Label" parent="AnimationPlayer/Labels"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = 697.0
 offset_top = 167.0
 offset_right = 1012.0
@@ -204,6 +207,7 @@ label_settings = SubResource("LabelSettings_lsw61")
 
 [node name="Time" type="Label" parent="AnimationPlayer/Labels"]
 modulate = Color(1, 1, 1, 0)
+layout_mode = 0
 offset_left = 934.0
 offset_top = 166.0
 offset_right = 1249.0

@@ -33,7 +33,6 @@ var label_coin_pos: Vector2
 
 func _ready() -> void:
 	
-
 	menu.process_mode = Node.PROCESS_MODE_ALWAYS
 
 	await get_tree().process_frame
@@ -147,7 +146,6 @@ func set_active(mode: bool):
 	super.set_active(mode)
 	set_visible_menu(mode)
 	update_label_coins()
-	$MarginContainer/VBoxMain/Options/Wearpons.grab_focus()
 
 func _buy_item(item: ChestItem):
 	

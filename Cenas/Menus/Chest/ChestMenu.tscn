@@ -11,7 +11,7 @@
 font = ExtResource("4_qanw0")
 font_size = 40
 
-[node name="ChestMenu" type="CanvasLayer" node_paths=PackedStringArray("armor_menu", "menu", "tabCont", "inssu_coins_point", "coins_label")]
+[node name="ChestMenu" type="CanvasLayer" node_paths=PackedStringArray("armor_menu", "menu", "tabCont", "inssu_coins_point", "coins_label", "focus_button")]
 process_mode = 3
 script = ExtResource("1_qanw0")
 armor_menu = NodePath("MarginContainer/VBoxMain/TabContainer/WearponChestMenu")
@@ -19,6 +19,7 @@ menu = NodePath("MarginContainer")
 tabCont = NodePath("MarginContainer/VBoxMain/TabContainer")
 inssu_coins_point = NodePath("InsufficientCoinsPoint")
 coins_label = NodePath("MarginContainer/VBoxMain/Options/Control/Points")
+focus_button = NodePath("MarginContainer/VBoxMain/Options/Wearpons")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -83,11 +84,10 @@ theme_override_constants/separation = 20
 [node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxMain"]
 layout_mode = 2
 size_flags_vertical = 3
-current_tab = 1
+current_tab = 0
 tabs_visible = false
 
 [node name="WearponChestMenu" parent="MarginContainer/VBoxMain/TabContainer" node_paths=PackedStringArray("chess_menu") instance=ExtResource("4_nnnol")]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -95,6 +95,7 @@ chess_menu = NodePath("../../../..")
 metadata/_tab_index = 0
 
 [node name="PowerUpSize" parent="MarginContainer/VBoxMain/TabContainer" node_paths=PackedStringArray("chest_menu") instance=ExtResource("6_k4u0l")]
+visible = false
 layout_mode = 2
 chest_menu = NodePath("../../../..")
 metadata/_tab_index = 1

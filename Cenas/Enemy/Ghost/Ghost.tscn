@@ -251,13 +251,12 @@ radius = 5.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_5v7o7"]
 radius = 8.0
 
-[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "screen_notifier", "body", "anim", "bar", "gnaw_audio")]
+[node name="Ghost" type="Node2D" node_paths=PackedStringArray("area_hit", "screen_notifier", "body", "anim", "gnaw_audio")]
 script = ExtResource("1_8icm7")
 area_hit = NodePath("CharacterBody2D/Areas/HitArea")
 screen_notifier = NodePath("CharacterBody2D/ToBoss/VisibleOnScreenNotifier2D")
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/Animation")
-bar = NodePath("CharacterBody2D/ProgressBar")
 gnaw_audio = NodePath("GwanAudio")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="."]
@@ -271,20 +270,6 @@ animation = &"type_4"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
 shape = SubResource("CircleShape2D_6p1tk")
-
-[node name="ProgressBar" type="ProgressBar" parent="CharacterBody2D"]
-modulate = Color(0, 100, 0, 1)
-self_modulate = Color(0, 1, 0, 1)
-light_mask = 2
-visibility_layer = 4
-offset_left = -15.0
-offset_top = -23.0
-offset_right = 19.0
-offset_bottom = -19.0
-theme_override_colors/font_color = Color(0, 1, 0, 1)
-theme_override_colors/font_outline_color = Color(0, 1, 0, 1)
-value = 100.0
-show_percentage = false
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
 

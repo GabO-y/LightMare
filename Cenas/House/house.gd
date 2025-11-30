@@ -25,9 +25,7 @@ func _ready() -> void:
 	
 	Globals.house = self
 	Globals.player = player
-	
-	print(player)
-	
+		
 	room_manager.set_initial_room("SafeRoom")
 	player.global_position = initial_position.global_position
 	
@@ -52,6 +50,7 @@ func _ready() -> void:
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	player.set_active(false)
+	inital_menu.set_active(true)
 	
 	if only_play:
 		inital_menu.set_active(false)
@@ -72,6 +71,8 @@ func _ready() -> void:
 			break
 		
 		room_manager.match_doors("SafeRoom", room)
+	
+	
 	
 	await inital_menu.start_play
 	

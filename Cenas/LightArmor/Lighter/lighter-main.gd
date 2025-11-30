@@ -12,7 +12,7 @@ func _ready() -> void:
 	set_min(Vector2(1.0, 1.0), "distance", "value")
 	
 	set_max(0.4, "time_attack", "value")
-	set_min(0.1, "time_attack", "value")
+	set_min(1.0, "time_attack", "value")
 	
 	set_max(5, "time_attack", "level")
 	

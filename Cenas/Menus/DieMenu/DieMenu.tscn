@@ -216,6 +216,7 @@ anim = NodePath("AnimationPlayer")
 a_coins = NodePath("AnimationPlayer/Part2/AlreadyCoin")
 c_coins = NodePath("AnimationPlayer/Part2/ConqCoin")
 ene_count = NodePath("AnimationPlayer/Part2/EneCount")
+need_focus = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

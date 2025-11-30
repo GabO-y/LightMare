@@ -4,32 +4,106 @@ class_name TutorialMenu
 
 @export var video: VideoStreamPlayer
 @export var labels_container: VBoxContainer
+@export var button_next: Button
+@export var titulo: Label
+@export var imgs_cont: VBoxContainer
 
 var current_index: int = 1
 
 var infos: Array[Infos]
 
 func _ready() -> void:
-	create_info()
-	set_video_path(1, "res://Cenas/Menus/Tutorial/Videos/Movimentação-2025-11-29_22.25.48.ogv" )
-	set_labels(1, [
-		"No controle use o Analógico",
-		"No teclado use W, A, S, D",
-		"Para se movimentar"
-	])
+
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/Movimentação-2025-11-29_22.25.48.ogv"],		[
+			"Movimentação do Player",
+			"No controle use o Analógico 
+			Esquerdo",
+			"No teclado use W, A, S, D",
+		]
+	)
 	
-	create_info()
-	set_video_path(2, "res://Cenas/Menus/Tutorial/Videos/Dash-2025-11-29_22.54.11.ogv" )
-	set_labels(2, [
-		"No controle Aperte RT/R2",
-		"No teclado use Espaço",
-		"Para executar um Dash"
-	])
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/Lig_Des_Arma-2025-11-30_13.28.17.ogv"],
+		[
+			"Ligar e desligar as Armas",
+			"No controle, aperte X",
+			"No Mouse, use o 
+			botão Esquerdo"
+		]
+	)
+	
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/DirArmas-2025-11-30_13.36.43.ogv"],
+		[
+			"Direcionar a Arma",
+			"No Controle use o Anaçógico Direito",
+			"Com o Mouse, arraste-o",
+		]
+	)
+	
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/AtacarEne1-2025-11-30_14.04.03.ogv"],
+		[
+			"Atacar Inimigo 
+			com Lanterna Ou Isquéiro",
+			"Mantenha o inimigo dentro da Luz",
+			"Após um tempo ele sofrerá um dano",
+			"Mantenha a Luz 
+			constantemente  
+			nele para derrotá-lo"
+		]
+	)
+	
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/AtacarEne2-2025-11-30_14.14.34.ogv"],
+		[
+			"Ataque Inimigo com 
+			o Pisca-Pisca",
+			"Com o Controle, aperte RB/R1",
+			"No Mouse, aperte o botão Direito",
+			"Para dísparar",
+			"O projétil irá grudar num inimigo
+			e dar dano nele e quem estiver em
+			volta quando passar um tempo"
+		]
+	)
+	
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/Dash-2025-11-29_22.54.11.ogv"],
+		[
+			"Execução de um Dash",
+			"No controle Aperte RT/R2",
+			"No teclado use Espaço",
+		]
+	)
+	
+	create_info(
+		["res://Cenas/Menus/Tutorial/Videos/UsoDaLoja.ogv"],
+		[
+			"Loja",
+			"No controle aperte X",
+			"No mouse aperte o botão Esquedo",
+			"Perto do Ursinho para Abrir a loja",
+		]
+	)
+	
+	create_info(
+		["res://icon.svg", "res://godot_icon.png", "res://test.png"],
+		[
+			"klskjdhskjhfsdf",
+			"jafkjfsdhfkjshdkfs",
+			"jsdfhksjdfsd"
+		], 
+		false
+	)
+
 	
 	
 
 func set_active(mode: bool):
 	super.set_active(mode)
+	
 	if mode:
 		current_index = 1
 		play(1)
@@ -55,26 +129,62 @@ func play(i: int):
 	
 	current_index = i
 	
-	video.stream = load(info.video_path)
-	video.play()
+	video.visible = info.is_video
+	imgs_cont.visible = not info.is_video
 	
-	for child in labels_container.get_children():
+	if info.is_video:
+		video.stream = load(info.video_path)
+		video.play()
+	else:
+		for child in imgs_cont.get_children():
+			imgs_cont.remove_child(child)
+			
+		for img in info.imgs_path:
+			var t = TextureRect.new()
+			t.texture = load(img)
+			imgs_cont.add_child(t)
+	
+	
+	for child in labels_container.get_children():		
 		if is_instance_valid(child):
+			if child.name == "T1" or child.name == "T2":
+				continue
+				
 			labels_container.remove_child(child)
 			child.queue_free()
 			
+	var is_first: bool = true
+			
 	for text in info.labels_text:
+		
+		if is_first:
+			is_first = false
+			titulo.text = text
+			continue
+		
 		var label = Label.new()
 		label.label_settings = load("res://Cenas/Menus/Tutorial/Label/Tutorial.tres")
 		label.text = text
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-		labels_container.add_child(label)
+		var painel = PanelContainer.new()
+		painel.add_child(label)
+		labels_container.add_child(painel)
+			
 	
+func create_info(contents: Array[String], texts: Array[String], is_video: bool = true):
 	
-	
-func create_info():
-	var info = Infos.new()
+	var info = Infos.new() as Infos
 	info.index = infos.size() + 1
+	
+	if is_video:
+		info.video_path = contents.get(0)
+	else:
+		info.imgs_path = contents
+	
+	info.labels_text = texts
+	
+	info.is_video = is_video
+	
 	infos.append(info)
 	
 func get_info(i: int) -> Infos:
@@ -98,4 +208,6 @@ class Infos:
 	var index: int
 	var video_path: String
 	var labels_text: Array[String]
+	var imgs_path: Array[String]
+	var is_video: bool
 	

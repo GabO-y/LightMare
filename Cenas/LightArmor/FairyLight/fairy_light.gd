@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("shoot_bullet"):
 		try_shoot()
 		
-	if Input.is_action_just_pressed("ui_toggle_armor_2"):
+	if Input.is_action_just_pressed("ui_toggle_armor"):
 		toggle_activate()
 		
 	if not can_shot:

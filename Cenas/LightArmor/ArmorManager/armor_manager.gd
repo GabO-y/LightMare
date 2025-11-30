@@ -10,6 +10,9 @@ class_name ArmorManager
 var selected_armor: LightArmor
 var armors: Array[LightArmor]
 
+var index = 0
+var a = ["Lantern", "Lighter", "FairyLight"]
+
 func _ready() -> void:
 	
 	for name in ["Lantern", "Lighter", "FairyLight"]:
@@ -25,6 +28,16 @@ func _ready() -> void:
 		armors.append(armor)
 		
 	change_to_select()
+		
+#func _input(event: InputEvent) -> void:
+	#if Input.is_action_just_pressed("ui_accept"):
+		#index += 1
+		#if index >= a.size():
+			#index = 0
+		#var arm = select_armor(a.get(index))
+		#if not arm.is_active:
+			#arm.toggle_activate()
+		
 		
 func get_selected_armor():
 	selected_armor._update()

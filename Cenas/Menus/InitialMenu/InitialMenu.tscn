@@ -79,11 +79,12 @@ corner_radius_top_right = 40
 corner_radius_bottom_right = 40
 corner_radius_bottom_left = 40
 
-[node name="InitialMenu" type="CanvasLayer" node_paths=PackedStringArray("anim", "anim_control_node", "control_node")]
+[node name="InitialMenu" type="CanvasLayer" node_paths=PackedStringArray("anim", "anim_control_node", "control_node", "focus_button")]
 script = ExtResource("1_0kox7")
 anim = NodePath("AnimationPlayer")
 anim_control_node = NodePath("AnimationPlayer/Control")
 control_node = NodePath("Control")
+focus_button = NodePath("Control/VBoxContainer/Start/Start")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -134,10 +135,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = -23.0
-offset_right = 66.0
-offset_bottom = 121.0
+offset_left = -99.0
+offset_top = -33.0
+offset_right = 98.0
+offset_bottom = 193.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 20
@@ -217,3 +218,4 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_51tdx")
 
 [connection signal="button_down" from="Control/VBoxContainer/Start/Start" to="." method="_on_start_button_down"]
 [connection signal="button_down" from="Control/VBoxContainer/Tutorial/Tutorial" to="." method="_on_tutorial_button_down"]
+[connection signal="button_down" from="Control/VBoxContainer/Exit/Start2" to="." method="exit"]

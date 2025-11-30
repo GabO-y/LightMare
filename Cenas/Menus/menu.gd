@@ -4,11 +4,16 @@ class_name Menu
 
 @export var manager: MenuManager
 @export var is_active: bool = false
+@export var focus_button: Button
+@export var need_focus: bool = true
 
 func set_active(mode: bool):
 		
 	if Globals.player:
 		Globals.player.hud.visible = not mode
+	
+	if mode and need_focus:	
+		focus_button.grab_focus()
 	
 	get_tree().paused = mode
 	set_process_unhandled_input(mode)

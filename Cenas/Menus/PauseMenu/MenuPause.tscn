@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://bescn3vpqqiql" path="res://Cenas/Menus/PauseMenu/menu_pause.gd" id="1_bo35q"]
 [ext_resource type="PackedScene" uid="uid://ciq4xboriaopc" path="res://Cenas/Menus/SoundIconMenu/SoundIconMenu.tscn" id="2_amuvb"]
 
-[node name="MenuPause" type="CanvasLayer"]
+[node name="MenuPause" type="CanvasLayer" node_paths=PackedStringArray("focus_button")]
 script = ExtResource("1_bo35q")
+focus_button = NodePath("MarginContainer/VBoxContainer/Resume")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15

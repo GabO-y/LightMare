@@ -80,7 +80,7 @@ func _ready() -> void:
 	
 	_die.connect(
 		func():
-			if armor.is_active:
+			if armor.is_active: 
 				armor.toggle_activate()
 			armor.can_active = false
 	)
@@ -354,7 +354,8 @@ func update_hearts():
 			
 		var text = TextureRect.new()
 		text.texture = heart_model
-		text.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+		#text.expand_mode = TextureRect.EXPAND_FIT_WIDTH
+		#text.scale = Vector2(0.1, 0.01)
 		
 		for i in range(max_heart):
 			heart_conteiner.call_deferred("add_child", text.duplicate())

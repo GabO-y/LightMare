@@ -1,13 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx3nt37r4u3du"]
+[gd_scene load_steps=6 format=3 uid="uid://dx3nt37r4u3du"]
 
 [ext_resource type="Script" uid="uid://bk262bvyxbpt2" path="res://Cenas/Menus/Tutorial/tutorial.gd" id="1_dmow6"]
 [ext_resource type="VideoStream" uid="uid://bqxwnqt0itb0b" path="res://Cenas/Menus/Tutorial/Videos/Movimentação-2025-11-29_22.25.48.ogv" id="2_w8pg0"]
+[ext_resource type="FontFile" uid="uid://fjtj7n7g3qwi" path="res://Assets/Fonts/PixelFont/Pixel Game.otf" id="3_tb207"]
 [ext_resource type="LabelSettings" uid="uid://cmv2pgbfcqm6p" path="res://Cenas/Menus/Tutorial/Label/Tutorial.tres" id="3_w8pg0"]
 
-[node name="Tutorial" type="CanvasLayer" node_paths=PackedStringArray("video", "labels_container")]
+[sub_resource type="LabelSettings" id="LabelSettings_88ywa"]
+font = ExtResource("3_tb207")
+font_size = 60
+
+[node name="Tutorial" type="CanvasLayer" node_paths=PackedStringArray("video", "labels_container", "button_next", "titulo", "imgs_cont", "focus_button")]
 script = ExtResource("1_dmow6")
-video = NodePath("Control/MarginContainer/HBoxContainer/VideoStreamPlayer")
+video = NodePath("Control/MarginContainer/HBoxContainer/PanelContainer/VideoStreamPlayer")
 labels_container = NodePath("Control/MarginContainer/HBoxContainer/VBoxContainer")
+button_next = NodePath("Control/HBoxContainer/Button5")
+titulo = NodePath("Control/MarginContainer/HBoxContainer/VBoxContainer/T1")
+imgs_cont = NodePath("Control/MarginContainer/HBoxContainer/PanelContainer/ImgsCointainer")
+focus_button = NodePath("Control/HBoxContainer/Button5")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -43,13 +52,19 @@ theme_override_constants/margin_bottom = 100
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/MarginContainer/HBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/MarginContainer/HBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 0
 audio_track = 1
 stream = ExtResource("2_w8pg0")
 autoplay = true
 loop = true
+
+[node name="ImgsCointainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
 
 [node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -59,7 +74,16 @@ theme_override_constants/separation = 50
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/separation = 10
-alignment = 1
+
+[node name="T1" type="Label" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Titulo"
+label_settings = SubResource("LabelSettings_88ywa")
+horizontal_alignment = 1
+
+[node name="T2" type="HSeparator" parent="Control/MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Control"]
 layout_mode = 1
