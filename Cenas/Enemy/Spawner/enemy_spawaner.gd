@@ -14,7 +14,7 @@ class_name Spawn
 var room: Room
 var enemies_already_spawner = 0
 var enemies: Array[Enemy] = []
-var can_input: bool = true
+#var can_input: bool = true
 	
 func _ready() -> void:
 	timer.wait_time = time_to_spawn
@@ -42,17 +42,16 @@ func get_random_point_in_area(area: Area2D) -> Vector2:
 		push_error("O shape não é um CircleShape2D!")
 		return area.global_position
 
-var d = 0.5
-var t = 0.0
+#var d = 0.5
+#var t = 0.0
 
-func _process(delta: float) -> void:
-	if not can_input:
-		if t >= d:
-			t = 0.0
-			can_input = true
-		t += delta
+#func _process(delta: float) -> void:
+	#if not can_input:
+		#if t >= d:
+			#t = 0.0
+			#can_input = true
+		#t += delta
 		
-
 func spawanEmenie() -> Enemy:
 	
 	if type_enemie == null:
@@ -88,10 +87,10 @@ func enable():
 func disable():
 	set_active(false)
 	
-func _input(event: InputEvent) -> void:
-	if Input.is_key_label_pressed(KEY_Q) and can_input and is_active:
-		spawn(["Zombie", "Ghost"].pick_random(), 1)
-		can_input = false
+#func _input(event: InputEvent) -> void:
+	#if Input.is_key_label_pressed(KEY_Q) and can_input and is_active:
+		#spawn(["Zombie", "Ghost"].pick_random(), 1)
+		#can_input = false
 	
 func set_active(mode: bool):
 	
@@ -135,36 +134,36 @@ func spawn(ene_name: String, level: int) -> Enemy:
 	var path = str("res://Cenas/Enemy/", ene_name, "/", ene_name, ".tscn")
 	var ene = load(path).instantiate() as Enemy
 	
-	print("ene: ", ene)
-	print("ene_name: ", ene_name)
-	print(path)
-	
 	add_child(ene)
 	
 	ene.default_setup()
 	ene.set_level(level, "current")
 	ene.setup()
 	
-	#ene.enemy_die.connect(
-		#room.manager.item_manager.try_drop
-	#)
+	ene.enemy_die.connect(
+		room.manager.item_manager.try_drop
+	)
 
-	#ene.global_position = global_position 
-	#
-	#ene.set_active(true)
-	#
-	#enemies.append(ene)
-	#ene.spawn = self
+	ene.global_position = global_position 
 	
-	ene.is_active = false
-	ene.visible = true
-	ene.z_index = 1000
-	z_index = 1000
-	ene.spawn = self
 	ene.set_active(true)
-	ene.is_stop = true
-
 	
+	enemies.append(ene)
+	ene.spawn = self
+	
+#	Foi quando eu estava fazendo testes
+	#ene.enemy_die.connect(
+		#Globals.room_manager.item_manager.try_drop
+	#)
+	
+	#ene.is_active = false
+	#ene.visible = true
+	#ene.z_index = 1000
+	#z_index = 1000
+	#ene.spawn = self
+	#ene.set_active(true)
+	#ene.is_stop = true
+
 	return ene
 	
 func get_random_circle_point() -> Vector2:

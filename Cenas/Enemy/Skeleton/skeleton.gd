@@ -148,7 +148,7 @@ func setup_prepere_attack():
 	current_state = State.PREPARE_ATTACK
 	
 func setup_await():
-	duration = 1.0
+	duration = 2.0
 	timer = 0.0
 	current_state = State.AWAITING
 		
@@ -175,7 +175,7 @@ func default_setup():
 	
 	damage_att.setup(1, 1,"value")
 	speed_att.setup(100, 150, "value")
-	heath_att.setup(3, 15, "value")
+	heath_att.setup(3.0, 5.0, "value")
 	
 	set_level(9, "max")
 

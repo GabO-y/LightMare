@@ -152,7 +152,7 @@ func set_active(mode: bool):
 	
 func chase_player(dist):
 	
-	if (dist < 40):
+	if (dist < 25):
 		current_state = State.PREPARE_ATTACKING
 		return
 	

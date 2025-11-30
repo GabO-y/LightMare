@@ -24,7 +24,9 @@ func _on_button_pressed() -> void:
 	hide_menu()
 
 func _on_exit_button_down() -> void:
-	get_tree().quit()
+	Globals.house.reset()
+	Globals.house.inital_menu.start()
+	
 
 func _on_finish_round_pressed() -> void:
 	

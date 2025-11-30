@@ -95,15 +95,11 @@ func set_armor(armor: LightArmor):
 	self.armor = armor
 		
 func _spend_coins(amount: int):
-	
-	print("a")
-	
+		
 	if amount > coins:
 		print("quantidade a ser gasta, execede a quantidade de moedas: Player/spend_coins()")
 		return
-		
-	print("b")
-		
+				
 	coins -= amount
 	update_label_coins()
 	
@@ -111,6 +107,9 @@ func _spend_coins(amount: int):
 func _process(delta: float) -> void:
 			
 	if is_in_menu: return
+	
+	if coins < 0:
+		print("NEgativo")
 		
 	animation_logic()
 	
@@ -348,33 +347,32 @@ func update_hearts():
 	var broken_heart = load("res://Assets/Player/Heats/broken_heart.png")
 		
 	for child in heart_conteiner.get_children():
-		heart_conteiner.call_deferred("remove_child", child)
+		if is_instance_valid(child):
+			heart_conteiner.remove_child(child)
+			child.queue_free()
 	
 	if hearts == max_heart:
 			
 		var text = TextureRect.new()
 		text.texture = heart_model
-		#text.expand_mode = TextureRect.EXPAND_FIT_WIDTH
-		#text.scale = Vector2(0.1, 0.01)
+		text.expand_mode = TextureRect.EXPAND_KEEP_SIZE
 		
 		for i in range(max_heart):
-			heart_conteiner.call_deferred("add_child", text.duplicate())
+			heart_conteiner.add_child(text.duplicate())
 		
 		return
 			
 	for i in range(max_heart):
 						
 		var text = TextureRect.new()
-		text.expand_mode = TextureRect.EXPAND_FIT_WIDTH
 
 		if i <= hearts - 1:
 			text.texture = heart_model
 		else:
 			text.texture = broken_heart
 			
-		if text.texture:
-			heart_conteiner.call_deferred("add_child", text)
-				
+		heart_conteiner.add_child(text)
+						
 func upgrade_heart(amount: int):
 	max_heart += amount
 	
@@ -382,8 +380,8 @@ func reset():
 	
 	set_active(true)
 	
-	armor.set_process(true)
-	armor.set_physics_process(true)
+	#armor.set_process(true)
+	#armor.set_physics_process(true)
 	
 	process_mode = Node.PROCESS_MODE_INHERIT
 	

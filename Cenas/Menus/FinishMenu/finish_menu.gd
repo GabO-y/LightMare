@@ -87,8 +87,8 @@ func random_time_effect(t):
 	
 	time_label.text = str("%2d:%2d" % [min, sec])
 
-func set_active(mode: bool):
-	super.set_active(mode)
+func set_active(mode: bool, principal: bool = true):
+	super.set_active(mode, principal)
 	
 	for cpu in particles:
 		cpu.emitting = mode

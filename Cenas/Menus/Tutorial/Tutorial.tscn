@@ -11,11 +11,11 @@ font_size = 60
 
 [node name="Tutorial" type="CanvasLayer" node_paths=PackedStringArray("video", "labels_container", "button_next", "titulo", "imgs_cont", "focus_button")]
 script = ExtResource("1_dmow6")
-video = NodePath("Control/MarginContainer/HBoxContainer/PanelContainer/VideoStreamPlayer")
+video = NodePath("Control/MarginContainer/HBoxContainer/VideoStreamPlayer")
 labels_container = NodePath("Control/MarginContainer/HBoxContainer/VBoxContainer")
 button_next = NodePath("Control/HBoxContainer/Button5")
 titulo = NodePath("Control/MarginContainer/HBoxContainer/VBoxContainer/T1")
-imgs_cont = NodePath("Control/MarginContainer/HBoxContainer/PanelContainer/ImgsCointainer")
+imgs_cont = NodePath("Control/MarginContainer/HBoxContainer/ImgsCointainer")
 focus_button = NodePath("Control/HBoxContainer/Button5")
 
 [node name="Control" type="Control" parent="."]
@@ -52,10 +52,8 @@ theme_override_constants/margin_bottom = 100
 [node name="HBoxContainer" type="HBoxContainer" parent="Control/MarginContainer"]
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="Control/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="Control/MarginContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 0
 audio_track = 1
@@ -63,8 +61,9 @@ stream = ExtResource("2_w8pg0")
 autoplay = true
 loop = true
 
-[node name="ImgsCointainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer/PanelContainer"]
+[node name="ImgsCointainer" type="VBoxContainer" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2
+alignment = 1
 
 [node name="VSeparator" type="VSeparator" parent="Control/MarginContainer/HBoxContainer"]
 layout_mode = 2

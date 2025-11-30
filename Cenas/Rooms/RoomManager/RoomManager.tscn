@@ -26,9 +26,6 @@ round_manager = NodePath("Managers/RoundManagar")
 metadata/_edit_vertical_guides_ = [-149.0, -529.0]
 metadata/_edit_horizontal_guides_ = [135.0]
 
-[node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.258125, 0.1475, 0.59, 1)
-
 [node name="Rooms" type="Node2D" parent="."]
 
 [node name="Hall" parent="Rooms" instance=ExtResource("5_ow6w0")]

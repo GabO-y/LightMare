@@ -7,7 +7,7 @@ class_name Menu
 @export var focus_button: Button
 @export var need_focus: bool = true
 
-func set_active(mode: bool):
+func set_active(mode: bool, principal: bool = true):
 		
 	if Globals.player:
 		Globals.player.hud.visible = not mode
@@ -23,6 +23,7 @@ func set_active(mode: bool):
 	is_active = mode
 	visible = mode
 
+	if not principal: return
 
 	if mode:
 		
@@ -31,7 +32,8 @@ func set_active(mode: bool):
 		
 		for menu in manager.menus:
 			if menu != self:
-				menu.set_process(false)
+				menu.set_active(false, false)
+				
 	else:
 		
 		if manager.current_menu == self:

@@ -369,13 +369,15 @@ timer = NodePath("UpdateLifeTimer")
 
 [node name="DamageBar" type="ProgressBar" parent="DinamicLifeBar"]
 visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 228.0
-offset_top = 583.0
-offset_right = -148.0
-offset_bottom = -43.0
+anchors_preset = -1
+anchor_left = 0.148
+anchor_top = 0.9
+anchor_right = 0.822
+anchor_bottom = 0.934
+offset_left = 0.503998
+offset_top = -0.200012
+offset_right = 0.0559692
+offset_bottom = -0.231995
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_cu7t7")

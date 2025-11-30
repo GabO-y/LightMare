@@ -250,11 +250,9 @@ size = Vector2(11.5, 12.2222)
 [node name="Player" type="Node2D" node_paths=PackedStringArray("body", "anim", "hit_area", "hud", "label_coins", "armor_node", "armor_manager", "dash_audio", "heart_conteiner") groups=["player"]]
 modulate = Color(1, 0.992157, 1, 1)
 script = ExtResource("1_yjlpd")
-can_die = false
 body = NodePath("CharacterBody2D")
 anim = NodePath("CharacterBody2D/AnimatedSprite2D")
 hit_area = NodePath("CharacterBody2D/HitArea")
-coins = 100000
 hud = NodePath("Hud")
 label_coins = NodePath("Hud/Coins")
 armor_node = NodePath("CharacterBody2D/Armors")
@@ -305,10 +303,12 @@ offset_bottom = 23.0
 grow_horizontal = 0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Hud"]
-size_flags_horizontal = 3
-
-[node name="TextureRect" type="TextureRect" parent="Hud/HBoxContainer"]
-layout_mode = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -556.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="WearponsInfos" parent="." instance=ExtResource("6_4o7c8")]
 

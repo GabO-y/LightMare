@@ -202,7 +202,7 @@ func _clear_effects():
 	item_manager.make_items_chase_player()
 
 func reset():
-	
+		
 	for room in rooms: 
 		room.reset()
 		

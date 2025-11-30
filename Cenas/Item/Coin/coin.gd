@@ -27,15 +27,15 @@ func get_value() -> int:
 	
 func get_type():
 	var p = randf()
-	var thresholds = [0.9, 0.8, 0.7, 0.0]
+	var thresholds = [0.7, 0.5, 0.3, 0.0]
 	var types = [4, 3, 2, 1]
-	var type = 1  # padrão
+	var type = 1  
 
 	for i in range(thresholds.size()):
 		if p >= thresholds[i]:
 			type = types[i]
 			break
-			
+
 	return type
 	
 

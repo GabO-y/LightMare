@@ -24,6 +24,7 @@ var original_c_coin_pos: Vector2
 var final_results: Dictionary
 
 func _ready() -> void:
+	original_c_coin_pos = c_coins.global_position
 	reset()
 	
 func reset():
@@ -32,7 +33,9 @@ func reset():
 	set_process_unhandled_input(false)
 	set_process_unhandled_key_input(false)
 	
-	original_c_coin_pos = c_coins.global_position
+	c_coins.global_position = original_c_coin_pos
+	Globals.conquited_coins = 0
+
 	
 func _process(delta: float) -> void:
 	
@@ -46,7 +49,6 @@ func _process(delta: float) -> void:
 		elif can_reset:
 			can_reset = false
 			house.reset()
-			c_coins.global_position = original_c_coin_pos
 	
 	if is_awaiting:
 		if timer >= duration:

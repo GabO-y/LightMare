@@ -73,27 +73,46 @@ func _ready() -> void:
 		["res://Cenas/Menus/Tutorial/Videos/Dash-2025-11-29_22.54.11.ogv"],
 		[
 			"Execução de um Dash",
-			"No controle Aperte RT/R2",
-			"No teclado use Espaço",
+			"No controle Aperte RT/R2
+			No teclado use Espaço",
+			"Enquando o Player estiver
+			no Dash, ele não pode tomar
+			dano"
+			
 		]
 	)
 	
 	create_info(
-		["res://Cenas/Menus/Tutorial/Videos/UsoDaLoja.ogv"],
+		["res://Cenas/Menus/Tutorial/Videos/Moedas-2025-11-30_18.00.41.ogv"],
+		[
+			"Moedas",
+			"Quando um inimigo é derrotado
+			 ele deixa uma moeda cair",
+			"Há vários tipos de moedas
+			> Amarela vale 1
+			> Vermelha vale 5
+			> Verde vale 10
+			> Azul vale 20",
+			"Use-as na Loja"
+		]
+	)
+
+	create_info(
+		[
+			"res://Cenas/Menus/Tutorial/Imagens/Captura de tela de 2025-11-30 15-40-58.png", 
+			"res://Cenas/Menus/Tutorial/Imagens/Captura de tela de 2025-11-30 15-43-58.png",
+			"res://Cenas/Menus/Tutorial/Imagens/Captura de tela de 2025-11-30 17-43-33.png"
+		],
 		[
 			"Loja",
-			"No controle aperte X",
-			"No mouse aperte o botão Esquedo",
-			"Perto do Ursinho para Abrir a loja",
-		]
-	)
-	
-	create_info(
-		["res://icon.svg", "res://godot_icon.png", "res://test.png"],
-		[
-			"klskjdhskjhfsdf",
-			"jafkjfsdhfkjshdkfs",
-			"jsdfhksjdfsd"
+			"Há sempre um ursinho no primeiro quarto",
+			"No Controle, aperte X
+			No Mouse, aperte o botão Esquerdo
+			Para abrir a Loja",
+			"Melhoria das Armas e
+			Melhoria dos atributos
+			São feitos na Loja
+			Com moedas"
 		], 
 		false
 	)
@@ -101,7 +120,7 @@ func _ready() -> void:
 	
 	
 
-func set_active(mode: bool):
+func set_active(mode: bool, principal: bool = true):
 	super.set_active(mode)
 	
 	if mode:
@@ -137,11 +156,15 @@ func play(i: int):
 		video.play()
 	else:
 		for child in imgs_cont.get_children():
-			imgs_cont.remove_child(child)
-			
+			if is_instance_valid(child):
+				child.queue_free()	
+				imgs_cont.remove_child(child)
+				
 		for img in info.imgs_path:
 			var t = TextureRect.new()
 			t.texture = load(img)
+			t.expand_mode = TextureRect.EXPAND_KEEP_SIZE
+			t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			imgs_cont.add_child(t)
 	
 	

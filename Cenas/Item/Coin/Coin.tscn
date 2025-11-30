@@ -207,7 +207,7 @@ audio = NodePath("Area2D/AudioStreamPlayer")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_hqy1t")
-animation = &"4"
+animation = &"1"
 
 [node name="Area2D" type="Area2D" parent="."]
 

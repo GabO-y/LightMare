@@ -87,10 +87,13 @@ text = "Conversar"
 metadata/_edit_use_anchors_ = true
 
 [node name="InitialPosition" type="Marker2D" parent="."]
-position = Vector2(64, 104)
+position = Vector2(69, 98)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_k1pxl")
 volume_db = -10.0
 autoplay = true
 parameters/looping = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.258125, 0.1475, 0.59, 1)

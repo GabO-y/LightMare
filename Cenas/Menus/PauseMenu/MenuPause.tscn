@@ -38,7 +38,7 @@ text = "Finalizar Partida"
 
 [node name="Exit" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Sair do Jogo"
+text = "Voltar para o Menu"
 
 [node name="SoundIconMenu" parent="." instance=ExtResource("2_amuvb")]
 

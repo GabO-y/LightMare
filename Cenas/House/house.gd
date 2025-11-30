@@ -19,7 +19,7 @@ var can_reset: bool = false
 
 var follow: Node2D
 
-var start_time: int
+var start_time: float = 0.0
 
 func _ready() -> void:
 	
@@ -27,7 +27,7 @@ func _ready() -> void:
 	Globals.player = player
 		
 	room_manager.set_initial_room("SafeRoom")
-	player.global_position = initial_position.global_position
+	player.body.global_position = initial_position.global_position
 	
 	Globals.room_manager = room_manager
 	Globals.item_manager = room_manager.item_manager
@@ -49,8 +49,7 @@ func _ready() -> void:
 			
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	player.set_active(false)
-	inital_menu.set_active(true)
+	inital_menu.start()
 	
 	if only_play:
 		inital_menu.set_active(false)
@@ -58,9 +57,9 @@ func _ready() -> void:
 		player.set_active(true)
 		start_time = Time.get_ticks_msec()
 		
-	if true:
+	if false:
 		
-		var room = "TutorialRoom"
+		var room = "GhostBossRoom"
 		
 		for door in room_manager.get_room("SafeRoom").doors:
 			door.name = room
@@ -71,16 +70,16 @@ func _ready() -> void:
 			break
 		
 		room_manager.match_doors("SafeRoom", room)
+		
+	inital_menu.start_play.connect(await_initial_menu)
 	
-	
-	
-	await inital_menu.start_play
-	
+func await_initial_menu():
 	player.set_active(true)
-	start_time = Time.get_ticks_msec()
+	if start_time == 0.0:
+		start_time = Time.get_ticks_msec()
 
 func _process(delta: float) -> void:
-		
+				
 	if camera.enabled:
 		if is_instance_valid(follow):
 			camera.global_position = follow.global_position
@@ -101,7 +100,7 @@ func desable_camera():
 	room_manager.current_room.camera.enabled = true
 		
 func reset():
-	
+
 	player.reset()
 	
 	menu_manager.reset()
@@ -112,8 +111,12 @@ func reset():
 	
 	room_manager.item_manager.reset()
 
-	player.global_position = initial_position.global_position
+	print("antes: ", player.global_position)
+
+	player.body.global_position = initial_position.global_position
 	
+	print("depois: ", player.global_position)
+
 	for door in room_manager.current_room.doors:
 		door.open()
 		

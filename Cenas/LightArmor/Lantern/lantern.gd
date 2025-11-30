@@ -15,8 +15,8 @@ func _ready() -> void:
 	set_max(Vector2(1.7, 2.0), "distance", "value")
 	set_min(Vector2(1.2, 1.2), "distance", "value")
 	
-	set_max(0.5, "time_attack", "value")
-	set_min(1.2, "time_attack", "value")
+	set_max(0.7, "time_attack", "value")
+	set_min(1.5, "time_attack", "value")
 	
 	set_min(10.0, "distance", "price")
 	set_max(150.0, "distance", "price")
@@ -27,7 +27,7 @@ func _ready() -> void:
 	set_max(100, "time_attack", "price")
 	set_min(10, "time_attack", "price")
 	
-	set_max(3, "time_attack", "level")
+	set_max(5, "time_attack", "level")
 	
 func _process(delta):
 		

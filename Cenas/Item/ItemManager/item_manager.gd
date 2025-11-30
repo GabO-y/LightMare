@@ -26,7 +26,7 @@ var key_in_scene: Key
 var is_finish_get_key: bool = false
 
 var drops = {
-	"comum": {"chance" : 0.3, "item": [
+	"comum": {"chance" : 0.0, "item": [
 		"coin"
 	]}
 }
