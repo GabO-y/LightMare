@@ -1,8 +1,9 @@
-[gd_scene load_steps=43 format=3 uid="uid://d1huichr7pt8c"]
+[gd_scene load_steps=44 format=3 uid="uid://d1huichr7pt8c"]
 
 [ext_resource type="Script" uid="uid://b2e2n7y0q4emx" path="res://Cenas/Enemy/Bosses/ghost_boss.gd" id="1_21eog"]
 [ext_resource type="Texture2D" uid="uid://bqh5hf6cggxvu" path="res://Assets/Enemies/MegaGhost (Boss))/spr_boss_modelo.png" id="2_5a185"]
 [ext_resource type="Script" uid="uid://bnmqjw0nwa0nl" path="res://Cenas/Enemy/Bosses/dinamic_life_bar.gd" id="3_t6okw"]
+[ext_resource type="Script" uid="uid://db8yqiucc3emc" path="res://Cenas/Enemy/Bosses/ray_node.gd" id="4_r7115"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qm0in"]
 atlas = ExtResource("2_5a185")
@@ -302,16 +303,18 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r7115"]
 bg_color = Color(0.928641, 2.79158e-06, 5.77569e-07, 1)
 
-[node name="GhostBoss" type="Node2D" node_paths=PackedStringArray("screen_notifier", "slash_node", "slash_node_timer", "area_attack_ghosts_run", "ghost_spawn_node", "life_bar", "damage_bar", "body", "anim")]
+[node name="GhostBoss" type="Node2D" node_paths=PackedStringArray("screen_notifier", "slash_node", "slash_node_timer", "area_attack_ghosts_run", "ghost_spawn_node", "ray_node", "life_bar", "damage_bar", "body", "anim")]
 script = ExtResource("1_21eog")
 screen_notifier = NodePath("BossBody/SpecialUtils/VisibleOnScreenNotifier2D")
 slash_node = NodePath("BossBody/SlashNode")
 slash_node_timer = NodePath("BossBody/SlashNode/SlashView/TimerToHideView")
 area_attack_ghosts_run = NodePath("BossBody/SpecialUtils/AreaAttackToGhostsRun")
 ghost_spawn_node = NodePath("UtilsStatic/GhostSpawn")
+ray_node = NodePath("UtilsStatic/RayNode")
+special_coldown = 5.0
 life_bar = NodePath("DinamicLifeBar/DamageBar/LifeBar")
 damage_bar = NodePath("DinamicLifeBar/DamageBar")
-heath = 100.0
+heath = 300.0
 damage = 2.0
 body = NodePath("BossBody")
 anim = NodePath("BossBody/AnimatedSprite2D")
@@ -329,7 +332,6 @@ frame = 15
 frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BossBody"]
-visible = false
 shape = SubResource("CircleShape2D_5a185")
 
 [node name="SlashNode" type="Node2D" parent="BossBody"]
@@ -404,6 +406,25 @@ autostart = true
 
 [node name="GhostSpawn" type="Node2D" parent="UtilsStatic"]
 scale = Vector2(1.3, 1.3)
+
+[node name="RayNode" type="Node2D" parent="UtilsStatic" node_paths=PackedStringArray("up", "down", "left", "right")]
+script = ExtResource("4_r7115")
+up = NodePath("Up")
+down = NodePath("Down")
+left = NodePath("Left")
+right = NodePath("Right")
+
+[node name="Up" type="RayCast2D" parent="UtilsStatic/RayNode"]
+target_position = Vector2(0, -15)
+
+[node name="Down" type="RayCast2D" parent="UtilsStatic/RayNode"]
+target_position = Vector2(0, 16)
+
+[node name="Left" type="RayCast2D" parent="UtilsStatic/RayNode"]
+target_position = Vector2(-17, 0)
+
+[node name="Right" type="RayCast2D" parent="UtilsStatic/RayNode"]
+target_position = Vector2(17, 0)
 
 [connection signal="body_entered" from="BossBody/SlashNode/SlashArea" to="." method="_on_slash_player_body_entered"]
 [connection signal="body_exited" from="BossBody/SlashNode/SlashArea" to="." method="_on_slash_area_player_body_exited"]

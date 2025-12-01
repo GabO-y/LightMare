@@ -24,7 +24,7 @@ func setup():
 
 func try_upgrade():
 		
-	if player.coins <= int(item_price.text):
+	if player.coins < int(item_price.text):
 		armor_menu.chess_menu._insuffient_coisn()
 		return
 				

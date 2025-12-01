@@ -19,12 +19,12 @@ func _ready() -> void:
 	set_min(1.5, "time_attack", "value")
 	
 	set_min(10.0, "distance", "price")
-	set_max(150.0, "distance", "price")
+	set_max(70.0, "distance", "price")
 	
-	set_max(70, "damage", "price")
+	set_max(50.0, "damage", "price")
 	set_min(2, "damage", "price")
 	
-	set_max(100, "time_attack", "price")
+	set_max(70.0, "time_attack", "price")
 	set_min(10, "time_attack", "price")
 	
 	set_max(5, "time_attack", "level")

@@ -25,6 +25,8 @@ var is_laugh_animation: bool = false
 @export var area_attack_ghosts_run: Area2D
 @export var ghost_spawn_node: Node2D
 
+@export var ray_node: RayNode
+
 var is_prepere_attack: bool = false
 var prepere_attack_duration: float = 0.0
 var prepere_attack_timer: float = 0.0
@@ -70,7 +72,16 @@ var shoot_timer: float = 0.0
 var shoot_coldown: float = 0.5
 var shoot_type: int = 1
 
-var specials_queue: Array[Specials] = [Specials.GHOSTS_RUN, Specials.SHOOTING]
+var crashs_count: int = 0
+var crashs_max: int = 4
+var ghosts_in_crash: Array[Dictionary]
+var can_split: bool = true
+var spawn_by_split: int = 2
+var max_degree: int = 3
+var count_free_ghost_crash = 5
+var is_split: bool = false
+
+var specials_queue: Array[Specials] = [Specials.GHOSTS_RUN, Specials.SHOOTING, Specials.CRASH_WALL]
 
 func _ready() -> void:
 		
@@ -104,7 +115,6 @@ func _physics_process(delta: float) -> void:
 				current_state = State.CHASING
 		State.SPECIAL:
 			special_move(delta)
-			
 		State.STOPED:
 			pass
 		State.DYING:
@@ -135,7 +145,7 @@ func special_move(delta):
 		Specials.GHOSTS_RUN:
 			ghost_run_move()
 		Specials.CRASH_WALL:
-			pass
+			crash_wall_move()
 		Specials.SHOOTING:
 			shooting_special_move(delta)
 
@@ -152,6 +162,7 @@ func setup_ghost_run():
 	
 	speed = 150
 	
+
 func setup_shooting():
 	speed = 0
 	shoot_type = [1, 2].pick_random()
@@ -190,7 +201,6 @@ func shoot(dir: Vector2, speed_to_shoot: int):
 	b.speed = speed_to_shoot
 	b.start()
 	
-	
 func ghost_run_move():
 				
 	if is_entrece:
@@ -208,6 +218,132 @@ func ghost_run_move():
 	chase_move()
 	last_dir = dir
 	
+func setup_crash_wall():
+	ghosts_in_crash.append(
+		{
+			"gho": self,
+			"crashs": 0,
+			"rays": ray_node.duplicate(),
+			"dir": ray_node.get_random_diagonal_dir(),
+			"can_split": true,
+			"quant": 4,
+			"degree": 0
+		}
+	)
+	body.collision_layer = 0
+	body.collision_mask = 0
+	
+func split(gho: Dictionary):
+	
+	ghosts_in_crash.erase(gho)
+	
+	if not gho["can_split"]: 
+		gho["gho"].queue_free()
+		return
+
+	gho["rays"].set_active(false)
+	
+	var g = gho["gho"] as Enemy
+	var pos = g.body.global_position
+	
+	for i in range(spawn_by_split):
+		
+		var n_gho = create_ghosts()
+		n_gho.body.global_position = pos
+		n_gho.speed = 110
+	
+		Globals.room_manager.current_room.add_child(n_gho)
+		
+		var degree = (gho["degree"] + 1)
+		var can_split = degree < max_degree
+	
+		ghosts_in_crash.append({
+			"gho": n_gho,
+			"crashs": 0,
+			"rays": ray_node.duplicate(),
+			"dir": Vector2([1, -1].pick_random(), [1, -1].pick_random()),
+			"quant": 2,
+			"can_split": can_split,
+			"degree": degree
+		})
+		
+	g.visible = false
+	
+	if gho["degree"] != 0:
+		g.queue_free()
+	else:
+		body.collision_layer = 0
+		body.collision_mask = 0
+		is_split = true
+	
+func crash_wall_move():
+	
+	if is_entrece:
+		entrace()
+	
+	for gho in ghosts_in_crash:
+		
+		var dir = gho["dir"] as Vector2
+		var g = gho["gho"] as Enemy
+		var rays = gho["rays"] as RayNode
+		
+		if not rays in g.body.get_children():
+			g.body.add_child(rays)
+			rays.dir = dir
+		
+		var a1 = []
+		var a2 = []
+		for i in range(10):
+			a1.append([1, 2].pick_random())
+			a2.append([1, 2].pick_random())
+			
+		if a1 == a2:
+			gho["dir"] = ray_node.get_random_diagonal_dir()
+		
+		if rays.is_colliding():
+			gho["dir"] = rays.dir
+			if rays.finish_collision:
+				gho["crashs"] += 1
+				
+		
+			
+			
+		if gho["crashs"] >= 5:
+			if not gho["can_split"]: 
+				
+				g.body.global_position = g.body.global_position.move_toward(room.camera.global_position, 2)
+				var dist = g.body.global_position.distance_to(room.camera.global_position)
+				
+				if dist < 5:
+					ghosts_in_crash.erase(gho)
+					count_free_ghost_crash += 1
+					
+					if count_free_ghost_crash == pow(spawn_by_split, max_degree):
+						body.global_position = get_random_point_in_line(get_random_line())
+						is_entrece = true
+						visible = true
+					
+					g.queue_free()
+					
+			else:
+				split(gho)
+			continue
+		
+		g.dir = dir
+		g.body.velocity = dir * g.speed
+		g.body.move_and_slide()
+		
+func finish_crash_wall():
+	for gho in ghosts_in_crash:
+		var g = gho["gho"] as Enemy
+		if not g is GhostBoss:
+			if is_instance_valid(g):
+				g.queue_free()
+	
+	ghosts_in_crash.clear()
+	setup()
+			
+
 func shooting_special_move(delta):
 	
 	var t = 0.5
@@ -238,40 +374,38 @@ func shooting_special_move(delta):
 			setup()
 			return
 	
+
+	
 func set_ghost_to_1(ghost: Ghost):
+	
 	ghost.type_special = 1
 	time_await_ghost_run += 0.5
+	
 	await Globals.time(time_await_ghost_run)
 	
 	if is_instance_valid(ghost):
 		ghost.is_stop = false
+		ghost.is_active = true
 	
 func set_ghost_to_2(ghost: Ghost):	
+	
 	ghost.type_special = 2		
 	time_await_ghost_run += 0.01
 	
 	await Globals.time(time_await_ghost_run)
-	
+
 	if is_instance_valid(ghost):
 		ghost.is_stop = false
-
-func create_ghosts(pos: Vector2):
+		ghost.is_active = true
+		
+func create_ghosts():
 	
 	var ghost: Ghost = load("res://Cenas/Enemy/Ghost/Ghost.tscn").instantiate()
 	
 	ghost.is_stop = true
 	ghost.current_state = Ghost.State.SPECIAL
 	
-	ghost_spawn_node.add_child(ghost)
-
-	ghost.global_position = pos 
 	ghost.speed = 300
-
-	
-	ghost.screen_notifier.screen_exited.connect(
-				func():
-					_ghost_out(ghost)
-	)
 
 	return ghost
 	
@@ -313,7 +447,14 @@ func create_ghosts_and_run():
 	for i in range(quant_ghost_create):
 
 		var line = get_random_line()
-		var gho = create_ghosts(get_random_point_in_line(line)) as Ghost
+		var gho = create_ghosts() as Ghost
+		ghost_spawn_node.add_child(gho)
+		gho.body.global_position = get_random_point_in_line(line)
+
+		gho.screen_notifier.screen_exited.connect(
+				func():
+					_ghost_out(gho)
+		)
 		
 		gho.speed_att.set_min(150, "value")
 		gho.setup()
@@ -413,6 +554,8 @@ func setup():
 	damage_bar.visible = true
 	total_shoot = 10
 	shoot_timer = 0.0
+	visible = true
+	count_free_ghost_crash = 0
 
 func reset():
 	segs_to_ghost_run = room.segs_to_ghost_room
@@ -457,7 +600,6 @@ func prepere_attack_logic(delta: float):
 
 func slash(dir: Vector2):
 	
-	
 	slash_node.visible = true
 	var angle = dir.angle() - PI/4
 	slash_node.rotation = angle
@@ -491,7 +633,7 @@ func start_special():
 		Specials.GHOSTS_RUN:
 			setup_ghost_run()
 		Specials.CRASH_WALL:
-			pass
+			setup_crash_wall()
 		Specials.SHOOTING:
 			setup_shooting()
 			
@@ -499,7 +641,7 @@ func get_random_special() -> Specials:
 	# Logica para ir um ataque por vez
 	
 	if specials_queue.is_empty():
-		specials_queue = [Specials.GHOSTS_RUN, Specials.SHOOTING]
+		specials_queue = [Specials.GHOSTS_RUN, Specials.SHOOTING, Specials.CRASH_WALL]
 	
 	return specials_queue.pop_at(randi_range(0, specials_queue.size() - 1))
 
@@ -507,7 +649,7 @@ func get_random_special() -> Specials:
 
 func _on_timer_to_hide_view_timeout() -> void:
 	slash_node.visible = false
-	
+
 func _on_slash_player_body_entered(body: Node2D) -> void:
 	var player = body.get_parent() as Player
 	if !player: return
@@ -528,9 +670,11 @@ func _on_slash_area_player_body_exited(body: Node2D) -> void:
 # quando o fantasma esta correndo, se ele atravessar vc, vc toma dano
 func _on_area_attack_to_ghosts_run_player_body_entered(body: Node2D) -> void:	
 	var player = body.get_parent() as Player
-	if !player: return
+	if !player or not current_special in [Specials.GHOSTS_RUN, Specials.CRASH_WALL]: return
 	
 	if is_dying or not is_active: return
+	
+	if current_special == Specials.CRASH_WALL and is_split: return
 	
 	player.take_knockback(dir, 20)
 	player.take_damage(1)
@@ -538,7 +682,8 @@ func _on_area_attack_to_ghosts_run_player_body_entered(body: Node2D) -> void:
 func _ghost_out(me):
 							
 	if me is GhostBoss:
-		create_ghosts_and_run()	
+		if current_special == Specials.GHOSTS_RUN:
+			create_ghosts_and_run()	
 		
 	if me is Ghost:
 		me.die()

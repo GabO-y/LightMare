@@ -59,7 +59,7 @@ func start():
 	var time = Globals.house.calc_game_time_sec()
 	
 	min_sec["min"] = time / 60
-	min_sec["sec"] = time % 60
+	min_sec["sec"] = int(time) % 60
 
 	await anim.animation_finished
 	set_process(true)

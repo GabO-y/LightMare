@@ -3,7 +3,7 @@ extends LightArmor
 func _ready() -> void:
 	super._ready()
 	
-	set_price(20)
+	set_price(15)
 	
 	set_max(3, "damage", "value")
 	set_min(1, "damage", "value")
@@ -17,15 +17,15 @@ func _ready() -> void:
 	set_max(5, "time_attack", "level")
 	
 	set_min(10.0, "distance", "price")
-	set_max(150.0, "distance", "price")
+	set_max(70.0, "distance", "price")
 	
-	set_max(70, "damage", "price")
+	set_max(50.0, "damage", "price")
 	set_min(2, "damage", "price")
 	
-	set_max(100, "time_attack", "price")
+	set_max(80.0, "time_attack", "price")
 	set_min(10, "time_attack", "price")
 	
-	set_max(5, "damage", "level")
+	set_max(3, "damage", "level")
 	
 	_update()
 	

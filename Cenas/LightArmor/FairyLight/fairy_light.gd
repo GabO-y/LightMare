@@ -10,7 +10,7 @@ func _ready() -> void:
 
 	super._ready()
 	
-	set_price(100.0)
+	set_price(50)
 	
 	set_max(20, "damage", "value")
 	set_min(5, "damage", "value")
@@ -22,12 +22,12 @@ func _ready() -> void:
 	set_min(3.0, "time_attack", "value")
 	
 	set_min(10.0, "distance", "price")
-	set_max(150.0, "distance", "price")
+	set_max(100.0, "distance", "price")
 	
-	set_max(70, "damage", "price")
+	set_max(50.0, "damage", "price")
 	set_min(2, "damage", "price")
 	
-	set_max(100, "time_attack", "price")
+	set_max(50.0, "time_attack", "price")
 	set_min(10, "time_attack", "price")
 	
 	set_max(3, "time_attack", "level")

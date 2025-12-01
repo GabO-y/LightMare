@@ -51,6 +51,11 @@ visible = false
 
 [node name="GhostBossRoom" parent="Rooms" instance=ExtResource("6_ow6w0")]
 visible = false
+is_clear = null
+finish = null
+spread = null
+is_camera_chase_mode = null
+can_return = null
 
 [node name="TutorialRoom" parent="Rooms" instance=ExtResource("10_gc0uj")]
 visible = false

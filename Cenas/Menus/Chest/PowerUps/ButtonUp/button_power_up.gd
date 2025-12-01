@@ -34,7 +34,7 @@ func upgrade():
 		bar.value = 10
 		return
 
-	if Globals.player.coins <= price:
+	if Globals.player.coins < price:
 		chest_menu._insuffient_coisn()
 		return
 		
@@ -50,13 +50,13 @@ func upgrade():
 			Globals.player.hearts = max_h
 			
 			Globals.player.update_hearts()
-			price += price * 0.45
+			price += price * 0.35
 		"speed":
 			Globals.player.speed_bonus += 0.05
-			price += price * 0.5
+			price += price * 0.4
 		"invencible":
 			Globals.player.invencible_duration_bonus += 0.1
-			price += price * 0.51
+			price += price * 0.45
 			
 	update_label()
 		

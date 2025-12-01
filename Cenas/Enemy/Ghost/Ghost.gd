@@ -63,10 +63,11 @@ func _physics_process(delta: float) -> void:
 		State.DASHING:
 			dash(delta)
 		State.SPECIAL:
+			print("especial")
 			special_move()
 	
 func special_move():
-		
+				
 	body.collision_layer = Globals.layers["boss"] 
 	body.collision_mask = 0
 		
@@ -78,6 +79,7 @@ func special_move():
 			body.move_and_slide()
 		
 func move_special_1():
+	
 	if is_continue_toward:
 		body.velocity = dir * speed
 		body.move_and_slide()
@@ -173,7 +175,7 @@ func refrash():
 func ghosts_run_move():
 	
 	var ene_pos = body.global_position
-	var pla_pos = Globals.player_pos
+	var pla_pos = Globals.player_pos()
 	
 	var dist = ene_pos.distance_to(pla_pos)
 	dir = ene_pos.direction_to(pla_pos)
