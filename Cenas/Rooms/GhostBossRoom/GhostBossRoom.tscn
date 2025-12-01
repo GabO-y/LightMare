@@ -156,6 +156,7 @@ zoom = Vector2(2.5, 2.5)
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="HallwayLadder" parent="Doors" instance=ExtResource("4_es5nb")]
+position = Vector2(193, 201)
 
 [node name="Exports" type="Node2D" parent="."]
 

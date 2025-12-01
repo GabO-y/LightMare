@@ -1,33 +1,33 @@
 graph TD
-    A[Menu Principal] --> |Iniciar Jogo| B[Safe Room - Quarto]
-    A --> |Configurações| C[Configurações]
-    C --> A
-    
-    B --> |Interagir com Urso| D[Loja de Upgrades]
-    D --> B
-    
-    B --> |Iniciar Run| E[Quarto → Corredor → Hall]
-    E --> |Matar Hordas| F[Banheiro/Brinquedoteca]
-    F --> |Matar Hordas| G[Corredor 2]
-    G --> |Matar Hordas| H[Escritório]
-    H --> |Matar Hordas| I[Sala do Boss]
-    
-    E --> |Morrer| J[Game Over]
-    F --> |Morrer| J
-    G --> |Morrer| J
-    H --> |Morrer| J
-    I --> |Morrer| J
-    
-    J --> |Tentar Novamente| B
-    J --> |Menu| A
-    
-    I --> |Derrotar Boss| K[Vitória]
-    K --> |Nova Run| B
-    K --> |Menu| A
-    
-    style A fill:#2d3748
-    style B fill:#38a169
-    style D fill:#805ad5
-    style I fill:#e53e3e
-    style J fill:#c53030
-    style K fill:#48bb78
+	A[Menu Principal] --> |Iniciar Jogo| B[Safe Room - Quarto]
+	A --> |Configurações| C[Configurações]
+	C --> A
+	
+	B --> |Interagir com Urso| D[Loja de Upgrades]
+	D --> B
+	
+	B --> |Iniciar Run| E[Quarto → Corredor → Hall]
+	E --> |Matar Hordas| F[Banheiro/Brinquedoteca]
+	F --> |Matar Hordas| G[Corredor 2]
+	G --> |Matar Hordas| H[Escritório]
+	H --> |Matar Hordas| I[Sala do Boss]
+	
+	E --> |Morrer| J[Game Over]
+	F --> |Morrer| J
+	G --> |Morrer| J
+	H --> |Morrer| J
+	I --> |Morrer| J
+	
+	J --> |Tentar Novamente| B
+	J --> |Menu| A
+	
+	I --> |Derrotar Boss| K[Vitória]
+	K --> |Nova Run| B
+	K --> |Menu| A
+	
+	style A fill:#2d3748
+	style B fill:#38a169
+	style D fill:#805ad5
+	style I fill:#e53e3e
+	style J fill:#c53030
+	style K fill:#48bb78

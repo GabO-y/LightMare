@@ -36,6 +36,12 @@ var last_dir: Vector2
 var audio_timer: float = 0.0
 var audio_time_play: float = 1.0
 
+var is_stuned: bool = false
+var stun_duration: float = 0.3
+var stun_timer: float = 0.0
+var stun_coldown: float = 0.3
+var can_stun: bool = true
+
 func _ready() -> void:
 	
 	player = Globals.player
@@ -75,6 +81,22 @@ func _process(delta: float) -> void:
 			
 		audio_timer += delta
 	
+	if is_stuned and can_stun:
+		if stun_timer >= stun_duration:
+			is_stop = false
+			is_stuned = false
+			can_stun = false
+			stun_coldown = 0.3
+		stun_timer += delta
+		
+	if not can_stun:
+		if stun_timer >= stun_coldown:
+			stun_timer = 0.0
+			can_stun = true
+		stun_timer += delta
+		
+			
+	
 func update_bar():
 	if bar == null:
 		return
@@ -105,6 +127,9 @@ func take_damage(damage: float):
 	
 	if is_dead: return
 	
+	is_stop = true
+	is_stuned = true
+	
 	heath -= damage
 	
 	if damage_audio:
@@ -112,7 +137,7 @@ func take_damage(damage: float):
 
 	drop_damage_label(damage)
 	
-	if heath <= 0 and !is_dead:
+	if heath <= 0:
 		die()
 	else:
 		change_color_damage()

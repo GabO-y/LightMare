@@ -36,6 +36,10 @@ func _process(delta: float) -> void:
 	animation_logic()
 
 func _physics_process(delta: float) -> void:
+	
+	if !is_active or is_stop:
+		return
+	
 	match current_state:
 		State.DASHING:
 			dash_move(delta)

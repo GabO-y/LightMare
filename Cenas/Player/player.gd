@@ -355,7 +355,6 @@ func update_hearts():
 			
 		var text = TextureRect.new()
 		text.texture = heart_model
-		text.expand_mode = TextureRect.EXPAND_KEEP_SIZE
 		
 		for i in range(max_heart):
 			heart_conteiner.add_child(text.duplicate())
@@ -364,7 +363,7 @@ func update_hearts():
 			
 	for i in range(max_heart):
 						
-		var text = TextureRect.new()
+		var text = TextureRect.new()		
 
 		if i <= hearts - 1:
 			text.texture = heart_model

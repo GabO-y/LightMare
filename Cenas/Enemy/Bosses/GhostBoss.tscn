@@ -309,7 +309,6 @@ slash_node = NodePath("BossBody/SlashNode")
 slash_node_timer = NodePath("BossBody/SlashNode/SlashView/TimerToHideView")
 area_attack_ghosts_run = NodePath("BossBody/SpecialUtils/AreaAttackToGhostsRun")
 ghost_spawn_node = NodePath("UtilsStatic/GhostSpawn")
-special_coldown = 1.0
 life_bar = NodePath("DinamicLifeBar/DamageBar/LifeBar")
 damage_bar = NodePath("DinamicLifeBar/DamageBar")
 heath = 100.0

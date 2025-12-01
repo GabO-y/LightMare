@@ -48,32 +48,22 @@ func _ready() -> void:
 	default_setup()
 	
 func _process(delta: float) -> void:
+	animation_logic()
+	super._process(delta)
 	
-	if is_stop: return
+func _physics_process(delta: float) -> void:
 	
-	var dist = dist_to_player()
-			
-	#if not special_attack.is_empty():
-		#match special_attack:
-			#"ghosts_run":
-				#ghosts_run_move()
-		#return
-				
+	if not is_active or is_stop: return
+	
 	match current_state:
 		State.CHASE:
-			chase_player(dist)
+			chase_player(dist_to_player())
 		State.PREPARE_ATTACKING:
 			prepare_attack(delta)
 		State.DASHING:
 			dash(delta)
 		State.SPECIAL:
 			special_move()
-			
-	animation_logic()
-	
-	
-		
-	super._process(delta)
 	
 func special_move():
 		
@@ -196,9 +186,6 @@ func ghosts_run_move():
 	
 	body.velocity = dir * speed
 	body.move_and_slide()
-
-func take_damage(damage: float):
-	super.take_damage(damage)
 
 func die():
 	super.die()

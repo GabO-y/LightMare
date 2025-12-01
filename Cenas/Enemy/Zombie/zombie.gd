@@ -35,13 +35,10 @@ func _physics_process(delta: float) -> void:
 	
 	if !is_active or is_stop:
 		return
-				
-	var player_pos = Globals.player_pos()
-	var distance_to_player = dist_to_player()
-		
+
 	match current_state:
 		State.CHASING:
-			handle_chasing_state(distance_to_player)
+			handle_chasing_state(dist_to_player())
 		State.DASHING:
 			handle_dashing_state(delta)
 		State.ATTACKING:
